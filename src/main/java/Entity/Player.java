@@ -61,9 +61,11 @@ public class Player extends Entity{
     }
     public void update(){
         if(keyH.rightPressed){
+            direction = "right";
             x += speed;
         }
         else if(keyH.leftPressed){
+            direction = "left";
             x -= speed;
         }
         else if(keyH.upPressed){
@@ -76,9 +78,17 @@ public class Player extends Entity{
     }
     public void draw(Graphics2D g2){
 
-        //BufferedImage image = null;
+        BufferedImage image = null;
         //switch case
-        BufferedImage image = left2;
+        switch (direction){
+            case "right":
+                image = right1;
+                break;
+            case "left":
+                image = left2;
+                break;
+
+        }
         g2.drawImage(image, x, y, gp.tileSize/2,gp.tileSize, null);
 
     }
