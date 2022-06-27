@@ -82,7 +82,7 @@ public class Player extends Entity{
         //switch case
         switch (direction){
             case "right":
-                image = right1;
+                image = right2;
                 break;
             case "left":
                 image = left2;
