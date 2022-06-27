@@ -1,0 +1,44 @@
+package Entity;
+
+import Main.GamePanel;
+import Main.KeyHandler;
+
+import java.awt.*;
+
+public class Player extends Entity{
+
+    GamePanel gp;
+    KeyHandler keyH;
+
+    public Player (GamePanel gp, KeyHandler keyH){
+        this.gp = gp;
+        this.keyH = keyH;
+        setDefaultValues();
+    }
+    public void setDefaultValues(){
+        x = 100;
+        y = 100;
+        speed = 12;
+    }
+    public void update(){
+        if(keyH.rightPressed){
+            x += speed;
+        }
+        else if(keyH.leftPressed){
+            x -= speed;
+        }
+        else if(keyH.upPressed){
+            y -= speed;
+        }
+        else if(keyH.downPressed){
+            y += speed;
+        }
+
+    }
+    public void draw(Graphics2D g2){
+
+        g2.setColor(Color.BLACK);
+        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+
+    }
+}
