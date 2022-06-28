@@ -11,4 +11,4 @@ I am following RyiSnow tutorials on Youtube https://www.youtube.com/playlist?lis
 
 All sprites and design are my owns.
 
-![Semantic description of image](src/main/resources/BatIconbig.png "Image Title")
+![](BatStill.GIF)
