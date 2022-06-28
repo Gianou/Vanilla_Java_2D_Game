@@ -10,3 +10,5 @@ I am a student in the Hes-so Valais/Wallis Business IT bachelor program and my g
 I am following RyiSnow tutorials on Youtube https://www.youtube.com/playlist?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
 
 All sprites and design are my owns.
+
+![](summer-2022-2d-game/src/main/resources/BatIcon2Big.png)
