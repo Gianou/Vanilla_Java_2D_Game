@@ -8,6 +8,8 @@ public class MainBat {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setResizable(false);
         frame.setTitle("Bat Game");
+        ImageIcon batIcon = new ImageIcon("src/main/resources/BatIcon2Big.png");
+        frame.setIconImage(batIcon.getImage());
 
         GamePanel gamePanel = new GamePanel();
         frame.add(gamePanel);
