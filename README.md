@@ -11,4 +11,4 @@ I am following RyiSnow tutorials on Youtube https://www.youtube.com/playlist?lis
 
 All sprites and design are my owns.
 
-![](summer-2022-2d-game/src/main/resources/BatIcon2Big.png)
+![Semantic description of image](src/main/resources/BatIconbig.png "Image Title")
