@@ -22,9 +22,9 @@ public class Player extends Entity{
         getPlayerImage();
     }
     public void setDefaultValues(){
-        x = -100;
+        x = 100;
         y = 100;
-        speed = 24;
+        speed = 12;
         direction = "right";
     }
     public void getPlayerImage(){
@@ -74,6 +74,17 @@ public class Player extends Entity{
         else if(keyH.downPressed){
             y += speed;
         }
+        spriteCounter++;
+        if(spriteCounter>10) {
+            if (spriteNum == 1){
+                spriteNum = 2;
+            }
+
+            else if (spriteNum == 2) {
+                spriteNum = 1;
+            }
+            spriteCounter = 0;
+        }
 
     }
     public void draw(Graphics2D g2){
@@ -82,10 +93,16 @@ public class Player extends Entity{
         //switch case
         switch (direction){
             case "right":
-                image = right2;
+                if(spriteNum == 1)
+                    image = right1;
+                if(spriteNum == 2)
+                    image = right2;
                 break;
             case "left":
-                image = left2;
+                if(spriteNum == 1)
+                    image = left1;
+                if(spriteNum == 2)
+                    image = left2;
                 break;
 
         }
