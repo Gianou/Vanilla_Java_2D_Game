@@ -30,13 +30,21 @@ public class Player extends Entity{
     public void getPlayerImage(){
         try {
 
-            File file = new File("src/main/resources/BatStill1.png");
+            File file = new File("src/main/resources/BatStillR1.png");
             FileInputStream fis = new FileInputStream(file);
-            still1 = ImageIO.read(fis);
+            stillR1 = ImageIO.read(fis);
 
-            file = new File("src/main/resources/BatStill2.png");
+            file = new File("src/main/resources/BatStillR2.png");
             fis = new FileInputStream(file);
-            still2 = ImageIO.read(fis);
+            stillR2 = ImageIO.read(fis);
+
+            file = new File("src/main/resources/BatStillL1.png");
+            fis = new FileInputStream(file);
+            stillL1 = ImageIO.read(fis);
+
+            file = new File("src/main/resources/BatStillL2.png");
+            fis = new FileInputStream(file);
+            stillL2 = ImageIO.read(fis);
 
             file = new File("src/main/resources/BatLeft1.png");
             fis = new FileInputStream(file);
@@ -74,6 +82,13 @@ public class Player extends Entity{
         else if(keyH.downPressed){
             y += speed;
         }
+        //Add still animation when no keys pressed
+        else{
+            if(direction.equals("right") || direction.equals("stillR"))
+                direction = "stillR";
+            else
+                direction = "stillL";
+        }
         spriteCounter++;
         if(spriteCounter>10) {
             if (spriteNum == 1){
@@ -103,6 +118,18 @@ public class Player extends Entity{
                     image = left1;
                 if(spriteNum == 2)
                     image = left2;
+                break;
+            case "stillR":
+                if(spriteNum == 1)
+                    image = stillR1;
+                if(spriteNum == 2)
+                    image = stillR2;
+                break;
+            case "stillL":
+                if(spriteNum == 1)
+                    image = stillL1;
+                if(spriteNum == 2)
+                    image = stillL2;
                 break;
 
         }
