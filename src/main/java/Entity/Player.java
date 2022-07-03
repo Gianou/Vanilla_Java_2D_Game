@@ -68,7 +68,28 @@ public class Player extends Entity{
         }
     }
     public void update(){
-        if(keyH.rightPressed){
+        if(keyH.rightPressed && keyH.upPressed){
+            direction = "right";
+            x += speed;
+            y -= speed;
+
+        }
+        else if(keyH.leftPressed && keyH.upPressed){
+            direction = "left";
+            x -= speed;
+            y -= speed;
+        }
+        else if(keyH.rightPressed && keyH.downPressed){
+            direction = "right";
+            x += speed;
+            y += speed;
+        }
+        else if(keyH.leftPressed && keyH.downPressed){
+            direction = "left";
+            x -= speed;
+            y += speed;
+        }
+        else if(keyH.rightPressed){
             direction = "right";
             x += speed;
         }
