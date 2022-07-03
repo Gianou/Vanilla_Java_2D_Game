@@ -30,35 +30,35 @@ public class Player extends Entity{
     public void getPlayerImage(){
         try {
 
-            File file = new File("src/main/resources/BatStillR1.png");
+            File file = new File("src/main/resources/player/BatStillR1.png");
             FileInputStream fis = new FileInputStream(file);
             stillR1 = ImageIO.read(fis);
 
-            file = new File("src/main/resources/BatStillR2.png");
+            file = new File("src/main/resources/player/BatStillR2.png");
             fis = new FileInputStream(file);
             stillR2 = ImageIO.read(fis);
 
-            file = new File("src/main/resources/BatStillL1.png");
+            file = new File("src/main/resources/player/BatStillL1.png");
             fis = new FileInputStream(file);
             stillL1 = ImageIO.read(fis);
 
-            file = new File("src/main/resources/BatStillL2.png");
+            file = new File("src/main/resources/player/BatStillL2.png");
             fis = new FileInputStream(file);
             stillL2 = ImageIO.read(fis);
 
-            file = new File("src/main/resources/BatLeft1.png");
+            file = new File("src/main/resources/player/BatLeft1.png");
             fis = new FileInputStream(file);
             left1 = ImageIO.read(fis);
 
-            file = new File("src/main/resources/BatLeft2.png");
+            file = new File("src/main/resources/player/BatLeft2.png");
             fis = new FileInputStream(file);
             left2 = ImageIO.read(fis);
 
-            file = new File("src/main/resources/BatRight1.png");
+            file = new File("src/main/resources/player/BatRight1.png");
             fis = new FileInputStream(file);
             right1 = ImageIO.read(fis);
 
-            file = new File("src/main/resources/BatRight2.png");
+            file = new File("src/main/resources/player/BatRight2.png");
             fis = new FileInputStream(file);
             right2 = ImageIO.read(fis);
 
@@ -154,7 +154,7 @@ public class Player extends Entity{
                 break;
 
         }
-        g2.drawImage(image, x, y, gp.tileSize/2,gp.tileSize, null);
+        g2.drawImage(image, x, y, gp.tileSize,gp.tileSize*2, null);
 
     }
 }
