@@ -42,9 +42,9 @@ public class TileManager {
     }
     public void draw(Graphics2D g2){
         //g2.drawImage(tile[0].image, 0, 0, gp.tileSize, gp.tileSize, null);
-        for(int i = 0; i<=12*16*gp.scale ; i+=16*gp.scale){
-            for(int j = 0; j<=16*16*gp.scale; j+=16*gp.scale){
-                g2.drawImage(tile[0].image, j, i, gp.tileSize, gp.tileSize, null);
+        for(int i = 0; i<=12*gp.tileSize ; i+= gp.tileSize){
+            for(int j = 0; j<=16*gp.tileSize; j+=gp.tileSize){
+                g2.drawImage(tile[1].image, j, i, gp.tileSize, gp.tileSize, null);
             }
         }
     }
