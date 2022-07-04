@@ -4,23 +4,30 @@ import Main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
 
+/**
+ * Class used to read tile images and to draw maps
+ */
 public class TileManager {
     GamePanel gp;
     Tile []  tile;
+    int [][] mapTileNum;
 
     public TileManager(GamePanel gp) throws IOException {
         this.gp = gp;
 
         tile = new Tile[10];
+        mapTileNum = new int [gp.maxScreenCol] [gp.maxScreenRow];
 
         getTileImage();
     }
 
+    /**
+     * Reads the images of the different tiles that can be used to draw map and saves them all to the tile[] array
+     * @throws IOException
+     */
     public void getTileImage() throws IOException {
 
         tile[0] = new Tile();
@@ -37,16 +44,40 @@ public class TileManager {
         file = new File("src/main/resources/tiles/Water.png");
         fis = new FileInputStream(file);
         tile[2].image = ImageIO.read(fis);
-
-
     }
-    public void draw(Graphics2D g2){
-        //g2.drawImage(tile[0].image, 0, 0, gp.tileSize, gp.tileSize, null);
-        for(int i = 0; i<=12*gp.tileSize ; i+= gp.tileSize){
-            for(int j = 0; j<=16*gp.tileSize; j+=gp.tileSize){
-                g2.drawImage(tile[1].image, j, i, gp.tileSize, gp.tileSize, null);
+
+    /**
+     * Used to draw a map. Uses a double for loop to go through each tile of the GamePanel and paints
+     * according to the tile value from readMapTxt()
+     * @param g2
+     * @throws IOException
+     */
+    public void draw(Graphics2D g2) throws IOException {
+        int [] map = readMapTxt("src/main/resources/maps/01map");
+        int pos = 0;
+        for (int i = 0; i<gp.maxScreenRow; i++){
+            for (int j = 0; j<gp.maxScreenCol; j++){
+
+                g2.drawImage(tile[map[pos++]].image, j* gp.tileSize, i*gp.tileSize, gp.tileSize, gp.tileSize, null);
             }
         }
     }
 
+    /**
+     * Reads .txt file and copies content to an int array.
+     * @param filepath, path to .txt file. Should always be in "src/main/resources/maps"
+     * @return int array used to know what tile to use when drawing a map
+     * @throws FileNotFoundException
+     */
+    private int [] readMapTxt(String filepath) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File(filepath));
+        int [] tileValue = new int [gp.maxScreenRow*gp.maxScreenCol];
+        int i = 0;
+        while(scanner.hasNextInt())
+        {
+            tileValue[i++] = scanner.nextInt();
+        }
+        return tileValue;
+    }
 }
+
