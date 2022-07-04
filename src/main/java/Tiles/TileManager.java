@@ -19,9 +19,12 @@ public class TileManager {
         this.gp = gp;
 
         tile = new Tile[10];
-        mapTileNum = new int [gp.maxScreenCol] [gp.maxScreenRow];
+        mapTileNum = new int [gp.maxScreenRow] [gp.maxScreenCol];
 
         getTileImage();
+        readMapTxt("src/main/resources/maps/01map");
+        System.out.println("su");
+
     }
 
     /**
@@ -53,12 +56,23 @@ public class TileManager {
      * @throws IOException
      */
     public void draw(Graphics2D g2) throws IOException {
-        int [] map = readMapTxt("src/main/resources/maps/01map");
-        int pos = 0;
-        for (int i = 0; i<gp.maxScreenRow; i++){
-            for (int j = 0; j<gp.maxScreenCol; j++){
+        int col = 0;
+        int row = 0;
+        int x = 0;
+        int y = 0;
 
-                g2.drawImage(tile[map[pos++]].image, j* gp.tileSize, i*gp.tileSize, gp.tileSize, gp.tileSize, null);
+        while(col < gp.maxScreenCol && row < gp.maxScreenRow){
+            int tileNum = mapTileNum[row][col];
+            System.out.println(tileNum);
+            g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
+            col++;
+            x += gp.tileSize;
+
+            if(col == gp.maxScreenCol){
+                col = 0;
+                x = 0;
+                row++;
+                y += gp.tileSize;
             }
         }
     }
@@ -69,15 +83,18 @@ public class TileManager {
      * @return int array used to know what tile to use when drawing a map
      * @throws FileNotFoundException
      */
-    private int [] readMapTxt(String filepath) throws FileNotFoundException {
+    private void readMapTxt(String filepath) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(filepath));
-        int [] tileValue = new int [gp.maxScreenRow*gp.maxScreenCol];
-        int i = 0;
+        int row = 0;
+        int col = 0;
         while(scanner.hasNextInt())
         {
-            tileValue[i++] = scanner.nextInt();
+            mapTileNum[row][col++] = scanner.nextInt();
+            if(col > gp.maxScreenCol-1){
+                row++;
+                col = 0;
+            }
         }
-        return tileValue;
     }
 }
 
