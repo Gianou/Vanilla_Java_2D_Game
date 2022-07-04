@@ -23,7 +23,6 @@ public class TileManager {
 
         getTileImage();
         readMapTxt("src/main/resources/maps/01map");
-        System.out.println("su");
 
     }
 
@@ -63,7 +62,6 @@ public class TileManager {
 
         while(col < gp.maxScreenCol && row < gp.maxScreenRow){
             int tileNum = mapTileNum[row][col];
-            System.out.println(tileNum);
             g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
             col++;
             x += gp.tileSize;

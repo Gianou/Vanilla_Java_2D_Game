@@ -15,15 +15,22 @@ public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyH;
 
+    public final int screenX;
+    public final int screenY;
+
     public Player (GamePanel gp, KeyHandler keyH){
         this.gp = gp;
         this.keyH = keyH;
+
+        screenX = gp.screenWidth/2-(gp.tileSize/2);
+        screenY = gp.screenHeight/2-(gp.tileSize);
+
         setDefaultValues();
         getPlayerImage();
     }
     public void setDefaultValues(){
-        x = 100;
-        y = 100;
+        worldX = 100;
+        worldY = 100;
         speed = 8;
         direction = "right";
     }
@@ -70,38 +77,38 @@ public class Player extends Entity{
     public void update(){
         if(keyH.rightPressed && keyH.upPressed){
             direction = "right";
-            x += speed;
-            y -= speed;
+            worldX += speed;
+            worldY -= speed;
 
         }
         else if(keyH.leftPressed && keyH.upPressed){
             direction = "left";
-            x -= speed;
-            y -= speed;
+            worldX -= speed;
+            worldY -= speed;
         }
         else if(keyH.rightPressed && keyH.downPressed){
             direction = "right";
-            x += speed;
-            y += speed;
+            worldX += speed;
+            worldY += speed;
         }
         else if(keyH.leftPressed && keyH.downPressed){
             direction = "left";
-            x -= speed;
-            y += speed;
+            worldX -= speed;
+            worldY += speed;
         }
         else if(keyH.rightPressed){
             direction = "right";
-            x += speed;
+            worldX += speed;
         }
         else if(keyH.leftPressed){
             direction = "left";
-            x -= speed;
+            worldX -= speed;
         }
         else if(keyH.upPressed){
-            y -= speed;
+            worldY -= speed;
         }
         else if(keyH.downPressed){
-            y += speed;
+            worldY += speed;
         }
         //Add still animation when no keys pressed
         else{
@@ -154,7 +161,7 @@ public class Player extends Entity{
                 break;
 
         }
-        g2.drawImage(image, x, y, gp.tileSize,gp.tileSize*2, null);
+        g2.drawImage(image, screenX, screenY, gp.tileSize,gp.tileSize*2, null);
 
     }
 }
