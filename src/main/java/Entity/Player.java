@@ -31,7 +31,7 @@ public class Player extends Entity{
     public void setDefaultValues(){
         worldX = 100;
         worldY = 100;
-        speed = 8;
+        speed = 12;
         direction = "right";
     }
     public void getPlayerImage(){

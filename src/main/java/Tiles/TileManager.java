@@ -19,11 +19,21 @@ public class TileManager {
         this.gp = gp;
 
         tile = new Tile[10];
-        mapTileNum = new int [gp.maxScreenRow] [gp.maxScreenCol];
+        mapTileNum = new int [gp.maxWorldRow] [gp.maxWorldCol];
 
         getTileImage();
-        readMapTxt("src/main/resources/maps/01map");
+        readMapTxt("src/main/resources/maps/02map");
 
+        affiche();
+
+    }
+    public void affiche(){
+        for (int i = 0; i<gp.maxWorldRow; i++) {
+            for (int j = 0; j < gp.maxWorldCol; j++) {
+                System.out.print(mapTileNum[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
     /**
@@ -55,22 +65,26 @@ public class TileManager {
      * @throws IOException
      */
     public void draw(Graphics2D g2) throws IOException {
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
+        int worldCol = 0;
+        int worldRow = 0;
 
-        while(col < gp.maxScreenCol && row < gp.maxScreenRow){
-            int tileNum = mapTileNum[row][col];
-            g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
-            col++;
-            x += gp.tileSize;
 
-            if(col == gp.maxScreenCol){
-                col = 0;
-                x = 0;
-                row++;
-                y += gp.tileSize;
+        while(worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow){
+            int tileNum = mapTileNum[worldRow][worldCol];
+
+            int worldX = worldCol * gp.tileSize;
+            int worldY = worldRow * gp.tileSize;
+            int screenX = worldX - gp.player.worldX + gp.player.screenX;
+            int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+
+            g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            worldCol++;
+
+
+            if(worldCol == gp.maxWorldCol){
+                worldCol = 0;
+                worldRow++;
             }
         }
     }
@@ -88,7 +102,7 @@ public class TileManager {
         while(scanner.hasNextInt())
         {
             mapTileNum[row][col++] = scanner.nextInt();
-            if(col > gp.maxScreenCol-1){
+            if(col > gp.maxWorldCol-1){
                 row++;
                 col = 0;
             }
