@@ -25,6 +25,8 @@ public class Player extends Entity{
         screenX = gp.screenWidth/2-(gp.tileSize/2);
         screenY = gp.screenHeight/2-(gp.tileSize);
 
+        solidArea = new Rectangle(0, gp.tileSize, gp.tileSize, gp.tileSize);
+
         setDefaultValues();
         getPlayerImage();
     }
@@ -75,6 +77,7 @@ public class Player extends Entity{
         }
     }
     public void update(){
+        /*
         if(keyH.rightPressed && keyH.upPressed){
             direction = "right";
             worldX += speed;
@@ -96,20 +99,26 @@ public class Player extends Entity{
             worldX -= speed;
             worldY += speed;
         }
-        else if(keyH.rightPressed){
-            direction = "right";
-            worldX += speed;
-        }
-        else if(keyH.leftPressed){
-            direction = "left";
-            worldX -= speed;
-        }
-        else if(keyH.upPressed){
-            worldY -= speed;
-        }
-        else if(keyH.downPressed){
-            worldY += speed;
-        }
+
+         */
+        if(keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed){
+            if(keyH.rightPressed){
+                direction = "right";
+
+            }
+            else if(keyH.leftPressed){
+                direction = "left";
+
+            }
+            else if(keyH.upPressed){
+                direction = "up";
+
+            }
+            else if(keyH.downPressed){
+                direction = "down";
+
+            }
+        /*
         //Add still animation when no keys pressed
         else{
             if(direction.equals("right") || direction.equals("stillR"))
@@ -117,6 +126,34 @@ public class Player extends Entity{
             else
                 direction = "stillL";
         }
+
+         */
+
+            // Check Tile Collision
+            collision = false;
+            gp.cChecker.checkTile(this);
+
+            // If collision false, player can move
+            if(!collision){
+                switch(direction){
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                }
+            }
+
+
+        }
+
         spriteCounter++;
         if(spriteCounter>10) {
             if (spriteNum == 1){
@@ -141,12 +178,13 @@ public class Player extends Entity{
                 if(spriteNum == 2)
                     image = right2;
                 break;
-            case "left":
+            case "left", "up", "down":
                 if(spriteNum == 1)
                     image = left1;
                 if(spriteNum == 2)
                     image = left2;
                 break;
+
             case "stillR":
                 if(spriteNum == 1)
                     image = stillR1;
