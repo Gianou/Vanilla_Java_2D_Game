@@ -14,6 +14,7 @@ public class Player extends Entity{
 
     GamePanel gp;
     KeyHandler keyH;
+    char orientation = 'r';
 
     public final int screenX;
     public final int screenY;
@@ -81,24 +82,28 @@ public class Player extends Entity{
         if(keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed){
             if(keyH.rightPressed && keyH.upPressed){
                 direction = "rightUp";
+                orientation = 'r';
             }
             else if(keyH.leftPressed && keyH.upPressed){
                 direction = "leftUp";
-
+                orientation = 'l';
             }
             else if(keyH.rightPressed && keyH.downPressed){
                 direction = "rightDown";
+                orientation = 'r';
             }
             else if(keyH.leftPressed && keyH.downPressed){
                 direction = "leftDown";
+                orientation = 'l';
             }
 
             else if(keyH.rightPressed){
                 direction = "right";
-
+                orientation = 'r';
             }
             else if(keyH.leftPressed){
                 direction = "left";
+                orientation = 'l';
 
             }
             else if(keyH.upPressed){
@@ -109,17 +114,6 @@ public class Player extends Entity{
                 direction = "down";
 
             }
-        /*
-        //Add still animation when no keys pressed
-        else{
-            if(direction.equals("right") || direction.equals("stillR"))
-                direction = "stillR";
-            else
-                direction = "stillL";
-        }
-
-         */
-
             // Check Tile Collision
             collision = false;
             gp.cChecker.checkTile(this);
@@ -160,6 +154,13 @@ public class Player extends Entity{
 
 
         }
+        else if(orientation == 'r'){
+            direction = "stillR";
+        }
+        else{
+            direction = "stillL";
+        }
+
 
         spriteCounter++;
         if(spriteCounter>10) {
@@ -179,17 +180,32 @@ public class Player extends Entity{
         BufferedImage image = null;
         //switch case
         switch (direction){
-            case "right":
+            case "right", "rightDown", "rightUp":
                 if(spriteNum == 1)
                     image = right1;
                 if(spriteNum == 2)
                     image = right2;
                 break;
-            case "left", "up", "down":
+            case "left", "leftDown", "leftUp":
                 if(spriteNum == 1)
                     image = left1;
                 if(spriteNum == 2)
                     image = left2;
+                break;
+
+            case "up", "down":
+                if(orientation == 'l'){
+                    if(spriteNum == 1)
+                        image = left1;
+                    if(spriteNum == 2)
+                        image = left2;
+                }
+                if(orientation == 'r'){
+                    if(spriteNum == 1)
+                        image = right1;
+                    if(spriteNum == 2)
+                        image = right2;
+                }
                 break;
 
             case "stillR":
