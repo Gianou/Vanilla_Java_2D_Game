@@ -121,7 +121,8 @@ public class Player extends Entity{
             gp.cChecker.checkTile(this);
 
             // Check object collision
-            gp.cChecker.checkObject(this, true);
+            int objIndex = gp.cChecker.checkObject(this, true);
+            pickUpObject(objIndex);
 
             // If collision false, player can move
             if(!collision){
@@ -179,6 +180,11 @@ public class Player extends Entity{
             spriteCounter = 0;
         }
 
+    }
+    public void pickUpObject(int i){
+        if(i != 999){
+            gp.obj[i] = null;
+        }
     }
     public void draw(Graphics2D g2){
 

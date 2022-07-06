@@ -11,15 +11,15 @@ public class AssetSetter {
 
     public void setObject(){
         gp.obj[0] = new OBJ_Key();
-        gp.obj[0].worldX = gp.tileSize*7;
-        gp.obj[0].worldY = gp.tileSize*6;
+        gp.obj[0].worldX = gp.tileSize*20;
+        gp.obj[0].worldY = gp.tileSize*20;
 
         gp.obj[1] = new OBJ_Key();
         gp.obj[1].worldX = -gp.tileSize;
         gp.obj[1].worldY = 0;
 
         gp.obj[2] = new OBJ_Rock();
-        gp.obj[2].worldX = gp.tileSize*8;
-        gp.obj[2].worldY = gp.tileSize*8;
+        gp.obj[2].worldX = gp.tileSize*10;
+        gp.obj[2].worldY = gp.tileSize*10;
     }
 }

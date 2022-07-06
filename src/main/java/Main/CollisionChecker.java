@@ -132,77 +132,85 @@ public class CollisionChecker {
                         entity.solidArea.y -= entity.speed;
                         if(entity.solidArea.intersects(gp.obj[i].solidArea)){
                             entity.collision = true;
+                            if(player){
+                                index = i;
+                            }
                         }
-                        if(player){
-                            index = i;
-                        }
+
                         break;
                     case "down":
                         entity.solidArea.y += entity.speed;
                         if(entity.solidArea.intersects(gp.obj[i].solidArea)){
                             entity.collision = true;
+                            if(player){
+                                index = i;
+                            }
                         }
-                        if(player){
-                            index = i;
-                        }
+
                         break;
                     case "right":
                         entity.solidArea.x += entity.speed;
                         if(entity.solidArea.intersects(gp.obj[i].solidArea)){
                             entity.collision = true;
+                            if(player){
+                                index = i;
+                            }
                         }
-                        if(player){
-                            index = i;
-                        }
+
                         break;
                     case "left":
                         entity.solidArea.x -= entity.speed;
                         if(entity.solidArea.intersects(gp.obj[i].solidArea)){
                             entity.collision = true;
+                            if(player){
+                                index = i;
+                            }
                         }
-                        if(player){
-                            index = i;
-                        }
+
                         break;
                     case "leftUp":
                         entity.solidArea.x -= entity.speed;
                         entity.solidArea.y -= entity.speed;
                         if(entity.solidArea.intersects(gp.obj[i].solidArea) || entity.solidArea.intersects(gp.obj[i].solidArea)){
                             entity.collision = true;
+                            if(player){
+                                index = i;
+                            }
                         }
-                        if(player){
-                            index = i;
-                        }
+
                         break;
                     case "rightUp":
                         entity.solidArea.x += entity.speed;
                         entity.solidArea.y -= entity.speed;
                         if(entity.solidArea.intersects(gp.obj[i].solidArea) || entity.solidArea.intersects(gp.obj[i].solidArea)){
                             entity.collision = true;
+                            if(player){
+                                index = i;
+                            }
                         }
-                        if(player){
-                            index = i;
-                        }
+
                         break;
                     case "rightDown":
                         entity.solidArea.x += entity.speed;
                         entity.solidArea.y += entity.speed;
                         if(entity.solidArea.intersects(gp.obj[i].solidArea) || entity.solidArea.intersects(gp.obj[i].solidArea)){
                             entity.collision = true;
+                            if(player){
+                                index = i;
+                            }
                         }
-                        if(player){
-                            index = i;
-                        }
+
                         break;
                     case "leftDown":
                         entity.solidArea.x -= entity.speed;
                         entity.solidArea.y += entity.speed;
                         if(entity.solidArea.intersects(gp.obj[i].solidArea) || entity.solidArea.intersects(gp.obj[i].solidArea)){
                             entity.collision = true;
+                            if(player){
+                                index = i;
+                            }
                         }
-                        if(player){
-                            index = i;
-                        }
+
                         break;
 
                 }
