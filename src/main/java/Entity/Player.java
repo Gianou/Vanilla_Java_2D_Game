@@ -77,32 +77,30 @@ public class Player extends Entity{
         }
     }
     public void update(){
-        /*
-        if(keyH.rightPressed && keyH.upPressed){
-            direction = "right";
-            worldX += speed;
-            worldY -= speed;
 
-        }
-        else if(keyH.leftPressed && keyH.upPressed){
-            direction = "left";
-            worldX -= speed;
-            worldY -= speed;
-        }
-        else if(keyH.rightPressed && keyH.downPressed){
-            direction = "right";
-            worldX += speed;
-            worldY += speed;
-        }
-        else if(keyH.leftPressed && keyH.downPressed){
-            direction = "left";
-            worldX -= speed;
-            worldY += speed;
-        }
 
-         */
+
+
         if(keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed){
-            if(keyH.rightPressed){
+            if(keyH.rightPressed && keyH.upPressed){
+                direction = "rightUp";
+            }
+            else if(keyH.leftPressed && keyH.upPressed){
+                direction = "leftUp";
+
+            }
+            else if(keyH.rightPressed && keyH.downPressed){
+                direction = "right";
+                worldX += speed;
+                worldY += speed;
+            }
+            else if(keyH.leftPressed && keyH.downPressed){
+                direction = "left";
+                worldX -= speed;
+                worldY += speed;
+            }
+
+            else if(keyH.rightPressed){
                 direction = "right";
 
             }
@@ -147,6 +145,14 @@ public class Player extends Entity{
                         break;
                     case "left":
                         worldX -= speed;
+                        break;
+                    case "rightUp":
+                        worldX += speed;
+                        worldY -= speed;
+                        break;
+                    case "leftUp":
+                        worldX -= speed;
+                        worldY -= speed;
                         break;
                 }
             }
