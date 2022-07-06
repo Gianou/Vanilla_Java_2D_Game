@@ -11,11 +11,11 @@ public class AssetSetter {
 
     public void setObject(){
         gp.obj[0] = new OBJ_Key();
-        gp.obj[0].worldX = gp.tileSize*3;
-        gp.obj[0].worldY = gp.tileSize*3;
+        gp.obj[0].worldX = gp.tileSize*7;
+        gp.obj[0].worldY = gp.tileSize*2;
 
         gp.obj[1] = new OBJ_Key();
-        gp.obj[1].worldX = gp.tileSize*6;
-        gp.obj[1].worldY = gp.tileSize*6;
+        gp.obj[1].worldX = -gp.tileSize;
+        gp.obj[1].worldY = 0;
     }
 }
