@@ -181,6 +181,9 @@ public class Player extends Entity{
         }
 
     }
+
+    //OBJECT INTERACTION EVENT
+    // Create an interaction fonction in SuperObject
     public void pickUpObject(int i){
         if(i != 999){
             gp.obj[i] = null;
