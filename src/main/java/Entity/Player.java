@@ -78,9 +78,6 @@ public class Player extends Entity{
     }
     public void update(){
 
-
-
-
         if(keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed){
             if(keyH.rightPressed && keyH.upPressed){
                 direction = "rightUp";
@@ -90,14 +87,10 @@ public class Player extends Entity{
 
             }
             else if(keyH.rightPressed && keyH.downPressed){
-                direction = "right";
-                worldX += speed;
-                worldY += speed;
+                direction = "rightDown";
             }
             else if(keyH.leftPressed && keyH.downPressed){
-                direction = "left";
-                worldX -= speed;
-                worldY += speed;
+                direction = "leftDown";
             }
 
             else if(keyH.rightPressed){
@@ -153,6 +146,14 @@ public class Player extends Entity{
                     case "leftUp":
                         worldX -= speed;
                         worldY -= speed;
+                        break;
+                    case "leftDown":
+                        worldX -= speed;
+                        worldY += speed;
+                        break;
+                    case "rightDown":
+                        worldX += speed;
+                        worldY += speed;
                         break;
                 }
             }
