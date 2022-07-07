@@ -30,8 +30,8 @@ public class BatResolutionTest {
          */
         for (int i = 0; i<50; i++){
             for (int j = 0; j<50; j++){
-                if(i == 3 || i == 49-3 ||  j == 3 || j == 49 -3){
-                    System.out.print(1 + " ");
+                if(i <= 7 || i >= 49-7 ||  j <= 7 || j >= 49 -7){
+                    System.out.print(2 + " ");
                 }
                 else
                     System.out.print(0 + " ");
