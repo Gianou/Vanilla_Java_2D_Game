@@ -43,7 +43,7 @@ public class TileManager {
     public void getTileImage() throws IOException {
 
         tile[0] = new Tile();
-        File file = new File("src/main/resources/tiles/Grass.png");
+        File file = new File("src/main/resources/tiles/Grass2.png");
         FileInputStream fis = new FileInputStream(file);
         tile[0].image = ImageIO.read(fis);
 
@@ -58,6 +58,23 @@ public class TileManager {
         fis = new FileInputStream(file);
         tile[2].image = ImageIO.read(fis);
         tile[2].collision =true;
+
+        tile[3] = new Tile();
+        file = new File("src/main/resources/tiles/Sand.png");
+        fis = new FileInputStream(file);
+        tile[3].image = ImageIO.read(fis);
+
+        tile[4] = new Tile();
+        file = new File("src/main/resources/tiles/Sea1.png");
+        fis = new FileInputStream(file);
+        tile[4].image = ImageIO.read(fis);
+        tile[4].collision =true;
+
+        tile[5] = new Tile();
+        file = new File("src/main/resources/tiles/Tree.png");
+        fis = new FileInputStream(file);
+        tile[5].image = ImageIO.read(fis);
+        tile[5].collision =true;
     }
 
     /**

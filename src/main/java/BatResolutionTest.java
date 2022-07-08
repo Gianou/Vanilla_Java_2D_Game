@@ -33,6 +33,8 @@ public class BatResolutionTest {
                 if(i <= 7 || i >= 49-7 ||  j <= 7 || j >= 49 -7){
                     System.out.print(2 + " ");
                 }
+                else if(j == 8 || i == 8|| i == 49-8 || j == 49-8)
+                    System.out.print(3 + " ");
                 else
                     System.out.print(0 + " ");
             }
