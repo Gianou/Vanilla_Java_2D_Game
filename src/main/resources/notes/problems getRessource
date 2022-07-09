@@ -1,0 +1,3 @@
+While following RiySnow tutorials on youtube I systematically had troubles with his file readings method.
+
+The "getClass().getResource("file/path") techniques never worked for me
