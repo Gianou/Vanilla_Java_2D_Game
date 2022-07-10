@@ -10,7 +10,7 @@ public class Sound {
     File soundFile [] = new File [30];
 
     public Sound(){
-        soundFile[0] = new File ("src/main/resources/sounds/Test.wav");
+        soundFile[0] = new File ("src/main/resources/sounds/HauntedHouse.wav");
     }
 
     public void setFile(int i){
