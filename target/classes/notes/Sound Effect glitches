@@ -1,0 +1,5 @@
+kralaryth — Aujourd’hui à 18:11
+Thread music = new Thread(new Runnable() {
+    @Override public void run() { your code }
+};
+music.start();
