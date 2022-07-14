@@ -11,7 +11,7 @@ public class Sound {
     AudioInputStream [] ais = new AudioInputStream[soundFile.length];
 
     public Sound(){
-        soundFile[0] = new File ("src/main/resources/sounds/HauntedHouse.wav");
+        soundFile[0] = new File ("src/main/resources/sounds/ChillPrairie.wav");
         soundFile[1] =  new File ("src/main/resources/sounds/PickUp.wav");
         soundFile[2] =  new File ("src/main/resources/sounds/DoorOpen.wav");
     }
