@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class UI {
     GamePanel gp;
-    Font myFont;
+    Font arial_40, arial_55;
     OBJ_Key key;
     BufferedImage keyImg;
     boolean messageOn;
@@ -18,7 +18,8 @@ public class UI {
 
     public UI(GamePanel gp) {
         this.gp = gp;
-        myFont = new Font("Arial", Font.PLAIN, 40);
+        arial_40 = new Font("Courier New", Font.BOLD, 40);
+        arial_55 = new Font("Courier New", Font.BOLD, 55);
         key = new OBJ_Key();
         keyImg = key.image;
     }
@@ -31,8 +32,8 @@ public class UI {
 
         if(gameFinished){
 
-            g2.setFont(myFont);
-            g2.setColor(Color.PINK);
+            g2.setFont(arial_55);
+            g2.setColor(Color.BLACK);
 
             String text;
             int textLength;
@@ -42,16 +43,22 @@ public class UI {
              textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 
              x = gp.screenWidth/2 - textLength/2;
-             y = gp.screenHeight/2;
+             y = gp.screenHeight/2 - gp.tileSize*2;
+             g2.drawString(text, x, y);
+
+             gp.stopMusic();
+             gp.gameThread = null;
+
         }
 
         else {
-            g2.setFont(myFont);
+            g2.setFont(arial_40);
             g2.setColor(Color.BLACK);
             g2.drawImage(keyImg, gp.tileSize/4, gp.tileSize/4, gp.tileSize, gp.tileSize, null);
             g2.drawString(" x " + gp.player.hasKey,gp.tileSize, gp.tileSize + gp.tileSize/4);
             // Coordinate
-            g2.drawString("X : " + String.valueOf(gp.player.worldX/gp.tileSize) +"  Y : " + String.valueOf(gp.player.worldY/gp.tileSize + 2),gp.screenWidth - gp.tileSize*6, gp.tileSize + gp.tileSize/4);
+            g2.drawString("X : " + String.valueOf(gp.player.worldX/gp.tileSize) +"  Y : " +
+                    String.valueOf(gp.player.worldY/gp.tileSize + 2),gp.screenWidth - gp.tileSize*8, gp.tileSize + gp.tileSize/4);
 
             if(messageOn){
                 messageLength = (int)g2.getFontMetrics().getStringBounds(message, g2).getWidth();

@@ -63,7 +63,7 @@ public class CollisionChecker {
                 //up
                 if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
                     entity.upOk = false;
-                    // entity.collision = true;
+
                 }
                 entityTopRow = entityTopWorldY/gp.tileSize;
                 //Right
@@ -72,8 +72,7 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityRightCol];//[entityBottomRow][entityRightCol]
                 if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
                     entity.rightOk = false;
-                    System.out.println(rightOk);
-                    //entity.collision = true;
+
                 }
 
 
