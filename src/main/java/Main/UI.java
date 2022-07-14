@@ -31,7 +31,7 @@ public class UI {
         g2.drawImage(keyImg, gp.tileSize/4, gp.tileSize/4, gp.tileSize, gp.tileSize, null);
         g2.drawString(" x " + gp.player.hasKey,gp.tileSize, gp.tileSize + gp.tileSize/4);
         if(messageOn){
-            g2.drawString(message, gp.player.screenX, gp.player.screenY);
+            g2.drawString(message, gp.player.screenX , gp.player.screenY);
         }
     }
 }
