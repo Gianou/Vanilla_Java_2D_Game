@@ -214,6 +214,14 @@ public class Player extends Entity{
                         hasKey--;
                     }
                     break;
+                case "Chest":
+                    if(hasKey > 0){
+                        gp.playSE(2);
+                        gp.obj[i] = null;
+                        gp.ui.showMessage("You found the treasure, it was the friendship you made along the way");
+                        hasKey--;
+                    }
+                    break;
             }
         }
     }
