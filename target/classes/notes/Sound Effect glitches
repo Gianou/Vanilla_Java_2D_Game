@@ -1,5 +1,2 @@
-kralaryth — Aujourd’hui à 18:11
-Thread music = new Thread(new Runnable() {
-    @Override public void run() { your code }
-};
-music.start();
+Problem only occured when I removed the music to do some testings.
+

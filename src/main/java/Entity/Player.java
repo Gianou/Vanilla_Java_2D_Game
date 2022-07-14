@@ -200,6 +200,7 @@ public class Player extends Entity{
                     if(hasKey > 0){
                         gp.playSE(2);
                         gp.obj[i] = null;
+                        gp.ui.showMessage("Door Unlocked");
                         hasKey--;
                     }
                     break;

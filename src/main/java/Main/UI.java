@@ -12,6 +12,8 @@ public class UI {
     BufferedImage keyImg;
     boolean messageOn;
     String message = "";
+    int messageLength;
+    int msgCpt = 0;
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -31,7 +33,13 @@ public class UI {
         g2.drawImage(keyImg, gp.tileSize/4, gp.tileSize/4, gp.tileSize, gp.tileSize, null);
         g2.drawString(" x " + gp.player.hasKey,gp.tileSize, gp.tileSize + gp.tileSize/4);
         if(messageOn){
-            g2.drawString(message, gp.player.screenX , gp.player.screenY);
+            messageLength = (int)g2.getFontMetrics().getStringBounds(message, g2).getWidth();
+            g2.drawString(message, (gp.player.screenX + gp.tileSize/2) - messageLength/2, gp.player.screenY);
+            msgCpt ++;
+            if(msgCpt > 120){
+                messageOn = false;
+                msgCpt = 0;
+            }
         }
     }
 }

@@ -24,17 +24,8 @@ public class TileManager {
         getTileImage();
         readMapTxt("src/main/resources/maps/02map");
 
-        affiche();
+    }
 
-    }
-    public void affiche(){
-        for (int i = 0; i<gp.maxWorldRow; i++) {
-            for (int j = 0; j < gp.maxWorldCol; j++) {
-                System.out.print(mapTileNum[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
 
     /**
      * Reads the images of the different tiles that can be used to draw map and saves them all to the tile[] array
