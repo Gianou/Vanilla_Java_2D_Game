@@ -8,6 +8,7 @@ import java.net.URL;
 public class Sound {
     Clip clip;
     File soundFile [] = new File [30];
+    AudioInputStream [] ais = new AudioInputStream[soundFile.length];
 
     public Sound(){
         soundFile[0] = new File ("src/main/resources/sounds/HauntedHouse.wav");
@@ -15,11 +16,13 @@ public class Sound {
         soundFile[2] =  new File ("src/main/resources/sounds/DoorOpen.wav");
     }
 
+
     public void setFile(int i){
+
         try {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile[i].getAbsoluteFile());
+            ais[i] = AudioSystem.getAudioInputStream(soundFile[i].getAbsoluteFile());
             clip = AudioSystem.getClip();
-            clip.open(ais);
+            clip.open(ais[i]);
         } catch (UnsupportedAudioFileException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -28,6 +31,7 @@ public class Sound {
             throw new RuntimeException(e);
         }
     }
+
     public void play(){
         clip.start();
     }
