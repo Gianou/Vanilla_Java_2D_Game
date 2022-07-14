@@ -1,0 +1,6 @@
+JLWGL didn't work :
+
+    "Jul 14, 2022 7:02:11 PM net.java.games.input.DefaultControllerEnvironment getControllers
+    WARNING: Found unknown Windows version: Windows 10"
+
+JInput

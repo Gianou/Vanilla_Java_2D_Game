@@ -216,9 +216,12 @@ public class Player extends Entity{
                     break;
                 case "Chest":
                     if(hasKey > 0){
+                        gp.ui.gameFinished = true;
+                        gp.stopMusic();
+                        gp.playSE(1);
                         gp.playSE(2);
-                        gp.obj[i] = null;
-                        gp.ui.showMessage("You found the treasure, it was the friendship you made along the way");
+                        //gp.obj[i] = null;
+                        //gp.ui.showMessage("You found the treasure, it was the friendship you made along the way");
                         hasKey--;
                     }
                     break;

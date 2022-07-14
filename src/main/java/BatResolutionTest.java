@@ -5,8 +5,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+
+
 public class BatResolutionTest {
+
     public static void main(String[] args) throws IOException {
+
+
+        }
+
         /*
         JFrame frame = new JFrame();
         int width = 455, height = 256;
@@ -27,7 +34,7 @@ public class BatResolutionTest {
         frame.add(image);
 
 
-         */
+
         for (int i = 0; i<50; i++){
             for (int j = 0; j<50; j++){
                 if(i <= 7 || i >= 49-7 ||  j <= 7 || j >= 49 -7){
@@ -40,5 +47,7 @@ public class BatResolutionTest {
             }
             System.out.println();
         }
-    }
+
+         */
+
 }
