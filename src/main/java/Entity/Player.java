@@ -20,6 +20,7 @@ public class Player extends Entity{
     public final int screenY;
     public int hasKey = 0;
 
+
     public Player (GamePanel gp, KeyHandler keyH){
         this.gp = gp;
         this.keyH = keyH;
@@ -141,24 +142,33 @@ public class Player extends Entity{
                         worldX -= speed;
                         break;
                     case "rightUp":
-                        worldX += speed;
-                        worldY -= speed;
+                        if(rightOk)
+                            worldX += speed;
+                        if(upOk)
+                            worldY -= speed;
                         break;
                     case "leftUp":
-                        worldX -= speed;
+                        if(leftOk)
+                            worldX -= speed;
+                        if(upOk)
                         worldY -= speed;
                         break;
                     case "leftDown":
+                        if(leftOk)
                         worldX -= speed;
+                        if(downOk)
                         worldY += speed;
                         break;
                     case "rightDown":
+                        if(rightOk)
                         worldX += speed;
+                        if(downOk)
                         worldY += speed;
                         break;
                 }
             }
 
+            resetDirectionsBoolean();
 
         }
         else if(orientation == 'r'){

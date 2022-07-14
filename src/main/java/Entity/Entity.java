@@ -13,4 +13,13 @@ public class Entity {
     public Rectangle solidArea;
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
+    public boolean upOk = true, rightOk = true, downOk = true, leftOk = true;
+
+    public void resetDirectionsBoolean(){
+        upOk = true;
+        rightOk = true;
+        downOk = true;
+        leftOk = true;
+    }
 }
+
