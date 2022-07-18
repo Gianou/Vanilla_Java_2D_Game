@@ -2,6 +2,7 @@ package Entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
+import Main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -41,40 +42,50 @@ public class Player extends Entity{
         speed = gp.tileSize/8;
         direction = "right";
     }
+
     public void getPlayerImage(){
         try {
+            UtilityTool uT = new UtilityTool();
 
             File file = new File("src/main/resources/player/BatStillR1.png");
             FileInputStream fis = new FileInputStream(file);
             stillR1 = ImageIO.read(fis);
+            stillR1 = uT.scaleImage(stillR1, gp.tileSize, gp.tileSize*2);
 
             file = new File("src/main/resources/player/BatStillR2.png");
             fis = new FileInputStream(file);
             stillR2 = ImageIO.read(fis);
+            stillR2 = uT.scaleImage(stillR2, gp.tileSize, gp.tileSize*2);
 
             file = new File("src/main/resources/player/BatStillL1.png");
             fis = new FileInputStream(file);
             stillL1 = ImageIO.read(fis);
+            stillL1 = uT.scaleImage(stillL1, gp.tileSize, gp.tileSize*2);
 
             file = new File("src/main/resources/player/BatStillL2.png");
             fis = new FileInputStream(file);
             stillL2 = ImageIO.read(fis);
+            stillL2 = uT.scaleImage(stillL2, gp.tileSize, gp.tileSize*2);
 
             file = new File("src/main/resources/player/BatLeft1.png");
             fis = new FileInputStream(file);
             left1 = ImageIO.read(fis);
+            left1 = uT.scaleImage(left1, gp.tileSize, gp.tileSize*2);
 
             file = new File("src/main/resources/player/BatLeft2.png");
             fis = new FileInputStream(file);
             left2 = ImageIO.read(fis);
+            left2 = uT.scaleImage(left2, gp.tileSize, gp.tileSize*2);
 
             file = new File("src/main/resources/player/BatRight1.png");
             fis = new FileInputStream(file);
             right1 = ImageIO.read(fis);
+            right1 = uT.scaleImage(right1, gp.tileSize, gp.tileSize*2);
 
             file = new File("src/main/resources/player/BatRight2.png");
             fis = new FileInputStream(file);
             right2 = ImageIO.read(fis);
+            right2 = uT.scaleImage(right2, gp.tileSize, gp.tileSize*2);
 
         }
         catch (IOException e){
@@ -275,7 +286,7 @@ public class Player extends Entity{
                 break;
 
         }
-        g2.drawImage(image, screenX, screenY, gp.tileSize,gp.tileSize*2, null);
+        g2.drawImage(image, screenX, screenY,null);
 
     }
 }

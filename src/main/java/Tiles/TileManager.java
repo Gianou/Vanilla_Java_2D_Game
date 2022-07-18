@@ -1,6 +1,8 @@
 package Tiles;
 
 import Main.GamePanel;
+import Main.UtilityTool;
+import jdk.jshell.execution.Util;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -25,6 +27,18 @@ public class TileManager {
         readMapTxt("src/main/resources/maps/03map");
 
     }
+    public void setUpImage(int index, String imageName, boolean collision) throws IOException {
+        UtilityTool uT = new UtilityTool();
+
+        tile[index] = new Tile();
+        File file = new File("src/main/resources/tiles/" + imageName + ".png");
+        FileInputStream fis = new FileInputStream(file);
+        tile[index].image = ImageIO.read(fis);
+        tile[index].image = uT.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+        if(collision)
+            tile[index].collision = true;
+
+    }
 
 
     /**
@@ -33,39 +47,13 @@ public class TileManager {
      */
     public void getTileImage() throws IOException {
 
-        tile[0] = new Tile();
-        File file = new File("src/main/resources/tiles/Grass5.png");
-        FileInputStream fis = new FileInputStream(file);
-        tile[0].image = ImageIO.read(fis);
+        setUpImage(0, "Grass5", false);
+        setUpImage(1, "Wall", true);
+        setUpImage(2, "Water", true);
+        setUpImage(3, "Sand", false);
+        setUpImage(4, "Sea1", true);
+        setUpImage(5, "Tree4", true);
 
-        tile[1] = new Tile();
-        file = new File("src/main/resources/tiles/Wall.png");
-        fis = new FileInputStream(file);
-        tile[1].image = ImageIO.read(fis);
-        tile[1].collision =true;
-
-        tile[2] = new Tile();
-        file = new File("src/main/resources/tiles/Water.png");
-        fis = new FileInputStream(file);
-        tile[2].image = ImageIO.read(fis);
-        tile[2].collision =true;
-
-        tile[3] = new Tile();
-        file = new File("src/main/resources/tiles/Sand.png");
-        fis = new FileInputStream(file);
-        tile[3].image = ImageIO.read(fis);
-
-        tile[4] = new Tile();
-        file = new File("src/main/resources/tiles/Sea1.png");
-        fis = new FileInputStream(file);
-        tile[4].image = ImageIO.read(fis);
-        tile[4].collision =true;
-
-        tile[5] = new Tile();
-        file = new File("src/main/resources/tiles/Tree4.png");
-        fis = new FileInputStream(file);
-        tile[5].image = ImageIO.read(fis);
-        tile[5].collision =true;
     }
 
     /**
@@ -92,7 +80,7 @@ public class TileManager {
                     worldY  + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                     worldY  - gp.tileSize*2 < gp.player.worldY + gp.player.screenY){
 
-                g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                g2.drawImage(tile[tileNum].image, screenX, screenY, null);
             }
 
             worldCol++;
@@ -124,5 +112,6 @@ public class TileManager {
             }
         }
     }
+
 }
 
