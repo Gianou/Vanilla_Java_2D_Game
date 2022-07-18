@@ -20,7 +20,7 @@ public class UI {
         this.gp = gp;
         arial_40 = new Font("Courier New", Font.BOLD, 40);
         arial_55 = new Font("Courier New", Font.BOLD, 55);
-        key = new OBJ_Key();
+        key = new OBJ_Key(gp);
         keyImg = key.image;
     }
     public void showMessage(String str){
@@ -32,26 +32,11 @@ public class UI {
 
         if(gameFinished){
 
-            g2.setFont(arial_55);
-            g2.setColor(Color.BLACK);
-
-            String text;
-            int textLength;
-            int x;
-            int y;
-             text = "You found the treasure!";
-             textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-
-             x = gp.screenWidth/2 - textLength/2;
-             y = gp.screenHeight/2 - gp.tileSize*2;
-             g2.drawString(text, x, y);
-
-             gp.stopMusic();
-             gp.gameThread = null;
+            drawFinished(g2);
 
         }
 
-        else {
+        else if (gp.gameState == gp.playState){
             g2.setFont(arial_40);
             g2.setColor(Color.BLACK);
             g2.drawImage(keyImg, gp.tileSize/4, gp.tileSize/4, gp.tileSize, gp.tileSize, null);
@@ -70,6 +55,43 @@ public class UI {
                 }
             }
         }
+        else if (gp.gameState == gp.pauseState){
+            drawPaused(g2);
+        }
 
+    }
+    public void drawFinished(Graphics2D g2){
+        g2.setFont(arial_55);
+        g2.setColor(Color.BLACK);
+
+        String text;
+        int textLength;
+        int x;
+        int y;
+        text = "You found the treasure!";
+        textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+
+        x = gp.screenWidth/2 - textLength/2;
+        y = gp.screenHeight/2 - gp.tileSize*2;
+        g2.drawString(text, x, y);
+
+        gp.stopMusic();
+        gp.gameThread = null;
+
+    }
+    public void drawPaused(Graphics2D g2){
+        g2.setFont(arial_55);
+        g2.setColor(Color.BLACK);
+
+        String text;
+        int textLength;
+        int x;
+        int y;
+        text = "Paused";
+        textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+
+        x = gp.screenWidth/2 - textLength/2;
+        y = gp.screenHeight/2 - gp.tileSize*2;
+        g2.drawString(text, x, y);
     }
 }
