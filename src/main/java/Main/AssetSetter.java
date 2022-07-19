@@ -1,5 +1,6 @@
 package Main;
 
+import Entity.NPC_Owl;
 import Object.*;
 
 public class AssetSetter {
@@ -9,6 +10,11 @@ public class AssetSetter {
         this.gp = gp;
     }
 
+    public void setNPC(){
+        gp.npc[0] = new NPC_Owl(gp);
+        gp.npc[0].worldX = gp.tileSize*14;
+        gp.npc[0].worldY = gp.tileSize*16;
+    }
     public void setObject(){
         gp.obj[0] = new OBJ_Key(gp);
         gp.obj[0].worldX = gp.tileSize*12;

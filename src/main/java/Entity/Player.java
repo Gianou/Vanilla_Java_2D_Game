@@ -13,7 +13,6 @@ import java.io.IOException;
 
 public class Player extends Entity{
 
-    GamePanel gp;
     KeyHandler keyH;
     char orientation = 'r';
 
@@ -23,7 +22,7 @@ public class Player extends Entity{
 
 
     public Player (GamePanel gp, KeyHandler keyH){
-        this.gp = gp;
+        super(gp);
         this.keyH = keyH;
 
         screenX = gp.screenWidth/2-(gp.tileSize/2);
@@ -136,6 +135,9 @@ public class Player extends Entity{
             // Check object collision
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex);
+
+            // Check NPC collision
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 
             // If collision false, player can move
             if(!collision){
