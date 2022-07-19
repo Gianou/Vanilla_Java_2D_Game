@@ -1,0 +1,16 @@
+1. Player can move in diagonals
+    I added four directions in Player.java : "rightUp", "leftUp", "rightDown", "leftDown".
+    This direction are set when the two required keys are pressed.
+    As I only have right and left sprites at the moment, I added the String orientation to determine if the player is looking left or right.
+
+    Collision were more complex to handle as I wanted the player to slide against wall if he moved in diagonal in that direction.
+    To do so diagonals collision are checked differently. I added booleans to Entity.java : upOk, downOk, rightOk, downOk.
+    CollisionChecker sets those booleans to false if a collision occure.
+    Then those booleans are checked in the Player class. If both are true, the player moves in diagonal, if only one is true,
+    the Player moves in that direction.
+
+2. NPC have a restricted zone to move in
+
+3. Add a dash to the player
+
+4. Give the player a gun

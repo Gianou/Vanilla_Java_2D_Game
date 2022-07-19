@@ -100,6 +100,8 @@ public class Entity {
 
         collision = false;
         gp.cChecker.checkTile(this);
+        gp.cChecker.checkObject(this, false);
+        gp.cChecker.checkPlayer(this);
 
         if(!collision) {
             switch (direction) {
