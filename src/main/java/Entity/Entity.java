@@ -19,6 +19,7 @@ public class Entity {
     public char orientation = 'r';
     public int actionLockCounter = 0;
     String [] dialogues = new String[10];
+    int dialogueIndex = 0;
 
     GamePanel gp;
 
@@ -140,6 +141,26 @@ public class Entity {
     }
     public void speak(){
 
+        if(dialogues[dialogueIndex] == null){
+            dialogueIndex = 0;
+        }
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+        switch (gp.player.direction){
+            case "up":
+                direction = "down";
+                break;
+            case "down":
+                direction = "up";
+                break;
+            case "right":
+                direction = "left";
+                break;
+            case "left":
+                direction = "right";
+                break;
+
+        }
     }
 }
 

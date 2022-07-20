@@ -14,3 +14,7 @@
 3. Add a dash to the player
 
 4. Give the player a gun
+
+4. Dialogue size
+    Check dialogue size and if it is too big for the rectangle, you start from the last index and search the first space before
+    the max length and make an new line

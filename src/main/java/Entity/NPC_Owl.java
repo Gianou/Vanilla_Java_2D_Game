@@ -94,9 +94,11 @@ public class NPC_Owl extends Entity{
     public void setDialogues(){
         dialogues[0] = "Who?";
         dialogues[1] = "Hoot";
+        dialogues[2] = "Hoooooooooooooooooooooooot";
     }
 
+    @Override
     public void speak(){
-        gp.ui.currentDialogue = dialogues[0];
+        super.speak();
     }
 }

@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 
     GamePanel gp;
-    public boolean rightPressed, leftPressed, downPressed, upPressed;
+    public boolean rightPressed, leftPressed, downPressed, upPressed, spacePressed;
     public boolean checkTime, tPressed;
 
     public KeyHandler(GamePanel gp){
@@ -36,6 +36,10 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_S) {
                 downPressed = true;
             }
+            if (code == KeyEvent.VK_SPACE) {
+                spacePressed = true;
+            }
+
             if (code == KeyEvent.VK_T) {
                 if (checkTime == false) {
                     checkTime = true;
@@ -95,6 +99,9 @@ public class KeyHandler implements KeyListener {
         }
         if(code== KeyEvent.VK_S){
             downPressed = false;
+        }
+        if(code== KeyEvent.VK_SPACE){
+            spacePressed = false;
         }
     }
 
