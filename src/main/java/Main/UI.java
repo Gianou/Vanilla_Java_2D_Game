@@ -4,10 +4,12 @@ import Object.OBJ_Key;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class UI {
     GamePanel gp;
-    Font arial_40, arial_55;
+    Font arial_40, arial_55, pixelFont;
     OBJ_Key key;
     BufferedImage keyImg;
     boolean messageOn;
@@ -17,8 +19,21 @@ public class UI {
     public boolean gameFinished = false;
     public String currentDialogue = "";
 
-    public UI(GamePanel gp) {
+    public UI(GamePanel gp){
         this.gp = gp;
+
+        try{
+            InputStream is = getClass().getResourceAsStream("/font/MP16REG.ttf");
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, is);
+        }
+        catch (FontFormatException e){
+            e.printStackTrace();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+
         arial_40 = new Font("Courier New", Font.BOLD, 40);
         arial_55 = new Font("Courier New", Font.BOLD, 55);
         key = new OBJ_Key(gp);
@@ -55,7 +70,8 @@ public class UI {
 
     }
     public void drawFinished(Graphics2D g2){
-        g2.setFont(arial_55);
+        g2.setFont(pixelFont);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
         g2.setColor(Color.BLACK);
 
         String text;
@@ -74,8 +90,10 @@ public class UI {
 
     }
     public void drawPlay(Graphics2D g2) {
-        g2.setFont(arial_40);
+        g2.setFont(pixelFont);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
         g2.setColor(Color.BLACK);
+
         g2.drawImage(keyImg, gp.tileSize / 4, gp.tileSize / 4, gp.tileSize, gp.tileSize, null);
         g2.drawString(" x " + gp.player.hasKey, gp.tileSize, gp.tileSize + gp.tileSize / 4);
         // Coordinate
@@ -93,7 +111,8 @@ public class UI {
         }
     }
     public void drawPaused(Graphics2D g2){
-        g2.setFont(arial_55);
+        g2.setFont(pixelFont);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
         g2.setColor(Color.BLACK);
 
         String text;
@@ -117,7 +136,9 @@ public class UI {
 
         drawSubWindow(x, y, width, height, g2);
 
-        g2.setFont(arial_40);
+        g2.setFont(pixelFont);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
+
         g2.drawString(currentDialogue, x+gp.tileSize, y+gp.tileSize);
     }
 
