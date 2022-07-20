@@ -93,117 +93,138 @@ public class Player extends Entity{
     }
     public void update(){
 
-        if(keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed){
-            if(keyH.rightPressed && keyH.upPressed){
-                direction = "rightUp";
-                orientation = 'r';
+        if(gp.gameState == gp.dialogueState){
+            if(orientation == 'r'){
+                direction = "stillR";
             }
-            else if(keyH.leftPressed && keyH.upPressed){
-                direction = "leftUp";
-                orientation = 'l';
+            else{
+                direction = "stillL";
             }
-            else if(keyH.rightPressed && keyH.downPressed){
-                direction = "rightDown";
-                orientation = 'r';
-            }
-            else if(keyH.leftPressed && keyH.downPressed){
-                direction = "leftDown";
-                orientation = 'l';
-            }
-
-            else if(keyH.rightPressed){
-                direction = "right";
-                orientation = 'r';
-            }
-            else if(keyH.leftPressed){
-                direction = "left";
-                orientation = 'l';
-
-            }
-            else if(keyH.upPressed){
-                direction = "up";
-
-            }
-            else if(keyH.downPressed){
-                direction = "down";
-
-            }
-            // Check Tile Collision
-            collision = false;
-            gp.cChecker.checkTile(this);
-
-            // Check object collision
-            int objIndex = gp.cChecker.checkObject(this, true);
-            pickUpObject(objIndex);
-
-            // Check NPC collision
-            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
-            interactNPC(npcIndex);
-
-            // If collision false, player can move
-            if(!collision){
-                switch(direction){
-                    case "up":
-                        worldY -= speed;
-                        break;
-                    case "down":
-                        worldY += speed;
-                        break;
-                    case "right":
-                        worldX += speed;
-                        break;
-                    case "left":
-                        worldX -= speed;
-                        break;
-                    case "rightUp":
-                        if(rightOk)
-                            worldX += speed;
-                        if(upOk)
-                            worldY -= speed;
-                        break;
-                    case "leftUp":
-                        if(leftOk)
-                            worldX -= speed;
-                        if(upOk)
-                        worldY -= speed;
-                        break;
-                    case "leftDown":
-                        if(leftOk)
-                        worldX -= speed;
-                        if(downOk)
-                        worldY += speed;
-                        break;
-                    case "rightDown":
-                        if(rightOk)
-                        worldX += speed;
-                        if(downOk)
-                        worldY += speed;
-                        break;
+            spriteCounter++;
+            if(spriteCounter>10) {
+                if (spriteNum == 1){
+                    spriteNum = 2;
                 }
+
+                else if (spriteNum == 2) {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
             }
-
-            resetDirectionsBoolean();
-
         }
-        else if(orientation == 'r'){
-            direction = "stillR";
-        }
+
         else{
-            direction = "stillL";
+            if(keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed){
+                if(keyH.rightPressed && keyH.upPressed){
+                    direction = "rightUp";
+                    orientation = 'r';
+                }
+                else if(keyH.leftPressed && keyH.upPressed){
+                    direction = "leftUp";
+                    orientation = 'l';
+                }
+                else if(keyH.rightPressed && keyH.downPressed){
+                    direction = "rightDown";
+                    orientation = 'r';
+                }
+                else if(keyH.leftPressed && keyH.downPressed){
+                    direction = "leftDown";
+                    orientation = 'l';
+                }
+
+                else if(keyH.rightPressed){
+                    direction = "right";
+                    orientation = 'r';
+                }
+                else if(keyH.leftPressed){
+                    direction = "left";
+                    orientation = 'l';
+
+                }
+                else if(keyH.upPressed){
+                    direction = "up";
+
+                }
+                else if(keyH.downPressed){
+                    direction = "down";
+
+                }
+                // Check Tile Collision
+                collision = false;
+                gp.cChecker.checkTile(this);
+
+                // Check object collision
+                int objIndex = gp.cChecker.checkObject(this, true);
+                pickUpObject(objIndex);
+
+                // Check NPC collision
+                int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+                interactNPC(npcIndex);
+
+                // If collision false, player can move
+                if(!collision){
+                    switch(direction){
+                        case "up":
+                            worldY -= speed;
+                            break;
+                        case "down":
+                            worldY += speed;
+                            break;
+                        case "right":
+                            worldX += speed;
+                            break;
+                        case "left":
+                            worldX -= speed;
+                            break;
+                        case "rightUp":
+                            if(rightOk)
+                                worldX += speed;
+                            if(upOk)
+                                worldY -= speed;
+                            break;
+                        case "leftUp":
+                            if(leftOk)
+                                worldX -= speed;
+                            if(upOk)
+                                worldY -= speed;
+                            break;
+                        case "leftDown":
+                            if(leftOk)
+                                worldX -= speed;
+                            if(downOk)
+                                worldY += speed;
+                            break;
+                        case "rightDown":
+                            if(rightOk)
+                                worldX += speed;
+                            if(downOk)
+                                worldY += speed;
+                            break;
+                    }
+                }
+
+                resetDirectionsBoolean();
+
+            }
+            else if(orientation == 'r'){
+                direction = "stillR";
+            }
+            else{
+                direction = "stillL";
+            }
+            spriteCounter++;
+            if(spriteCounter>10) {
+                if (spriteNum == 1){
+                    spriteNum = 2;
+                }
+
+                else if (spriteNum == 2) {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
+            }
         }
 
-
-        spriteCounter++;
-        if(spriteCounter>10) {
-            if (spriteNum == 1){
-                spriteNum = 2;
-            }
-
-            else if (spriteNum == 2) {
-                spriteNum = 1;
-            }
-            spriteCounter = 0;
-        }
 
     }
 

@@ -63,20 +63,26 @@ public class KeyHandler implements KeyListener {
         else if(gp.gameState == gp.dialogueState){
             //DIALOGUE
 
-            if (code == KeyEvent.VK_ENTER){
+// ADD SMTH TO MAKE PLAYER IDDLE
+
+            if (code == KeyEvent.VK_SPACE){
                 gp.gameState = gp.playState;
             }
             if (code == KeyEvent.VK_D) {
                 gp.gameState = gp.playState;
+                rightPressed = true;
             }
             if (code == KeyEvent.VK_A) {
                 gp.gameState = gp.playState;
+                leftPressed = true;
             }
             if (code == KeyEvent.VK_W) {
                 gp.gameState = gp.playState;
+                upPressed = true;
             }
             if (code == KeyEvent.VK_S) {
                 gp.gameState = gp.playState;
+                downPressed = true;
             }
 
         }

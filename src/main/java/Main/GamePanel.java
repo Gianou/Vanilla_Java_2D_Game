@@ -121,6 +121,11 @@ public class GamePanel extends JPanel implements Runnable{
 
         }
 
+        if(gameState == dialogueState){
+                //PLAYER
+                player.update();
+        }
+
 
     }
     public void paintComponent(Graphics g){
