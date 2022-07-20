@@ -18,6 +18,7 @@ public class Entity {
     public boolean upOk = true, rightOk = true, downOk = true, leftOk = true;
     public char orientation = 'r';
     public int actionLockCounter = 0;
+    String [] dialogues = new String[10];
 
     GamePanel gp;
 
@@ -135,7 +136,10 @@ public class Entity {
             spriteNum = 1;
         }
         spriteCounter = 0;
+        }
     }
+    public void speak(){
+
     }
 }
 

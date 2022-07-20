@@ -21,36 +21,63 @@ public class KeyHandler implements KeyListener {
 
         int code = e.getKeyCode();
 
-        if(code== KeyEvent.VK_D){
-            rightPressed = true;
-        }
-        if(code== KeyEvent.VK_A){
-            leftPressed = true;
-        }
-        if(code== KeyEvent.VK_W){
-            upPressed = true;
-        }
-        if(code== KeyEvent.VK_S){
-            downPressed = true;
-        }
-        if(code== KeyEvent.VK_P){
-            if(gp.gameState == gp.playState){
+        //PLAY
+        if(gp.gameState == gp.playState) {
+
+            if (code == KeyEvent.VK_D) {
+                rightPressed = true;
+            }
+            if (code == KeyEvent.VK_A) {
+                leftPressed = true;
+            }
+            if (code == KeyEvent.VK_W) {
+                upPressed = true;
+            }
+            if (code == KeyEvent.VK_S) {
+                downPressed = true;
+            }
+            if (code == KeyEvent.VK_T) {
+                if (checkTime == false) {
+                    checkTime = true;
+                } else if (checkTime == true) {
+                    checkTime = false;
+                }
+            }
+            if (code == KeyEvent.VK_P){
                 gp.gameState = gp.pauseState;
             }
+        }
 
-            else if(gp.gameState == gp.pauseState){
+            //PAUSE
+        else if(gp.gameState == gp.pauseState) {
+            if(code== KeyEvent.VK_P){
                 gp.gameState = gp.playState;
             }
 
         }
-        if(code== KeyEvent.VK_T){
-            if(checkTime == false){
-                checkTime = true;
+
+        else if(gp.gameState == gp.dialogueState){
+            //DIALOGUE
+
+            if (code == KeyEvent.VK_ENTER){
+                gp.gameState = gp.playState;
             }
-            else if (checkTime == true){
-                checkTime = false;
+            if (code == KeyEvent.VK_D) {
+                gp.gameState = gp.playState;
             }
+            if (code == KeyEvent.VK_A) {
+                gp.gameState = gp.playState;
+            }
+            if (code == KeyEvent.VK_W) {
+                gp.gameState = gp.playState;
+            }
+            if (code == KeyEvent.VK_S) {
+                gp.gameState = gp.playState;
+            }
+
         }
+
+
     }
 
     @Override
@@ -70,4 +97,5 @@ public class KeyHandler implements KeyListener {
             downPressed = false;
         }
     }
+
 }

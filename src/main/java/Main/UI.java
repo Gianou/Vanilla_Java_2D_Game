@@ -15,6 +15,7 @@ public class UI {
     int messageLength;
     int msgCpt = 0;
     public boolean gameFinished = false;
+    public String currentDialogue = "";
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -36,27 +37,20 @@ public class UI {
 
         }
 
+        //PLAYSTATE
         else if (gp.gameState == gp.playState){
-            g2.setFont(arial_40);
-            g2.setColor(Color.BLACK);
-            g2.drawImage(keyImg, gp.tileSize/4, gp.tileSize/4, gp.tileSize, gp.tileSize, null);
-            g2.drawString(" x " + gp.player.hasKey,gp.tileSize, gp.tileSize + gp.tileSize/4);
-            // Coordinate
-            g2.drawString("X : " + String.valueOf(gp.player.worldX/gp.tileSize) +"  Y : " +
-                    String.valueOf(gp.player.worldY/gp.tileSize + 2),gp.screenWidth - gp.tileSize*8, gp.tileSize + gp.tileSize/4);
-
-            if(messageOn){
-                messageLength = (int)g2.getFontMetrics().getStringBounds(message, g2).getWidth();
-                g2.drawString(message, (gp.player.screenX + gp.tileSize/2) - messageLength/2, gp.player.screenY);
-                msgCpt ++;
-                if(msgCpt > 120){
-                    messageOn = false;
-                    msgCpt = 0;
-                }
-            }
+            drawPlay(g2);
         }
+
+        //PAUSESTATE
         else if (gp.gameState == gp.pauseState){
+            System.out.println("ici dans l'ui");
             drawPaused(g2);
+        }
+
+        //DIALOGUESTATE
+        else if (gp.gameState == gp.dialogueState){
+            drawDialogue(g2);
         }
 
     }
@@ -79,6 +73,25 @@ public class UI {
         gp.gameThread = null;
 
     }
+    public void drawPlay(Graphics2D g2) {
+        g2.setFont(arial_40);
+        g2.setColor(Color.BLACK);
+        g2.drawImage(keyImg, gp.tileSize / 4, gp.tileSize / 4, gp.tileSize, gp.tileSize, null);
+        g2.drawString(" x " + gp.player.hasKey, gp.tileSize, gp.tileSize + gp.tileSize / 4);
+        // Coordinate
+        g2.drawString("X : " + String.valueOf(gp.player.worldX / gp.tileSize) + "  Y : " +
+                String.valueOf(gp.player.worldY / gp.tileSize + 2), gp.screenWidth - gp.tileSize * 8, gp.tileSize + gp.tileSize / 4);
+
+        if (messageOn) {
+            messageLength = (int) g2.getFontMetrics().getStringBounds(message, g2).getWidth();
+            g2.drawString(message, (gp.player.screenX + gp.tileSize / 2) - messageLength / 2, gp.player.screenY);
+            msgCpt++;
+            if (msgCpt > 120) {
+                messageOn = false;
+                msgCpt = 0;
+            }
+        }
+    }
     public void drawPaused(Graphics2D g2){
         g2.setFont(arial_55);
         g2.setColor(Color.BLACK);
@@ -93,5 +106,31 @@ public class UI {
         x = gp.screenWidth/2 - textLength/2;
         y = gp.screenHeight/2 - gp.tileSize*2;
         g2.drawString(text, x, y);
+    }
+    public void drawDialogue(Graphics2D g2){
+
+        //WINDOW
+        int x = gp.tileSize*2;
+        int y = gp.tileSize*6;
+        int width = gp.screenWidth - (gp.tileSize*4);
+        int height = gp.tileSize*2;
+
+        drawSubWindow(x, y, width, height, g2);
+
+        g2.setFont(arial_40);
+        g2.drawString(currentDialogue, x+gp.tileSize, y+gp.tileSize);
+    }
+
+    public void drawSubWindow(int x, int y, int width, int height, Graphics2D g2){
+        Color c = new Color(0, 0, 0, 128);
+        g2.setColor(c);
+        g2.fillRoundRect(x,y,width, height, 35, 35);
+
+        c = new Color(255, 255, 255, 128);
+        g2.setColor(c);
+        g2.setStroke(new BasicStroke(5));
+        g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
+
+
     }
 }

@@ -15,6 +15,7 @@ public class NPC_Owl extends Entity{
         direction = "right";
         speed = gp.tileSize/32;
         getOwlImage();
+        setDialogues();
     }
     public void getOwlImage(){
         try {
@@ -89,7 +90,13 @@ public class NPC_Owl extends Entity{
             }
             actionLockCounter = 0;
         }
+    }
+    public void setDialogues(){
+        dialogues[0] = "Who?";
+        dialogues[1] = "Hoot";
+    }
 
-
+    public void speak(){
+        gp.ui.currentDialogue = dialogues[0];
     }
 }
