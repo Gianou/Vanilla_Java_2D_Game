@@ -75,7 +75,7 @@ public class NPC_Owl extends Entity{
 
 
         if(actionLockCounter == 60){System.out.println(direction);
-            int i = (int) (Math.random()*100+1);
+            int i = (int) (Math.random()*150+1);
             if(i<=25){
                 direction = "up";
             }
@@ -87,6 +87,9 @@ public class NPC_Owl extends Entity{
             }
             else if(i<=100){
                 direction = "left";
+            }
+            else if(i<=150){
+                direction = "idle";
             }
             actionLockCounter = 0;
         }

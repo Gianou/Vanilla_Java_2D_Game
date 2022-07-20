@@ -89,6 +89,9 @@ public class Entity {
                     if (spriteNum == 2)
                         image = stillL2;
                     break;
+                case "idle":
+                    image = right1;
+                    break;
             }
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
         }
@@ -118,6 +121,8 @@ public class Entity {
                     break;
                 case "left":
                     worldX -= speed;
+                    break;
+                case "idle":
                     break;
 
             }

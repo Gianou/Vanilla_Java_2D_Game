@@ -60,11 +60,9 @@ public class KeyHandler implements KeyListener {
 
         }
 
+        //DIALOGUE
         else if(gp.gameState == gp.dialogueState){
-            //DIALOGUE
-
 // ADD SMTH TO MAKE PLAYER IDDLE
-
             if (code == KeyEvent.VK_SPACE){
                 gp.gameState = gp.playState;
             }
@@ -84,7 +82,33 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.playState;
                 downPressed = true;
             }
+        }
 
+        //TITLE
+        else if (gp.gameState == gp.titleState){
+            if (code == KeyEvent.VK_W) {
+                gp.ui.menuNum--;
+                if(gp.ui.menuNum < 0){
+                    gp.ui.menuNum = 2;
+                }
+            }
+            if (code == KeyEvent.VK_S) {
+                gp.ui.menuNum++;
+                if(gp.ui.menuNum > 2){
+                    gp.ui.menuNum = 0;
+                }
+            }
+            if (code == KeyEvent.VK_ENTER){
+                if(gp.ui.menuNum == 0){
+                    gp.gameState = gp.playState;
+                }
+                if (gp.ui.menuNum == 1){
+
+                }
+                if (gp.ui.menuNum == 2){
+                    System.exit(1);
+                }
+            }
         }
 
 

@@ -18,6 +18,7 @@ public class UI {
     int msgCpt = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int menuNum = 0;
 
     public UI(GamePanel gp){
         this.gp = gp;
@@ -50,6 +51,10 @@ public class UI {
 
             drawFinished(g2);
 
+        }
+
+        else if(gp.gameState == gp.titleState){
+            drawTitle(g2);
         }
 
         //PLAYSTATE
@@ -153,5 +158,87 @@ public class UI {
         g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
 
 
+    }
+    public void drawTitle(Graphics2D g2){
+
+
+        //TITLE NAME
+        g2.setFont(pixelFont);
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96f));
+        String text = "The Little Bat 2D";
+        int x = getXforCenteredText(text, g2);
+        int y = gp.screenHeight/5;
+
+        g2.setColor(Color.BLACK);
+        g2.drawString(text, x+5, y+5);
+
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
+
+        //NEW, CONTINUE, QUIT
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 36f));
+
+        text = "";
+        if(menuNum == 0){
+            text = "> ";
+        }
+        text += "NEW GAME";
+        x = getXforCenteredText(text, g2);
+        y = gp.screenHeight/4*3;
+        g2.setColor(Color.BLACK);
+        g2.drawString(text, x+5, y+5);
+        g2.setColor(Color.WHITE);
+        g2.drawString(text,x, y);
+
+        text = "";
+        if(menuNum == 1){
+            text = "> ";
+        }
+        text += "LOAD GAME";
+        x = getXforCenteredText(text, g2);
+
+        y += gp.tileSize;
+        g2.setColor(Color.BLACK);
+        g2.drawString(text, x+5, y+5);
+        g2.setColor(Color.WHITE);
+        g2.drawString(text,x, y);
+
+        text = "";
+        if(menuNum == 2){
+            text = "> ";
+        }
+        text += "QUIT";
+        x = getXforCenteredText(text, g2);
+        y += gp.tileSize;
+        g2.setColor(Color.BLACK);
+        g2.drawString(text, x+5, y+5);
+        g2.setColor(Color.WHITE);
+        g2.drawString(text,x, y);
+
+        // IMAGE
+
+        gp.player.spriteCounter++;
+        if(gp.player.spriteCounter>10) {
+            if (gp.player.spriteNum == 1) {
+                gp.player.spriteNum = 2;
+            } else if (gp.player.spriteNum == 2) {
+                gp.player.spriteNum = 1;
+            }
+            gp.player.spriteCounter = 0;
+        }
+        x = gp.screenWidth / 2 - gp.tileSize;
+        y = gp.tileSize * 2;
+        Image img = gp.player.stillR1;
+        if (gp.player.spriteNum == 2) {
+            img = gp.player.stillR2;
+        }
+        g2.drawImage(img, x, y, gp.tileSize*2, gp.tileSize*4, null);
+
+    }
+    public int getXforCenteredText(String text, Graphics2D g2){
+        int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        int x = gp.screenWidth/2 - textLength/2;
+        return x;
     }
 }
