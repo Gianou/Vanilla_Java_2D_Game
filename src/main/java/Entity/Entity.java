@@ -81,7 +81,6 @@ public class Entity {
                     if (spriteNum == 1)
                         image = stillR1;
                     if (spriteNum == 2)
-                        image = stillR2;
                     break;
                 case "stillL":
                     if (spriteNum == 1)

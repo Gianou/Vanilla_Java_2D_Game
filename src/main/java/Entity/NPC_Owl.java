@@ -49,17 +49,17 @@ public class NPC_Owl extends Entity{
             left1 = ImageIO.read(fis);
             left1 = uT.scaleImage(left1, gp.tileSize, gp.tileSize*2);
 
-            file = new File("src/main/resources/npc/OwlL2.gif");
+            file = new File("src/main/resources/npc/OwlL2.png");
             fis = new FileInputStream(file);
             left2 = ImageIO.read(fis);
             left2 = uT.scaleImage(left2, gp.tileSize, gp.tileSize*2);
 
-            file = new File("src/main/resources/npc/OwlR1.gif");
+            file = new File("src/main/resources/npc/OwlR1.png");
             fis = new FileInputStream(file);
             right1 = ImageIO.read(fis);
             right1 = uT.scaleImage(right1, gp.tileSize, gp.tileSize*2);
 
-            file = new File("src/main/resources/npc/OwlR2.gif");
+            file = new File("src/main/resources/npc/OwlR2.png");
             fis = new FileInputStream(file);
             right2 = ImageIO.read(fis);
             right2 = uT.scaleImage(right2, gp.tileSize, gp.tileSize*2);
