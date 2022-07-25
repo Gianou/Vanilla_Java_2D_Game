@@ -40,6 +40,10 @@ public class Player extends Entity{
         worldY = gp.tileSize*12;
         speed = gp.tileSize/8;
         direction = "right";
+
+        // PLAYER STATUS
+        maxLife = 6;
+        life = maxLife;
     }
 
     public void getPlayerImage(){
@@ -233,6 +237,7 @@ public class Player extends Entity{
             if(gp.keyH.spacePressed){
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
+                life--;
             }
 
         }

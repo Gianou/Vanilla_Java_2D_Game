@@ -17,6 +17,8 @@ public class OBJ_Key extends SuperObject{
             FileInputStream fis = new FileInputStream(file);
             image = ImageIO.read(fis);
             image = uT.scaleImage(image, gp.tileSize, gp.tileSize);
+
+
         }catch(IOException e){
             e.printStackTrace();
         }

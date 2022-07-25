@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+import Object.SuperObject;
+import Object.OBJ_Heart;
+
 public class UI {
     GamePanel gp;
     Font arial_40, arial_55, pixelFont;
@@ -19,6 +22,7 @@ public class UI {
     public boolean gameFinished = false;
     public String currentDialogue = "";
     public int menuNum = 0;
+    BufferedImage fullHeart, halfHeart, emptyHeart;
 
     public UI(GamePanel gp){
         this.gp = gp;
@@ -39,6 +43,13 @@ public class UI {
         arial_55 = new Font("Courier New", Font.BOLD, 55);
         key = new OBJ_Key(gp);
         keyImg = key.image;
+
+
+        // CREATE HUD OBJECT
+        SuperObject heart = new OBJ_Heart(gp);
+        fullHeart = heart.image;
+        halfHeart = heart.image2;
+        emptyHeart = heart.image3;
     }
     public void showMessage(String str){
         message = str;
@@ -99,11 +110,25 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
         g2.setColor(Color.BLACK);
 
-        g2.drawImage(keyImg, gp.tileSize / 4, gp.tileSize / 4, gp.tileSize, gp.tileSize, null);
-        g2.drawString(" x " + gp.player.hasKey, gp.tileSize, gp.tileSize + gp.tileSize / 4);
+        //DRAW KEYS
+        int x = gp.tileSize/4;
+        int y = gp.tileSize;
+        g2.drawImage(keyImg, x, y, gp.tileSize, gp.tileSize, null);
+        g2.drawString(" x " + gp.player.hasKey, x + gp.tileSize, y*2);
+
+
         // Coordinate
-        g2.drawString("X : " + String.valueOf(gp.player.worldX / gp.tileSize) + "  Y : " +
-                String.valueOf(gp.player.worldY / gp.tileSize + 2), gp.screenWidth - gp.tileSize * 8, gp.tileSize + gp.tileSize / 4);
+        if(gp.keyH.checkCoordinates){
+            String coordinates = "X : " + String.valueOf(gp.player.worldX / gp.tileSize) + "  Y : " +
+                    String.valueOf(gp.player.worldY / gp.tileSize + 2);
+            int textLength = (int) g2.getFontMetrics().getStringBounds(coordinates, g2).getWidth();
+            x = gp.screenWidth - ( textLength + gp.tileSize/4);
+            y = gp.tileSize;
+            g2.drawString(coordinates, x, y);
+        }
+
+
+
 
         if (messageOn) {
             messageLength = (int) g2.getFontMetrics().getStringBounds(message, g2).getWidth();
@@ -114,6 +139,7 @@ public class UI {
                 msgCpt = 0;
             }
         }
+        drawPlayerLife(g2);
     }
     public void drawPaused(Graphics2D g2){
         g2.setFont(pixelFont);
@@ -130,6 +156,7 @@ public class UI {
         x = gp.screenWidth/2 - textLength/2;
         y = gp.screenHeight/2 - gp.tileSize*2;
         g2.drawString(text, x, y);
+        drawPlayerLife(g2);
     }
     public void drawDialogue(Graphics2D g2){
 
@@ -145,6 +172,7 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
 
         g2.drawString(currentDialogue, x+gp.tileSize, y+gp.tileSize);
+        drawPlayerLife(g2);
     }
 
     public void drawSubWindow(int x, int y, int width, int height, Graphics2D g2){
@@ -240,5 +268,33 @@ public class UI {
         int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth/2 - textLength/2;
         return x;
+    }
+    public void drawPlayerLife(Graphics2D g2){
+        int x = gp.tileSize/4;
+        int y = gp.tileSize/4;
+        int i = 0;
+
+        //Draw max life
+        while (i < gp.player.maxLife/2){
+            g2.drawImage(emptyHeart, x, y, null);
+            i++;
+            x += gp.tileSize;
+        }
+
+        // Reset
+        x = gp.tileSize/4;
+        y = gp.tileSize/4;
+        i = 0;
+
+        //Draw max life
+        while (i < gp.player.life){
+            g2.drawImage(halfHeart, x, y, null);
+            i++;
+            if(i < gp.player.life){
+                g2.drawImage(fullHeart, x, y, null);
+            }
+            i++;
+            x += gp.tileSize;
+        }
     }
 }

@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity {
+    GamePanel gp;
     public int worldX, worldY;
     public int speed;
     public BufferedImage stillR1, stillR2, stillL2, stillL1, left1,left2,right1,right2;
@@ -21,7 +22,10 @@ public class Entity {
     String [] dialogues = new String[10];
     int dialogueIndex = 0;
 
-    GamePanel gp;
+    //ENTITY STATUS
+    public int maxLife;
+    public int life;
+
 
 
     public Entity(){}
