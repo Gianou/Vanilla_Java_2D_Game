@@ -59,9 +59,10 @@ public class UI {
     public void draw(Graphics2D g2){
 
         if(gameFinished){
-
             drawFinished(g2);
-
+        }
+        else if(gp.player.life <=0){
+            drawGameOver(g2);
         }
 
         else if(gp.gameState == gp.titleState){
@@ -296,5 +297,15 @@ public class UI {
             i++;
             x += gp.tileSize;
         }
+    }
+    public void drawGameOver(Graphics2D g2){
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 64F));
+        String text = "GAME OVER";
+        int x = getXforCenteredText(text, g2);
+        int y = gp.screenHeight/2 - gp.tileSize*2;
+        g2.drawString(text, x, y);
+
+        gp.stopMusic();
+        gp.gameThread = null;
     }
 }
