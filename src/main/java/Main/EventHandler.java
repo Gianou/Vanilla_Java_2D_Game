@@ -18,12 +18,11 @@ public class EventHandler {
     }
     public void checkEvent(){
 //EVENT EXAMPLE
-        if(hit( 41, 8, "right")){
+        if(hit( 12, 19, "down")){
             damagePit(gp.dialogueState);
         }
         if (hit(17, 19, "up")) {
             healingPool(gp.dialogueState);
-
         }
     }
     public boolean hit(int eventCol, int eventRow, String reqDirection){

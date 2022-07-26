@@ -240,7 +240,6 @@ public class Player extends Entity{
             if(gp.keyH.spacePressed){
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
-                life--;
             }
 
         }

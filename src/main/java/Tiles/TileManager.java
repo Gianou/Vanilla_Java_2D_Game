@@ -53,6 +53,7 @@ public class TileManager {
         setUpImage(3, "Sand", false);
         setUpImage(4, "Sea1", true);
         setUpImage(5, "Tree4", true);
+        setUpImage(6, "Hole", false);
 
     }
 
