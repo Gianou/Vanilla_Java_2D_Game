@@ -165,6 +165,9 @@ public class Player extends Entity{
                 int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
                 interactNPC(npcIndex);
 
+                //Check Event
+                gp.eventH.checkEvent();
+
                 // If collision false, player can move
                 if(!collision){
                     switch(direction){
@@ -328,4 +331,7 @@ public class Player extends Entity{
         g2.drawImage(image, screenX, screenY,null);
 
     }
+    //public void resetDirectionsBoolean(){
+
+    //}
 }
