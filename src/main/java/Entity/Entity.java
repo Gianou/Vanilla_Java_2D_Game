@@ -12,10 +12,11 @@ import java.io.IOException;
 
 public class Entity {
     GamePanel gp;
+    UtilityTool uT = new UtilityTool();
     public int worldX, worldY;
     public int speed;
     public BufferedImage stillR1, stillR2, stillL2, stillL1, left1, left2, right1, right2;
-    public BufferedImage upRight1, upRight2, downRight1, downRight2;
+    public BufferedImage upRight1, upRight2, downRight1, downRight2, up1, up2, down1, down2;
     public String direction;
     public int spriteCounter = 0;
     public int spriteNum = 1;
@@ -102,12 +103,14 @@ public class Entity {
                     image = right1;
                     break;
             }
-            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(image, screenX, screenY, null);
         }
     }
+
     public void setAction(){
 
     }
+
     public void update(){
 
         setAction();
@@ -130,6 +133,30 @@ public class Entity {
                     break;
                 case "left":
                     worldX -= speed;
+                    break;
+                case "rightUp":
+                    if(rightOk)
+                        worldX += speed;
+                    if(upOk)
+                        worldY -= speed;
+                    break;
+                case "leftUp":
+                    if(leftOk)
+                        worldX -= speed;
+                    if(upOk)
+                        worldY -= speed;
+                    break;
+                case "leftDown":
+                    if(leftOk)
+                        worldX -= speed;
+                    if(downOk)
+                        worldY += speed;
+                    break;
+                case "rightDown":
+                    if(rightOk)
+                        worldX += speed;
+                    if(downOk)
+                        worldY += speed;
                     break;
                 case "idle":
                     break;

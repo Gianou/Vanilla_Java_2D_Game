@@ -95,6 +95,7 @@ public class Player extends Entity{
             e.printStackTrace();
         }
     }
+    @Override
     public void update(){
 
         if(gp.gameState == gp.dialogueState){

@@ -19,27 +19,12 @@ public class NPC_Owl extends Entity{
     }
     public void getOwlImage(){
         try {
-            UtilityTool uT = new UtilityTool();
 
-            File file = new File("src/main/resources/npc/OwlL1.png");
-            FileInputStream fis = new FileInputStream(file);
-            left1 = ImageIO.read(fis);
-            left1 = uT.scaleImage(left1, gp.tileSize, gp.tileSize*2);
+            left1 = getNPCImage("OwlL1",uT,2,  2);
+            left2 = getNPCImage("OwlL2",uT,2,  2);
 
-            file = new File("src/main/resources/npc/OwlL2.png");
-            fis = new FileInputStream(file);
-            left2 = ImageIO.read(fis);
-            left2 = uT.scaleImage(left2, gp.tileSize, gp.tileSize*2);
-
-            file = new File("src/main/resources/npc/OwlR1.png");
-            fis = new FileInputStream(file);
-            right1 = ImageIO.read(fis);
-            right1 = uT.scaleImage(right1, gp.tileSize, gp.tileSize*2);
-
-            file = new File("src/main/resources/npc/OwlR2.png");
-            fis = new FileInputStream(file);
-            right2 = ImageIO.read(fis);
-            right2 = uT.scaleImage(right2, gp.tileSize, gp.tileSize*2);
+            right1 = getNPCImage("OwlR1",uT,2,  2);
+            right2 = getNPCImage("OwlR2",uT,2,  2);
 
         }
         catch (IOException e){
