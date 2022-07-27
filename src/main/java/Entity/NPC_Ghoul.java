@@ -4,12 +4,14 @@ import Main.GamePanel;
 import Main.UtilityTool;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class NPC_Owl extends Entity{
-    public NPC_Owl(GamePanel gp){
+public class NPC_Ghoul extends Entity{
+    public NPC_Ghoul(GamePanel gp){
         super(gp);
 
         direction = "right";
@@ -21,31 +23,17 @@ public class NPC_Owl extends Entity{
         try {
             UtilityTool uT = new UtilityTool();
 
-            File file = new File("src/main/resources/npc/OwlL1.png");
-            FileInputStream fis = new FileInputStream(file);
-            left1 = ImageIO.read(fis);
-            left1 = uT.scaleImage(left1, gp.tileSize, gp.tileSize*2);
-
-            file = new File("src/main/resources/npc/OwlL2.png");
-            fis = new FileInputStream(file);
-            left2 = ImageIO.read(fis);
-            left2 = uT.scaleImage(left2, gp.tileSize, gp.tileSize*2);
-
-            file = new File("src/main/resources/npc/OwlR1.png");
-            fis = new FileInputStream(file);
-            right1 = ImageIO.read(fis);
-            right1 = uT.scaleImage(right1, gp.tileSize, gp.tileSize*2);
-
-            file = new File("src/main/resources/npc/OwlR2.png");
-            fis = new FileInputStream(file);
-            right2 = ImageIO.read(fis);
-            right2 = uT.scaleImage(right2, gp.tileSize, gp.tileSize*2);
+            left1 = getNPCImage("GhoulD1",uT,2,  1);
+            left2 = getNPCImage("GhoulD2",uT,2,  1);
+            right1 = getNPCImage("GhoulR1",uT,2,  1);
+            right2 = getNPCImage("GhoulR2",uT,2,  1);
 
         }
         catch (IOException e){
             e.printStackTrace();
         }
     }
+
     @Override
     public void setAction(){
         actionLockCounter++;
@@ -72,10 +60,11 @@ public class NPC_Owl extends Entity{
         }
     }
     public void setDialogues(){
-        dialogues[0] = "Who?";
-        dialogues[1] = "Hoot";
-        dialogues[2] = "Hoooooooooooooooooooooooot";
+        dialogues[0] = "eurhagh?";
+        dialogues[1] = "mmmmmmh";
+        dialogues[2] = "argh argh";
     }
+
 
     @Override
     public void speak(){

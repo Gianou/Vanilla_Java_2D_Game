@@ -1,15 +1,21 @@
 package Entity;
 
 import Main.GamePanel;
+import Main.UtilityTool;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class Entity {
     GamePanel gp;
     public int worldX, worldY;
     public int speed;
-    public BufferedImage stillR1, stillR2, stillL2, stillL1, left1,left2,right1,right2;
+    public BufferedImage stillR1, stillR2, stillL2, stillL1, left1, left2, right1, right2;
+    public BufferedImage upRight1, upRight2, downRight1, downRight2;
     public String direction;
     public int spriteCounter = 0;
     public int spriteNum = 1;
@@ -169,6 +175,14 @@ public class Entity {
                 break;
 
         }
+    }
+    public BufferedImage getNPCImage(String name, UtilityTool uT, int width, int height) throws IOException {
+        File file = new File("src/main/resources/npc/" + name + ".png");
+        FileInputStream fis = new FileInputStream(file);
+        BufferedImage image = ImageIO.read(fis);
+        image = uT.scaleImage(image, gp.tileSize*width, gp.tileSize*height);
+
+        return image;
     }
 }
 

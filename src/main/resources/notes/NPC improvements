@@ -1,0 +1,5 @@
+1: UtilityTool resizing works for object but not NPC (Need to modify the draw methods?)
+
+2: All entity should have 8 directions and 2x8 images
+
+3: All entity should have a height and width that are used for image resizing and solidArea size
