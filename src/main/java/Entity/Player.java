@@ -20,6 +20,10 @@ public class Player extends Entity{
     public final int screenY;
     public int hasKey = 0;
 
+    public boolean dash = false;
+    public int dashCoolDownTime = 10, dashCoolDown = 0;
+
+
 
     public Player (GamePanel gp, KeyHandler keyH){
         super(gp);
@@ -120,6 +124,10 @@ public class Player extends Entity{
 
         else{
             if(keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed){
+                if(keyH.spacePressed && dashCoolDown > dashCoolDownTime){
+                    dash = true;
+                    dashCoolDown = 0;
+                }
                 if(keyH.rightPressed && keyH.upPressed){
                     direction = "rightUp";
                     orientation = 'r';
@@ -154,9 +162,14 @@ public class Player extends Entity{
                     direction = "down";
 
                 }
-                // Check Tile Collision
+
+                //CHECK COLLISION
+                collisionDash = false;
                 collision = false;
+
+                // Check Tile Collision
                 gp.cChecker.checkTile(this);
+
 
                 // Check object collision
                 int objIndex = gp.cChecker.checkObject(this, true);
@@ -168,6 +181,13 @@ public class Player extends Entity{
 
                 //Check Event
                 gp.eventH.checkEvent();
+                //CHECK FOR DASH
+                if(dash){
+                    gp.cChecker.checkTileDash(this);
+
+                    objIndex = gp.cChecker.checkObjectDash(this, true);
+                    pickUpObject(objIndex);
+                }
 
                 // If collision false, player can move
                 if(!collision){
@@ -210,8 +230,51 @@ public class Player extends Entity{
                             break;
                     }
                 }
+        //DASH
+                if(!collisionDash && dash){
+                    switch(direction){
+                        case "up":
+                            worldY -= gp.tileSize;
+                            break;
+                        case "down":
+                            worldY += gp.tileSize;
+                            break;
+                        case "right":
+                            worldX += gp.tileSize;
+                            break;
+                        case "left":
+                            worldX -= gp.tileSize;
+                            break;
+                        case "rightUp":
+                            if(rightOk)
+                                worldX += gp.tileSize;
+                            if(upOk)
+                                worldY -= gp.tileSize;
+                            break;
+                        case "leftUp":
+                            if(leftOk)
+                                worldX -= gp.tileSize;
+                            if(upOk)
+                                worldY -= gp.tileSize;
+                            break;
+                        case "leftDown":
+                            if(leftOk)
+                                worldX -= gp.tileSize;
+                            if(downOk)
+                                worldY += gp.tileSize;
+                            break;
+                        case "rightDown":
+                            if(rightOk)
+                                worldX += gp.tileSize;
+                            if(downOk)
+                                worldY += gp.tileSize;
+                            break;
+                    }
+                }
+
 
                 resetDirectionsBoolean();
+                dash = false;
 
             }
             else if(orientation == 'r'){
@@ -231,6 +294,7 @@ public class Player extends Entity{
                 }
                 spriteCounter = 0;
             }
+            dashCoolDown++;
         }
 
 

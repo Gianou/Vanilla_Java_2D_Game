@@ -22,12 +22,13 @@ public class Entity {
     public int spriteNum = 1;
     public Rectangle solidArea;
     public int solidAreaDefaultX, solidAreaDefaultY;
-    public boolean collision = false;
+    public boolean collision = false, collisionDash = false;
     public boolean upOk = true, rightOk = true, downOk = true, leftOk = true;
     public char orientation = 'r';
     public int actionLockCounter = 0;
     String [] dialogues = new String[10];
     int dialogueIndex = 0;
+    public int dashSpeed = 48*2;
 
     //ENTITY STATUS
     public int maxLife;
