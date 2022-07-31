@@ -15,7 +15,7 @@ public class Entity {
     UtilityTool uT = new UtilityTool();
     public int worldX, worldY;
     public int speed;
-    public BufferedImage left1, left2, right1, right2;
+    public BufferedImage left1, left2, right1, right2, still1, still2;
     public BufferedImage upRight1, upRight2, downRight1, downRight2, up1, up2, down1, down2;
     public int width, height;
     public String direction;

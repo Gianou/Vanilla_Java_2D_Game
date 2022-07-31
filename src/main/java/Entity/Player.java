@@ -74,12 +74,14 @@ public class Player extends Entity{
                 downRight1 = getNPCImage("GhoulDR1", uT);
                 downRight2 = getNPCImage("GhoulDR2", uT);
 
+                still1 = getNPCImage("GhoulDR1", uT);
+                still2 = getNPCImage("GhoulDR2", uT);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
        
     }
-
     @Override
     public void update(){
 
@@ -331,33 +333,51 @@ public class Player extends Entity{
         BufferedImage image = null;
         //switch case
         switch (direction){
-            case "right", "rightDown", "rightUp":
-                if(spriteNum == 1)
-                    image = right1;
-                if(spriteNum == 2)
-                    image = right2;
-                break;
-            case "left", "leftDown", "leftUp":
-                if(spriteNum == 1)
-                    image = left1;
-                if(spriteNum == 2)
-                    image = left2;
-                break;
 
-            case "up", "down":
-                if(orientation == 'l'){
-                    if(spriteNum == 1)
-                        image = left1;
-                    if(spriteNum == 2)
-                        image = left2;
-                }
-                if(orientation == 'r'){
-                    if(spriteNum == 1)
+                case "right":
+                    if (spriteNum == 1)
                         image = right1;
-                    if(spriteNum == 2)
+                    if (spriteNum == 2)
                         image = right2;
-                }
-                break;
+                    break;
+                case "rightUp":
+                    if (spriteNum == 1)
+                        image = upRight1;
+                    if (spriteNum == 2)
+                        image = upRight2;
+                    break;
+                case "rightDown":
+                    if (spriteNum == 1)
+                        image = downRight1;
+                    if (spriteNum == 2)
+                        image = downRight2;
+                    break;
+                case "left", "leftDown", "leftUp":
+                    if (spriteNum == 1)
+                        image = left1;
+                    if (spriteNum == 2)
+                        image = left2;
+                    break;
+
+                case "down":
+                    if (spriteNum == 1)
+                        image = down1;
+                    if (spriteNum == 2)
+                        image = down2;
+                    break;
+                case "up":
+                    if (spriteNum == 1)
+                        image = up1;
+                    if (spriteNum == 2)
+                        image = up2;
+                    break;
+            case "stillL", "stillR":
+
+                    if(spriteNum == 1)
+                        image = still1;
+                    if(spriteNum == 2)
+                        image = still2;
+
 
            
 
