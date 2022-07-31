@@ -25,8 +25,8 @@ public class Player extends Entity{
 
 
 
-    public Player (GamePanel gp, KeyHandler keyH){
-        super(gp);
+    public Player (GamePanel gp, KeyHandler keyH, int width, int height){
+        super(gp, width, height);
         this.keyH = keyH;
 
         screenX = gp.screenWidth/2-(gp.tileSize/2);
@@ -51,54 +51,35 @@ public class Player extends Entity{
     }
 
     public void getPlayerImage(){
-        try {
             UtilityTool uT = new UtilityTool();
 
-            File file = new File("src/main/resources/player/BatStillR1.png");
-            FileInputStream fis = new FileInputStream(file);
-            stillR1 = ImageIO.read(fis);
-            stillR1 = uT.scaleImage(stillR1, gp.tileSize, gp.tileSize*2);
+           
 
-            file = new File("src/main/resources/player/BatStillR2.png");
-            fis = new FileInputStream(file);
-            stillR2 = ImageIO.read(fis);
-            stillR2 = uT.scaleImage(stillR2, gp.tileSize, gp.tileSize*2);
+            try {
+                up1 = getNPCImage("GhoulU1", uT);
+                up2 = getNPCImage("GhoulU2", uT);
 
-            file = new File("src/main/resources/player/BatStillL1.png");
-            fis = new FileInputStream(file);
-            stillL1 = ImageIO.read(fis);
-            stillL1 = uT.scaleImage(stillL1, gp.tileSize, gp.tileSize*2);
+                down1 = getNPCImage("GhoulD1", uT);
+                down2 = getNPCImage("GhoulD2", uT);
 
-            file = new File("src/main/resources/player/BatStillL2.png");
-            fis = new FileInputStream(file);
-            stillL2 = ImageIO.read(fis);
-            stillL2 = uT.scaleImage(stillL2, gp.tileSize, gp.tileSize*2);
+                left1 = getNPCImage("GhoulD1", uT);
+                left2 = getNPCImage("GhoulD2", uT);
 
-            file = new File("src/main/resources/player/BatLeft1.png");
-            fis = new FileInputStream(file);
-            left1 = ImageIO.read(fis);
-            left1 = uT.scaleImage(left1, gp.tileSize, gp.tileSize*2);
+                right1 = getNPCImage("GhoulR1", uT);
+                right2 = getNPCImage("GhoulR2", uT);
 
-            file = new File("src/main/resources/player/BatLeft2.png");
-            fis = new FileInputStream(file);
-            left2 = ImageIO.read(fis);
-            left2 = uT.scaleImage(left2, gp.tileSize, gp.tileSize*2);
+                upRight1 = getNPCImage("GhoulUR1", uT);
+                upRight2 = getNPCImage("GhoulUR2", uT);
 
-            file = new File("src/main/resources/player/BatRight1.png");
-            fis = new FileInputStream(file);
-            right1 = ImageIO.read(fis);
-            right1 = uT.scaleImage(right1, gp.tileSize, gp.tileSize*2);
+                downRight1 = getNPCImage("GhoulDR1", uT);
+                downRight2 = getNPCImage("GhoulDR2", uT);
 
-            file = new File("src/main/resources/player/BatRight2.png");
-            fis = new FileInputStream(file);
-            right2 = ImageIO.read(fis);
-            right2 = uT.scaleImage(right2, gp.tileSize, gp.tileSize*2);
-
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+       
     }
+
     @Override
     public void update(){
 
@@ -378,18 +359,7 @@ public class Player extends Entity{
                 }
                 break;
 
-            case "stillR":
-                if(spriteNum == 1)
-                    image = stillR1;
-                if(spriteNum == 2)
-                    image = stillR2;
-                break;
-            case "stillL":
-                if(spriteNum == 1)
-                    image = stillL1;
-                if(spriteNum == 2)
-                    image = stillL2;
-                break;
+           
 
         }
         g2.drawImage(image, screenX, screenY,null);

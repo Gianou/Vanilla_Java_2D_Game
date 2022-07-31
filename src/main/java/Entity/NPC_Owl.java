@@ -9,9 +9,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class NPC_Owl extends Entity{
-    public NPC_Owl(GamePanel gp){
-        super(gp);
+    public NPC_Owl(GamePanel gp, int width, int height){
+        super(gp, width, height);
 
+        this.width = width;
+        this.height = height;
         direction = "right";
         speed = gp.tileSize/32;
         getOwlImage();
@@ -20,11 +22,11 @@ public class NPC_Owl extends Entity{
     public void getOwlImage(){
         try {
 
-            left1 = getNPCImage("OwlL1",uT,2,  2);
-            left2 = getNPCImage("OwlL2",uT,2,  2);
+            left1 = getNPCImage("OwlL1",uT);
+            left2 = getNPCImage("OwlL2",uT);
 
-            right1 = getNPCImage("OwlR1",uT,2,  2);
-            right2 = getNPCImage("OwlR2",uT,2,  2);
+            right1 = getNPCImage("OwlR1",uT);
+            right2 = getNPCImage("OwlR2",uT);
 
         }
         catch (IOException e){
@@ -36,7 +38,7 @@ public class NPC_Owl extends Entity{
         actionLockCounter++;
 
 
-        if(actionLockCounter == 60){System.out.println(direction);
+        if(actionLockCounter == 60){
             int i = (int) (Math.random()*150+1);
             if(i<=25){
                 direction = "up";

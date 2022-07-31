@@ -12,8 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class NPC_Ghoul extends Entity {
-    public NPC_Ghoul(GamePanel gp) {
-        super(gp);
+    public NPC_Ghoul(GamePanel gp, int width, int height) {
+        super(gp, width, height);
 
         solidArea = new Rectangle(0, 0, gp.tileSize * 2, gp.tileSize * 2);
         direction = "right";
@@ -24,23 +24,23 @@ public class NPC_Ghoul extends Entity {
 
     public void getOwlImage() {
         try {
-            up1 = getNPCImage("GhoulU1", uT, 2, 2);
-            up2 = getNPCImage("GhoulU2", uT, 2, 2);
+            up1 = getNPCImage("GhoulU1", uT);
+            up2 = getNPCImage("GhoulU2", uT);
 
-            down1 = getNPCImage("GhoulD1", uT, 2, 2);
-            down2 = getNPCImage("GhoulD2", uT, 2, 2);
+            down1 = getNPCImage("GhoulD1", uT);
+            down2 = getNPCImage("GhoulD2", uT);
 
-            left1 = getNPCImage("GhoulD1", uT, 2, 2);
-            left2 = getNPCImage("GhoulD2", uT, 2, 2);
+            left1 = getNPCImage("GhoulD1", uT);
+            left2 = getNPCImage("GhoulD2", uT);
 
-            right1 = getNPCImage("GhoulR1", uT, 2, 2);
-            right2 = getNPCImage("GhoulR2", uT, 2, 2);
+            right1 = getNPCImage("GhoulR1", uT);
+            right2 = getNPCImage("GhoulR2", uT);
 
-            upRight1 = getNPCImage("GhoulUR1", uT, 2, 2);
-            upRight2 = getNPCImage("GhoulUR2", uT, 2, 2);
+            upRight1 = getNPCImage("GhoulUR1", uT);
+            upRight2 = getNPCImage("GhoulUR2", uT);
 
-            downRight1 = getNPCImage("GhoulDR1", uT, 2, 2);
-            downRight2 = getNPCImage("GhoulDR2", uT, 2, 2);
+            downRight1 = getNPCImage("GhoulDR1", uT);
+            downRight2 = getNPCImage("GhoulDR2", uT);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,7 +53,6 @@ public class NPC_Ghoul extends Entity {
 
 
         if (actionLockCounter == 60) {
-            System.out.println(direction);
             int i = (int) (Math.random() * 120 + 1);
             if (i <= 10) {
                 direction = "up";
@@ -140,17 +139,7 @@ public class NPC_Ghoul extends Entity {
                         image = up2;
                     break;
 
-                case "stillR":
-                    if (spriteNum == 1)
-                        image = stillR1;
-                    if (spriteNum == 2)
-                        break;
-                case "stillL":
-                    if (spriteNum == 1)
-                        image = stillL1;
-                    if (spriteNum == 2)
-                        image = stillL2;
-                    break;
+
                 case "idle":
                     image = right1;
                     break;

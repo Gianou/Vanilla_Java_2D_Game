@@ -12,11 +12,11 @@ public class AssetSetter {
     }
 
     public void setNPC(){
-        gp.npc[0] = new NPC_Owl(gp);
+        gp.npc[0] = new NPC_Owl(gp, 1, 1);
         gp.npc[0].worldX = gp.tileSize*14;
         gp.npc[0].worldY = gp.tileSize*16;
 
-        gp.npc[1] = new NPC_Ghoul(gp);
+        gp.npc[1] = new NPC_Ghoul(gp, 2, 2);
         gp.npc[1].worldX = gp.tileSize*23;
         gp.npc[1].worldY = gp.tileSize*23;
     }

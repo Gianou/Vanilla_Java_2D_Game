@@ -15,8 +15,9 @@ public class Entity {
     UtilityTool uT = new UtilityTool();
     public int worldX, worldY;
     public int speed;
-    public BufferedImage stillR1, stillR2, stillL2, stillL1, left1, left2, right1, right2;
+    public BufferedImage left1, left2, right1, right2;
     public BufferedImage upRight1, upRight2, downRight1, downRight2, up1, up2, down1, down2;
+    public int width, height;
     public String direction;
     public int spriteCounter = 0;
     public int spriteNum = 1;
@@ -37,9 +38,11 @@ public class Entity {
 
 
     public Entity(){}
-    public Entity(GamePanel gp){
+    public Entity(GamePanel gp, int width, int height){
         this.gp = gp;
         solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
+        this.width = width;
+        this.height = height;
     }
 
     public void resetDirectionsBoolean(){
@@ -89,17 +92,7 @@ public class Entity {
                     }
                     break;
 
-                case "stillR":
-                    if (spriteNum == 1)
-                        image = stillR1;
-                    if (spriteNum == 2)
-                    break;
-                case "stillL":
-                    if (spriteNum == 1)
-                        image = stillL1;
-                    if (spriteNum == 2)
-                        image = stillL2;
-                    break;
+
                 case "idle":
                     image = right1;
                     break;
@@ -204,8 +197,17 @@ public class Entity {
 
         }
     }
-    public BufferedImage getNPCImage(String name, UtilityTool uT, int width, int height) throws IOException {
+    public BufferedImage getNPCImage(String name, UtilityTool uT) throws IOException {
         File file = new File("src/main/resources/npc/" + name + ".png");
+        FileInputStream fis = new FileInputStream(file);
+        BufferedImage image = ImageIO.read(fis);
+        image = uT.scaleImage(image, gp.tileSize*width, gp.tileSize*height);
+
+        return image;
+    }
+
+    public BufferedImage getPlayerImage(String name, UtilityTool uT, int width, int height) throws IOException {
+        File file = new File("src/main/resources/player/" + name + ".png");
         FileInputStream fis = new FileInputStream(file);
         BufferedImage image = ImageIO.read(fis);
         image = uT.scaleImage(image, gp.tileSize*width, gp.tileSize*height);

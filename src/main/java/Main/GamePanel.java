@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable{
     public EventHandler eventH = new EventHandler(this);
     Thread gameThread;
     //ENTITY OBJECT
-    public Player player = new Player(this, keyH);
+    public Player player = new Player(this, keyH, 1, 1);
     public SuperObject obj [] = new SuperObject[30];
     public Entity npc[] = new Entity[5];
     int fps = 60;

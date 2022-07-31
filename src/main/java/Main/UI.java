@@ -258,9 +258,9 @@ public class UI {
         }
         x = gp.screenWidth / 2 - gp.tileSize;
         y = gp.tileSize * 2;
-        Image img = gp.player.stillR1;
+        Image img = gp.player.right1;
         if (gp.player.spriteNum == 2) {
-            img = gp.player.stillR2;
+            img = gp.player.right2;
         }
         g2.drawImage(img, x, y, gp.tileSize*2, gp.tileSize*4, null);
 
