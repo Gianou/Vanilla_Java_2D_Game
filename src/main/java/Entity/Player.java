@@ -62,8 +62,8 @@ public class Player extends Entity{
                 down1 = getNPCImage("GhoulD1", uT);
                 down2 = getNPCImage("GhoulD2", uT);
 
-                left1 = getNPCImage("GhoulD1", uT);
-                left2 = getNPCImage("GhoulD2", uT);
+                left1 = getNPCImage("GhoulL1", uT);
+                left2 = getNPCImage("GhoulL2", uT);
 
                 right1 = getNPCImage("GhoulR1", uT);
                 right2 = getNPCImage("GhoulR2", uT);
@@ -71,8 +71,14 @@ public class Player extends Entity{
                 upRight1 = getNPCImage("GhoulUR1", uT);
                 upRight2 = getNPCImage("GhoulUR2", uT);
 
+                upLeft1 = getNPCImage("GhoulUL1", uT);
+                upLeft2 = getNPCImage("GhoulUL2", uT);
+
                 downRight1 = getNPCImage("GhoulDR1", uT);
                 downRight2 = getNPCImage("GhoulDR2", uT);
+
+                downLeft1 = getNPCImage("GhoulDL1", uT);
+                downLeft2 = getNPCImage("GhoulDL2", uT);
 
                 still1 = getNPCImage("GhoulDR1", uT);
                 still2 = getNPCImage("GhoulDR2", uT);
@@ -260,12 +266,7 @@ public class Player extends Entity{
                 dash = false;
 
             }
-            else if(orientation == 'r'){
-                direction = "stillR";
-            }
-            else{
-                direction = "stillL";
-            }
+
             spriteCounter++;
             if(spriteCounter>10) {
                 if (spriteNum == 1){
@@ -352,12 +353,26 @@ public class Player extends Entity{
                     if (spriteNum == 2)
                         image = downRight2;
                     break;
-                case "left", "leftDown", "leftUp":
+                case "left":
                     if (spriteNum == 1)
                         image = left1;
                     if (spriteNum == 2)
                         image = left2;
                     break;
+
+            case "leftUp":
+                if (spriteNum == 1)
+                    image = upLeft1;
+                if (spriteNum == 2)
+                    image = upLeft2;
+                break;
+
+            case "leftDown":
+                if (spriteNum == 1)
+                    image = downLeft1;
+                if (spriteNum == 2)
+                    image = downLeft2;
+                break;
 
                 case "down":
                     if (spriteNum == 1)
@@ -371,15 +386,6 @@ public class Player extends Entity{
                     if (spriteNum == 2)
                         image = up2;
                     break;
-            case "stillL", "stillR":
-
-                    if(spriteNum == 1)
-                        image = still1;
-                    if(spriteNum == 2)
-                        image = still2;
-
-
-           
 
         }
         g2.drawImage(image, screenX, screenY,null);
