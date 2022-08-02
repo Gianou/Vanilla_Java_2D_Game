@@ -32,7 +32,7 @@ public class Player extends Entity{
         screenX = gp.screenWidth/2-(gp.tileSize/2);
         screenY = gp.screenHeight/2-(gp.tileSize);
 
-        solidArea = new Rectangle(gp.tileSize/8, gp.tileSize + gp.tileSize/8, gp.tileSize/5*3, gp.tileSize/4*3);
+        //solidArea = new Rectangle(gp.tileSize/8, gp.tileSize + gp.tileSize/8, gp.tileSize/5*3, gp.tileSize/4*3);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -42,7 +42,8 @@ public class Player extends Entity{
     public void setDefaultValues(){
         worldX = gp.tileSize*12;
         worldY = gp.tileSize*12;
-        speed = gp.tileSize/8;
+        //speed = gp.tileSize/8;
+        speed =1;
         direction = "right";
 
         // PLAYER STATUS
@@ -389,6 +390,8 @@ public class Player extends Entity{
 
         }
         g2.drawImage(image, screenX, screenY,null);
+        g2.setColor(Color.blue);
+        g2.drawRect(screenX, screenY, solidArea.width, solidArea.height);
 
     }
     //public void resetDirectionsBoolean(){

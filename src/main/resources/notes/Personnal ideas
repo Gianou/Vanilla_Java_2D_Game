@@ -18,3 +18,6 @@
 4. Dialogue size
     Check dialogue size and if it is too big for the rectangle, you start from the last index and search the first space before
     the max length and make an new line
+
+5. Collision limitation
+    At the moment the collision doesn't allow Entities to move up to a wall if it's closer than the value of speed

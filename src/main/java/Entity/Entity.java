@@ -40,9 +40,11 @@ public class Entity {
     public Entity(){}
     public Entity(GamePanel gp, int width, int height){
         this.gp = gp;
-        solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
         this.width = width;
         this.height = height;
+        solidArea = new Rectangle(0, 0, width*gp.tileSize, height*gp.tileSize);
+
+
     }
 
     public void resetDirectionsBoolean(){
