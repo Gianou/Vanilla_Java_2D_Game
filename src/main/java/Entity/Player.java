@@ -42,8 +42,9 @@ public class Player extends Entity{
     public void setDefaultValues(){
         worldX = gp.tileSize*12;
         worldY = gp.tileSize*12;
-        //speed = gp.tileSize/8;
-        speed =1;
+        speed = gp.tileSize/8;
+        dashSpeed = gp.tileSize *2/3;
+        speed =25;
         direction = "right";
 
         // PLAYER STATUS
@@ -224,40 +225,40 @@ public class Player extends Entity{
                 if(!collisionDash && dash){
                     switch(direction){
                         case "up":
-                            worldY -= gp.tileSize;
+                            worldY -= dashSpeed;
                             break;
                         case "down":
-                            worldY += gp.tileSize;
+                            worldY += dashSpeed;
                             break;
                         case "right":
-                            worldX += gp.tileSize;
+                            worldX += dashSpeed;
                             break;
                         case "left":
-                            worldX -= gp.tileSize;
+                            worldX -= dashSpeed;
                             break;
                         case "rightUp":
                             if(rightOk)
-                                worldX += gp.tileSize;
+                                worldX += dashSpeed;
                             if(upOk)
-                                worldY -= gp.tileSize;
+                                worldY -= dashSpeed;
                             break;
                         case "leftUp":
                             if(leftOk)
-                                worldX -= gp.tileSize;
+                                worldX -= dashSpeed;
                             if(upOk)
-                                worldY -= gp.tileSize;
+                                worldY -= dashSpeed;
                             break;
                         case "leftDown":
                             if(leftOk)
-                                worldX -= gp.tileSize;
+                                worldX -= dashSpeed;
                             if(downOk)
-                                worldY += gp.tileSize;
+                                worldY += dashSpeed;
                             break;
                         case "rightDown":
                             if(rightOk)
-                                worldX += gp.tileSize;
+                                worldX += dashSpeed;
                             if(downOk)
-                                worldY += gp.tileSize;
+                                worldY += dashSpeed;
                             break;
                     }
                 }

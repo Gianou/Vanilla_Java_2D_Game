@@ -30,6 +30,8 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityTopRow][entityRightCol]; //[entityTopRow][entityRightCol]
                 if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
                     entity.collision = true;
+
+                    //entity.worldY -= entityTopWorldY - 12;
                 }
                 break;
             case "down":
@@ -38,6 +40,17 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityRightCol]; //[entityBottomRow][entityRightCol]
                 if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
                     entity.collision = true;
+
+
+                    int remaining =  entityBottomRow*gp.tileSize - entityBottomWorldY;
+
+                    System.out.println(remaining);
+
+                    if(remaining > 1){
+                        entity.worldY += remaining;
+                    }
+                    //entity.worldY += remaining;
+
                 }
                 break;
             case "left":
