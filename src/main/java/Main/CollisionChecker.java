@@ -31,7 +31,10 @@ public class CollisionChecker {
                 if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
                     entity.collision = true;
 
-                    //entity.worldY -= entityTopWorldY - 12;
+                    int remaining =  entityTopWorldY - (entityTopRow + 1) *gp.tileSize;
+                    if(remaining > 1){
+                        entity.worldY -= remaining;
+                    }
                 }
                 break;
             case "down":
@@ -41,16 +44,10 @@ public class CollisionChecker {
                 if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
                     entity.collision = true;
 
-
                     int remaining =  entityBottomRow*gp.tileSize - entityBottomWorldY;
-
-                    System.out.println(remaining);
-
                     if(remaining > 1){
-                        entity.worldY += remaining;
+                        entity.worldY += remaining - 1;
                     }
-                    //entity.worldY += remaining;
-
                 }
                 break;
             case "left":
@@ -59,6 +56,14 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityLeftCol]; //[entityBottomRow][entityLeftCol]
                 if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
                     entity.collision = true;
+
+                    int remaining =  entityLeftWorldX - entityLeftCol * gp.tileSize - gp.tileSize;
+                    System.out.println(remaining);
+                    if(remaining > 1){
+                        entity.worldX -= remaining;
+                }
+
+
                 }
                 break;
             case "right":
@@ -67,6 +72,11 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityRightCol];//[entityBottomRow][entityRightCol]
                 if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
                     entity.collision = true;
+
+                    int remaining =  entityRightCol*gp.tileSize - entityRightWorldX;
+                    if(remaining > 1){
+                        entity.worldX += remaining - 1;
+                    }
                 }
                 break;
             case "rightUp":
