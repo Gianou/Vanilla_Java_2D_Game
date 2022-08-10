@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class OBJ_Chest extends SuperObject{
     public OBJ_Chest(GamePanel gp){
-        this.gp = gp;
+        super(gp);
         name = "Chest";
         collision = true;
 

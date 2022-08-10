@@ -13,6 +13,7 @@ public class OBJ_Heart extends SuperObject{
 
 
     public OBJ_Heart(GamePanel gp){
+        super(gp);
         name = "Heart";
         collision = false;
 

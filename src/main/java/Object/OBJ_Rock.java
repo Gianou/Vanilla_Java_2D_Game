@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class OBJ_Rock extends SuperObject{
     public OBJ_Rock(GamePanel gp){
+        super(gp);
         name = "Rock";
         collision = true;
 

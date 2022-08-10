@@ -21,11 +21,32 @@ public class NPC_Owl extends Entity{
     public void getOwlImage(){
         try {
 
-            left1 = getNPCImage("OwlL1",uT);
-            left2 = getNPCImage("OwlL2",uT);
+            up1 = getNPCImage("OwlL1", uT);
+            up2 = getNPCImage("OwlL2", uT);
 
-            right1 = getNPCImage("OwlR1",uT);
-            right2 = getNPCImage("OwlR2",uT);
+            down1 = getNPCImage("OwlL1", uT);
+            down2 = getNPCImage("OwlL2", uT);
+
+            left1 = getNPCImage("OwlL1", uT);
+            left2 = getNPCImage("OwlL2", uT);
+
+            right1 = getNPCImage("OwlR1", uT);
+            right2 = getNPCImage("OwlR2", uT);
+
+            upRight1 = getNPCImage("OwlR1", uT);
+            upRight2 = getNPCImage("OwlR2", uT);
+
+            upLeft1 = getNPCImage("OwlL1", uT);
+            upLeft2 = getNPCImage("OwlL2", uT);
+
+            downRight1 = getNPCImage("OwlR1", uT);
+            downRight2 = getNPCImage("OwlR2", uT);
+
+            downLeft1 = getNPCImage("OwlL1", uT);
+            downLeft2 = getNPCImage("OwlL2", uT);
+
+            still1 = getNPCImage("OwlR1", uT);
+            still2 = getNPCImage("OwlR2", uT);
 
         }
         catch (IOException e){

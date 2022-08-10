@@ -9,14 +9,19 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class OBJ_Statue extends SuperObject{
-    public OBJ_Statue(GamePanel gp){
+    public OBJ_Statue(GamePanel gp, int x, int y){
+        super(gp);
 
+        worldX = x;
+        worldY = y;
         name = "Statue";
         collision = true;
         width = 3;
         height = 3;
 
-        solidArea = new Rectangle(gp.tileSize*width, gp.tileSize*height);
+        solidArea = new Rectangle(width*gp.tileSize *3/16, height*gp.tileSize*6/16, width*gp.tileSize *10/16, height*gp.tileSize*10/16);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         try{
             File file = new File("src/main/resources/objects/Statue.png");

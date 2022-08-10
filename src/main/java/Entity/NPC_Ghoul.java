@@ -29,8 +29,8 @@ public class NPC_Ghoul extends Entity {
             down1 = getNPCImage("GhoulD1", uT);
             down2 = getNPCImage("GhoulD2", uT);
 
-            left1 = getNPCImage("GhoulD1", uT);
-            left2 = getNPCImage("GhoulD2", uT);
+            left1 = getNPCImage("GhoulL1", uT);
+            left2 = getNPCImage("GhoulL2", uT);
 
             right1 = getNPCImage("GhoulR1", uT);
             right2 = getNPCImage("GhoulR2", uT);
@@ -38,8 +38,17 @@ public class NPC_Ghoul extends Entity {
             upRight1 = getNPCImage("GhoulUR1", uT);
             upRight2 = getNPCImage("GhoulUR2", uT);
 
+            upLeft1 = getNPCImage("GhoulUL1", uT);
+            upLeft2 = getNPCImage("GhoulUL2", uT);
+
             downRight1 = getNPCImage("GhoulDR1", uT);
             downRight2 = getNPCImage("GhoulDR2", uT);
+
+            downLeft1 = getNPCImage("GhoulDL1", uT);
+            downLeft2 = getNPCImage("GhoulDL2", uT);
+
+            still1 = getNPCImage("GhoulDR1", uT);
+            still2 = getNPCImage("GhoulDR2", uT);
 
         } catch (IOException e) {
             e.printStackTrace();

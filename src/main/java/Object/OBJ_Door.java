@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class OBJ_Door extends  SuperObject{
     public OBJ_Door(GamePanel gp){
-        this.gp = gp;
+        super(gp);
         name = "Door";
         collision = true;
 

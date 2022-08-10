@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class OBJ_Key extends SuperObject{
     public OBJ_Key(GamePanel gp){
+        super(gp);
         name = "Key";
         collision = false;
 

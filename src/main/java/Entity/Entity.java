@@ -56,7 +56,7 @@ public class Entity {
         leftOk = true;
     }
 
-    public void draw(Graphics2D g2, GamePanel gp){
+    public void draw(Graphics2D g2){
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
@@ -68,32 +68,56 @@ public class Entity {
             BufferedImage image = null;
             //switch case
             switch (direction) {
-                case "right", "rightDown", "rightUp":
+                case "right":
                     if (spriteNum == 1)
                         image = right1;
                     if (spriteNum == 2)
                         image = right2;
                     break;
-                case "left", "leftDown", "leftUp":
+                case "rightUp":
+                    if (spriteNum == 1)
+                        image = upRight1;
+                    if (spriteNum == 2)
+                        image = upRight2;
+                    break;
+                case "rightDown":
+                    if (spriteNum == 1)
+                        image = downRight1;
+                    if (spriteNum == 2)
+                        image = downRight2;
+                    break;
+                case "left":
                     if (spriteNum == 1)
                         image = left1;
                     if (spriteNum == 2)
                         image = left2;
                     break;
 
-                case "up", "down":
-                    if (orientation == 'l') {
-                        if (spriteNum == 1)
-                            image = left1;
-                        if (spriteNum == 2)
-                            image = left2;
-                    }
-                    if (orientation == 'r') {
-                        if (spriteNum == 1)
-                            image = right1;
-                        if (spriteNum == 2)
-                            image = right2;
-                    }
+                case "leftUp":
+                    if (spriteNum == 1)
+                        image = upLeft1;
+                    if (spriteNum == 2)
+                        image = upLeft2;
+                    break;
+
+                case "leftDown":
+                    if (spriteNum == 1)
+                        image = downLeft1;
+                    if (spriteNum == 2)
+                        image = downLeft2;
+                    break;
+
+                case "down":
+                    if (spriteNum == 1)
+                        image = down1;
+                    if (spriteNum == 2)
+                        image = down2;
+                    break;
+                case "up":
+                    if (spriteNum == 1)
+                        image = up1;
+                    if (spriteNum == 2)
+                        image = up2;
                     break;
 
 
