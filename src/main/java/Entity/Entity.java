@@ -42,8 +42,10 @@ public class Entity {
         this.gp = gp;
         this.width = width;
         this.height = height;
-        solidArea = new Rectangle(0, 0, width*gp.tileSize, height*gp.tileSize);
+        solidArea = new Rectangle(width*gp.tileSize *3/16, height*gp.tileSize*6/16, width*gp.tileSize *10/16, height*gp.tileSize*10/16);
 
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
     }
 
@@ -100,6 +102,10 @@ public class Entity {
                     break;
             }
             g2.drawImage(image, screenX, screenY, null);
+            g2.setColor(Color.blue);
+            g2.drawRect(screenX + width*gp.tileSize *3/16, screenY +height*gp.tileSize*6/16, solidArea.width, solidArea.height);
+            //g2.drawRect(worldX, worldY, solidArea.width, solidArea.height);
+
         }
     }
 

@@ -15,7 +15,6 @@ public class NPC_Ghoul extends Entity {
     public NPC_Ghoul(GamePanel gp, int width, int height) {
         super(gp, width, height);
 
-        solidArea = new Rectangle(0, 0, gp.tileSize * 2, gp.tileSize * 2);
         direction = "right";
         speed = gp.tileSize / 32;
         getOwlImage();
@@ -89,6 +88,7 @@ public class NPC_Ghoul extends Entity {
         super.speak();
     }
 
+    /*
     public void draw(Graphics2D g2, GamePanel gp) {
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
@@ -147,4 +147,6 @@ public class NPC_Ghoul extends Entity {
             g2.drawImage(image, screenX, screenY, null);
         }
     }
+
+     */
 }

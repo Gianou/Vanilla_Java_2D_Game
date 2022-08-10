@@ -12,8 +12,7 @@ public class NPC_Owl extends Entity{
     public NPC_Owl(GamePanel gp, int width, int height){
         super(gp, width, height);
 
-        this.width = width;
-        this.height = height;
+
         direction = "right";
         speed = gp.tileSize/32;
         getOwlImage();

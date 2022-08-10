@@ -44,7 +44,7 @@ public class Player extends Entity{
         worldY = gp.tileSize*12;
         speed = gp.tileSize/8;
         dashSpeed = gp.tileSize *2/3;
-        speed =25;
+        //speed =25;
         direction = "right";
 
         // PLAYER STATUS
@@ -93,195 +93,199 @@ public class Player extends Entity{
     @Override
     public void update(){
 
-        if(gp.gameState == gp.dialogueState){
-            if(orientation == 'r'){
-                direction = "stillR";
+        if(keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed){
+            if(gp.gameState == gp.dialogueState){
+                if(orientation == 'r'){
+                    direction = "stillR";
+                }
+                else{
+                    direction = "stillL";
+                }
+                spriteCounter++;
+                if(spriteCounter>10) {
+                    if (spriteNum == 1){
+                        spriteNum = 2;
+                    }
+
+                    else if (spriteNum == 2) {
+                        spriteNum = 1;
+                    }
+                    spriteCounter = 0;
+                }
             }
+
             else{
-                direction = "stillL";
-            }
-            spriteCounter++;
-            if(spriteCounter>10) {
-                if (spriteNum == 1){
-                    spriteNum = 2;
-                }
+                if(keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed){
+                    if(keyH.spacePressed && dashCoolDown > dashCoolDownTime){
+                        dash = true;
+                        dashCoolDown = 0;
+                    }
+                    if(keyH.rightPressed && keyH.upPressed){
+                        direction = "rightUp";
+                        orientation = 'r';
+                    }
+                    else if(keyH.leftPressed && keyH.upPressed){
+                        direction = "leftUp";
+                        orientation = 'l';
+                    }
+                    else if(keyH.rightPressed && keyH.downPressed){
+                        direction = "rightDown";
+                        orientation = 'r';
+                    }
+                    else if(keyH.leftPressed && keyH.downPressed){
+                        direction = "leftDown";
+                        orientation = 'l';
+                    }
 
-                else if (spriteNum == 2) {
-                    spriteNum = 1;
-                }
-                spriteCounter = 0;
-            }
-        }
+                    else if(keyH.rightPressed){
+                        direction = "right";
+                        orientation = 'r';
+                    }
+                    else if(keyH.leftPressed){
+                        direction = "left";
+                        orientation = 'l';
 
-        else{
-            if(keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed){
-                if(keyH.spacePressed && dashCoolDown > dashCoolDownTime){
-                    dash = true;
-                    dashCoolDown = 0;
-                }
-                if(keyH.rightPressed && keyH.upPressed){
-                    direction = "rightUp";
-                    orientation = 'r';
-                }
-                else if(keyH.leftPressed && keyH.upPressed){
-                    direction = "leftUp";
-                    orientation = 'l';
-                }
-                else if(keyH.rightPressed && keyH.downPressed){
-                    direction = "rightDown";
-                    orientation = 'r';
-                }
-                else if(keyH.leftPressed && keyH.downPressed){
-                    direction = "leftDown";
-                    orientation = 'l';
-                }
+                    }
+                    else if(keyH.upPressed){
+                        direction = "up";
 
-                else if(keyH.rightPressed){
-                    direction = "right";
-                    orientation = 'r';
-                }
-                else if(keyH.leftPressed){
-                    direction = "left";
-                    orientation = 'l';
+                    }
+                    else if(keyH.downPressed){
+                        direction = "down";
 
-                }
-                else if(keyH.upPressed){
-                    direction = "up";
+                    }
 
-                }
-                else if(keyH.downPressed){
-                    direction = "down";
+                    //CHECK COLLISION
+                    collisionDash = false;
+                    collision = false;
 
-                }
-
-                //CHECK COLLISION
-                collisionDash = false;
-                collision = false;
-
-                // Check Tile Collision
-                gp.cChecker.checkTile(this);
+                    // Check Tile Collision
+                    gp.cChecker.checkTile(this);
 
 
-                // Check object collision
-                int objIndex = gp.cChecker.checkObject(this, true);
-                pickUpObject(objIndex);
-
-                // Check NPC collision
-                int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
-                interactNPC(npcIndex);
-
-                //Check Event
-                gp.eventH.checkEvent();
-                //CHECK FOR DASH
-                if(dash){
-                    gp.cChecker.checkTileDash(this);
-
-                    objIndex = gp.cChecker.checkObjectDash(this, true);
+                    // Check object collision
+                    int objIndex = gp.cChecker.checkObject(this, true);
                     pickUpObject(objIndex);
-                }
 
-                // If collision false, player can move
-                if(!collision){
-                    switch(direction){
-                        case "up":
-                            worldY -= speed;
-                            break;
-                        case "down":
-                            worldY += speed;
-                            break;
-                        case "right":
-                            worldX += speed;
-                            break;
-                        case "left":
-                            worldX -= speed;
-                            break;
-                        case "rightUp":
-                            if(rightOk)
-                                worldX += speed;
-                            if(upOk)
-                                worldY -= speed;
-                            break;
-                        case "leftUp":
-                            if(leftOk)
-                                worldX -= speed;
-                            if(upOk)
-                                worldY -= speed;
-                            break;
-                        case "leftDown":
-                            if(leftOk)
-                                worldX -= speed;
-                            if(downOk)
-                                worldY += speed;
-                            break;
-                        case "rightDown":
-                            if(rightOk)
-                                worldX += speed;
-                            if(downOk)
-                                worldY += speed;
-                            break;
+                    // Check NPC collision
+                    int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+                    interactNPC(npcIndex);
+
+                    //Check Event
+                    gp.eventH.checkEvent();
+                    //CHECK FOR DASH
+                    if(dash){
+                        gp.cChecker.checkTileDash(this);
+
+                        objIndex = gp.cChecker.checkObjectDash(this, true);
+                        pickUpObject(objIndex);
                     }
-                }
-        //DASH
-                if(!collisionDash && dash){
-                    switch(direction){
-                        case "up":
-                            worldY -= dashSpeed;
-                            break;
-                        case "down":
-                            worldY += dashSpeed;
-                            break;
-                        case "right":
-                            worldX += dashSpeed;
-                            break;
-                        case "left":
-                            worldX -= dashSpeed;
-                            break;
-                        case "rightUp":
-                            if(rightOk)
-                                worldX += dashSpeed;
-                            if(upOk)
-                                worldY -= dashSpeed;
-                            break;
-                        case "leftUp":
-                            if(leftOk)
-                                worldX -= dashSpeed;
-                            if(upOk)
-                                worldY -= dashSpeed;
-                            break;
-                        case "leftDown":
-                            if(leftOk)
-                                worldX -= dashSpeed;
-                            if(downOk)
-                                worldY += dashSpeed;
-                            break;
-                        case "rightDown":
-                            if(rightOk)
-                                worldX += dashSpeed;
-                            if(downOk)
-                                worldY += dashSpeed;
-                            break;
+
+                    // If collision false, player can move
+                    if(!collision){
+                        switch(direction){
+                            case "up":
+                                worldY -= speed;
+                                break;
+                            case "down":
+                                worldY += speed;
+                                break;
+                            case "right":
+                                worldX += speed;
+                                break;
+                            case "left":
+                                worldX -= speed;
+                                break;
+                            case "rightUp":
+                                if(rightOk)
+                                    worldX += speed;
+                                if(upOk)
+                                    worldY -= speed;
+                                break;
+                            case "leftUp":
+                                if(leftOk)
+                                    worldX -= speed;
+                                if(upOk)
+                                    worldY -= speed;
+                                break;
+                            case "leftDown":
+                                if(leftOk)
+                                    worldX -= speed;
+                                if(downOk)
+                                    worldY += speed;
+                                break;
+                            case "rightDown":
+                                if(rightOk)
+                                    worldX += speed;
+                                if(downOk)
+                                    worldY += speed;
+                                break;
+                        }
                     }
+                    //DASH
+                    if(!collisionDash && dash){
+                        switch(direction){
+                            case "up":
+                                worldY -= dashSpeed;
+                                break;
+                            case "down":
+                                worldY += dashSpeed;
+                                break;
+                            case "right":
+                                worldX += dashSpeed;
+                                break;
+                            case "left":
+                                worldX -= dashSpeed;
+                                break;
+                            case "rightUp":
+                                if(rightOk)
+                                    worldX += dashSpeed;
+                                if(upOk)
+                                    worldY -= dashSpeed;
+                                break;
+                            case "leftUp":
+                                if(leftOk)
+                                    worldX -= dashSpeed;
+                                if(upOk)
+                                    worldY -= dashSpeed;
+                                break;
+                            case "leftDown":
+                                if(leftOk)
+                                    worldX -= dashSpeed;
+                                if(downOk)
+                                    worldY += dashSpeed;
+                                break;
+                            case "rightDown":
+                                if(rightOk)
+                                    worldX += dashSpeed;
+                                if(downOk)
+                                    worldY += dashSpeed;
+                                break;
+                        }
+                    }
+
+
+                    resetDirectionsBoolean();
+                    dash = false;
+
                 }
 
+                spriteCounter++;
+                if(spriteCounter>10) {
+                    if (spriteNum == 1){
+                        spriteNum = 2;
+                    }
 
-                resetDirectionsBoolean();
-                dash = false;
-
+                    else if (spriteNum == 2) {
+                        spriteNum = 1;
+                    }
+                    spriteCounter = 0;
+                }
+                dashCoolDown++;
             }
-
-            spriteCounter++;
-            if(spriteCounter>10) {
-                if (spriteNum == 1){
-                    spriteNum = 2;
-                }
-
-                else if (spriteNum == 2) {
-                    spriteNum = 1;
-                }
-                spriteCounter = 0;
-            }
-            dashCoolDown++;
         }
+
+
 
 
     }
@@ -392,7 +396,7 @@ public class Player extends Entity{
         }
         g2.drawImage(image, screenX, screenY,null);
         g2.setColor(Color.blue);
-        g2.drawRect(screenX, screenY, solidArea.width, solidArea.height);
+        g2.drawRect(screenX + width*gp.tileSize *3/16, screenY +height*gp.tileSize*6/16, solidArea.width, solidArea.height);
 
     }
     //public void resetDirectionsBoolean(){
