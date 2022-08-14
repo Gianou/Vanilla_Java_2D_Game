@@ -11,18 +11,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Entity {
-    GamePanel gp;
+    public GamePanel gp;
     UtilityTool uT = new UtilityTool();
     public int worldX, worldY;
     public int speed;
     public BufferedImage left1, left2, right1, right2, still1, still2;
     public BufferedImage upRight1, upRight2, upLeft1, upLeft2, downLeft1, downLeft2, downRight1, downRight2, up1, up2, down1, down2;
-    public int width, height;
+    public int width = 1, height = 1;
     public String direction;
     public int spriteCounter = 0;
     public int spriteNum = 1;
     public Rectangle solidArea;
-    public int solidAreaDefaultX, solidAreaDefaultY;
+    public int solidAreaDefaultX = 0, solidAreaDefaultY = 0;
     public boolean collision = false, collisionDash = false;
     public boolean upOk = true, rightOk = true, downOk = true, leftOk = true;
     public char orientation = 'r';
