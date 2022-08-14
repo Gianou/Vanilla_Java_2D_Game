@@ -93,6 +93,7 @@ public class Player extends Entity {
     @Override
     public void update() {
 
+
         if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed) {
             if (gp.gameState == gp.dialogueState) {
                 if (orientation == 'r') {
@@ -233,7 +234,8 @@ public class Player extends Entity {
         if (dash) {
             gp.cChecker.checkTileDash(this);
 
-            int objIndex = gp.cChecker.checkObjectDash(this, true);
+            int objIndex = gp.cChecker.checkObjectDash(this, true); //If there is an object,
+            // this fct will set collisionDash as true but the object willl still be picked
             pickUpObject(objIndex);
         }
 
@@ -287,7 +289,7 @@ public class Player extends Entity {
 
     public void interactNPC(int i) {
         if (i != 999) {
-            if (gp.keyH.spacePressed) {
+            if (gp.keyH.tPressed) {
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
             }

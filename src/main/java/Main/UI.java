@@ -85,6 +85,8 @@ public class UI {
             drawDialogue(g2);
         }
 
+
+
     }
     public void drawFinished(Graphics2D g2){
         g2.setFont(pixelFont);

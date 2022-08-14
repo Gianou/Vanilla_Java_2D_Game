@@ -45,15 +45,17 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.pauseState;
             }
 
+            if (code == KeyEvent.VK_T){
+                tPressed = true;
+            }
 
-            if (code == KeyEvent.VK_T) {
+
+            if (code == KeyEvent.VK_I) {
                 if (checkTime == false) {
                     checkTime = true;
                 } else if (checkTime == true) {
                     checkTime = false;
                 }
-            }
-            if (code == KeyEvent.VK_C) {
                 if (checkCoordinates == false) {
                     checkCoordinates = true;
                 } else if (checkCoordinates == true) {
@@ -143,6 +145,9 @@ public class KeyHandler implements KeyListener {
         }
         if(code== KeyEvent.VK_SPACE){
             spacePressed = false;
+        }
+        if(code== KeyEvent.VK_T){
+            tPressed = false;
         }
     }
 
