@@ -35,6 +35,9 @@ public class SuperObject extends Entity {
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
             g2.drawImage(image, screenX, screenY, gp.tileSize * width, gp.tileSize* height, null);
+            if(gp.keyH.debug){
+                g2.drawRect(screenX + solidArea.x, screenY +solidArea.y, solidArea.width, solidArea.height);
+            }
         }
     }
 

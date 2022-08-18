@@ -128,120 +128,15 @@ public class Entity {
             g2.drawImage(image, screenX, screenY, null);
             g2.setColor(Color.blue);
             if(gp.keyH.debug){
-                g2.drawRect(screenX + width*gp.tileSize *3/16, screenY +height*gp.tileSize*6/16, solidArea.width, solidArea.height);
+                g2.drawRect(screenX + solidArea.x, screenY +solidArea.y, solidArea.width, solidArea.height);
             }
 
 
         }
     }
 
-    public void setAction(){
-
-    }
-
-    public void update(){
-
-        setAction();
-
-        collision = false;
-        gp.cChecker.checkTile(this);
-        gp.cChecker.checkObject(this, false);
-        gp.cChecker.checkPlayer(this);
-
-        if(!collision) {
-            switch (direction) {
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
-                case "rightUp":
-                    if(rightOk)
-                        worldX += speed;
-                    if(upOk)
-                        worldY -= speed;
-                    break;
-                case "leftUp":
-                    if(leftOk)
-                        worldX -= speed;
-                    if(upOk)
-                        worldY -= speed;
-                    break;
-                case "leftDown":
-                    if(leftOk)
-                        worldX -= speed;
-                    if(downOk)
-                        worldY += speed;
-                    break;
-                case "rightDown":
-                    if(rightOk)
-                        worldX += speed;
-                    if(downOk)
-                        worldY += speed;
-                    break;
-                case "idle":
-                    break;
-
-            }
-
-
-            resetDirectionsBoolean();
-        }
-
-
-    spriteCounter++;
-        if(spriteCounter>10) {
-        if (spriteNum == 1){
-            spriteNum = 2;
-        }
-
-        else if (spriteNum == 2) {
-            spriteNum = 1;
-        }
-        spriteCounter = 0;
-        }
-    }
-    public void speak(){
-
-        if(dialogues[dialogueIndex] == null){
-            dialogueIndex = 0;
-        }
-        gp.ui.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex++;
-        switch (gp.player.direction){
-            case "up":
-                direction = "down";
-                break;
-            case "down":
-                direction = "up";
-                break;
-            case "right":
-                direction = "left";
-                break;
-            case "left":
-                direction = "right";
-                break;
-
-        }
-    }
-    public BufferedImage getNPCImage(String name, UtilityTool uT) throws IOException {
+    public BufferedImage getEntityImage(String name, UtilityTool uT) throws IOException {
         File file = new File("src/main/resources/npc/" + name + ".png");
-        FileInputStream fis = new FileInputStream(file);
-        BufferedImage image = ImageIO.read(fis);
-        image = uT.scaleImage(image, gp.tileSize*width, gp.tileSize*height);
-
-        return image;
-    }
-
-    public BufferedImage getPlayerImage(String name, UtilityTool uT, int width, int height) throws IOException {
-        File file = new File("src/main/resources/player/" + name + ".png");
         FileInputStream fis = new FileInputStream(file);
         BufferedImage image = ImageIO.read(fis);
         image = uT.scaleImage(image, gp.tileSize*width, gp.tileSize*height);

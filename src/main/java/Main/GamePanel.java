@@ -1,7 +1,7 @@
 package Main;
 
-import Entity.Entity;
-import Entity.Player;
+
+import Entity.*;
 import Sound.Sound;
 import Tiles.TileManager;
 import Object.SuperObject;
@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
     //ENTITY OBJECT
     public Player player = new Player(this, keyH, 1, 1);
     public SuperObject obj [] = new SuperObject[30];
-    public Entity npc[] = new Entity[5];
+    public SuperNPC npc[] = new SuperNPC[5];
     ArrayList<Entity> entityList = new ArrayList<>();
     int fps = 60;
 

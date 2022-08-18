@@ -51,34 +51,33 @@ public class Player extends Entity {
     public void getPlayerImage() {
         UtilityTool uT = new UtilityTool();
 
-
         try {
-            up1 = getNPCImage("GhoulU1", uT);
-            up2 = getNPCImage("GhoulU2", uT);
+            up1 = getEntityImage("GhoulU1", uT);
+            up2 = getEntityImage("GhoulU2", uT);
 
-            down1 = getNPCImage("GhoulD1", uT);
-            down2 = getNPCImage("GhoulD2", uT);
+            down1 = getEntityImage("GhoulD1", uT);
+            down2 = getEntityImage("GhoulD2", uT);
 
-            left1 = getNPCImage("GhoulL1", uT);
-            left2 = getNPCImage("GhoulL2", uT);
+            left1 = getEntityImage("GhoulL1", uT);
+            left2 = getEntityImage("GhoulL2", uT);
 
-            right1 = getNPCImage("GhoulR1", uT);
-            right2 = getNPCImage("GhoulR2", uT);
+            right1 = getEntityImage("GhoulR1", uT);
+            right2 = getEntityImage("GhoulR2", uT);
 
-            upRight1 = getNPCImage("GhoulUR1", uT);
-            upRight2 = getNPCImage("GhoulUR2", uT);
+            upRight1 = getEntityImage("GhoulUR1", uT);
+            upRight2 = getEntityImage("GhoulUR2", uT);
 
-            upLeft1 = getNPCImage("GhoulUL1", uT);
-            upLeft2 = getNPCImage("GhoulUL2", uT);
+            upLeft1 = getEntityImage("GhoulUL1", uT);
+            upLeft2 = getEntityImage("GhoulUL2", uT);
 
-            downRight1 = getNPCImage("GhoulDR1", uT);
-            downRight2 = getNPCImage("GhoulDR2", uT);
+            downRight1 = getEntityImage("GhoulDR1", uT);
+            downRight2 = getEntityImage("GhoulDR2", uT);
 
-            downLeft1 = getNPCImage("GhoulDL1", uT);
-            downLeft2 = getNPCImage("GhoulDL2", uT);
+            downLeft1 = getEntityImage("GhoulDL1", uT);
+            downLeft2 = getEntityImage("GhoulDL2", uT);
 
-            still1 = getNPCImage("GhoulDR1", uT);
-            still2 = getNPCImage("GhoulDR2", uT);
+            still1 = getEntityImage("GhoulDR1", uT);
+            still2 = getEntityImage("GhoulDR2", uT);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,7 +85,7 @@ public class Player extends Entity {
 
     }
 
-    @Override
+
     public void update() {
 
 
@@ -392,7 +391,7 @@ public class Player extends Entity {
         g2.drawImage(image, screenX, screenY, null);
         g2.setColor(Color.blue);
         if(keyH.debug){
-            g2.drawRect(screenX + width * gp.tileSize * 3 / 16, screenY + height * gp.tileSize * 6 / 16, solidArea.width, solidArea.height);
+            g2.drawRect(screenX + solidArea.x, screenY +solidArea.y, solidArea.width, solidArea.height);
         }
 
     }
