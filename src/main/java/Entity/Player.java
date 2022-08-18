@@ -3,12 +3,8 @@ package Entity;
 import Main.GamePanel;
 import Main.KeyHandler;
 import Main.UtilityTool;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Player extends Entity {
@@ -333,6 +329,7 @@ public class Player extends Entity {
         }
     }
 
+    @Override
     public void draw(Graphics2D g2) {
 
         BufferedImage image = null;
@@ -394,10 +391,9 @@ public class Player extends Entity {
         }
         g2.drawImage(image, screenX, screenY, null);
         g2.setColor(Color.blue);
-        g2.drawRect(screenX + width * gp.tileSize * 3 / 16, screenY + height * gp.tileSize * 6 / 16, solidArea.width, solidArea.height);
+        if(keyH.debug){
+            g2.drawRect(screenX + width * gp.tileSize * 3 / 16, screenY + height * gp.tileSize * 6 / 16, solidArea.width, solidArea.height);
+        }
 
     }
-    //public void resetDirectionsBoolean(){
-
-    //}
 }

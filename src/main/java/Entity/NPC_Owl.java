@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class NPC_Owl extends Entity{
+public class NPC_Owl extends SuperNPC{
     public NPC_Owl(GamePanel gp, int width, int height){
         super(gp, width, height);
 
@@ -16,7 +16,7 @@ public class NPC_Owl extends Entity{
         direction = "right";
         speed = gp.tileSize/32;
         getOwlImage();
-        setDialogues();
+        setDialogues("hoot", "hooty hoot", "Hoooty partner?");
     }
     public void getOwlImage(){
         try {
@@ -77,11 +77,6 @@ public class NPC_Owl extends Entity{
             }
             actionLockCounter = 0;
         }
-    }
-    public void setDialogues(){
-        dialogues[0] = "Who?";
-        dialogues[1] = "Hoot";
-        dialogues[2] = "Hoooooooooooooooooooooooot";
     }
 
     @Override

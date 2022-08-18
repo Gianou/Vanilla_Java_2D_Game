@@ -192,7 +192,7 @@ public class GamePanel extends JPanel implements Runnable{
             ui.draw(g2);
 
             //Debug
-            if(keyH.checkTime){
+            if(keyH.debug){
                 long drawEnd = System.nanoTime();
                 long passed = (drawEnd - drawStart);
                 g2.setColor(Color.BLACK);

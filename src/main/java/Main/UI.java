@@ -121,7 +121,7 @@ public class UI {
 
 
         // Coordinate
-        if(gp.keyH.checkCoordinates){
+        if(gp.keyH.debug){
             String coordinates = "X : " + String.valueOf(gp.player.worldX / gp.tileSize) + "  Y : " +
                     String.valueOf(gp.player.worldY / gp.tileSize + 2);
             int textLength = (int) g2.getFontMetrics().getStringBounds(coordinates, g2).getWidth();

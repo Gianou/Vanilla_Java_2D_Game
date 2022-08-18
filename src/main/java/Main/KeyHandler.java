@@ -7,8 +7,8 @@ public class KeyHandler implements KeyListener {
 
     GamePanel gp;
     public boolean rightPressed, leftPressed, downPressed, upPressed, spacePressed;
-    public boolean checkTime, tPressed;
-    public boolean checkCoordinates, cPressed;
+    public boolean debug;
+    public boolean  tPressed;
 
     public KeyHandler(GamePanel gp){
         this.gp = gp;
@@ -51,15 +51,11 @@ public class KeyHandler implements KeyListener {
 
 
             if (code == KeyEvent.VK_I) {
-                if (checkTime == false) {
-                    checkTime = true;
-                } else if (checkTime == true) {
-                    checkTime = false;
-                }
-                if (checkCoordinates == false) {
-                    checkCoordinates = true;
-                } else if (checkCoordinates == true) {
-                    checkCoordinates = false;
+
+                if (debug == false) {
+                    debug = true;
+                } else if (debug) {
+                    debug = false;
                 }
             }
 

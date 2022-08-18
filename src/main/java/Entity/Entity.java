@@ -127,8 +127,10 @@ public class Entity {
             }
             g2.drawImage(image, screenX, screenY, null);
             g2.setColor(Color.blue);
-            g2.drawRect(screenX + width*gp.tileSize *3/16, screenY +height*gp.tileSize*6/16, solidArea.width, solidArea.height);
-            //g2.drawRect(worldX, worldY, solidArea.width, solidArea.height);
+            if(gp.keyH.debug){
+                g2.drawRect(screenX + width*gp.tileSize *3/16, screenY +height*gp.tileSize*6/16, solidArea.width, solidArea.height);
+            }
+
 
         }
     }
@@ -246,5 +248,6 @@ public class Entity {
 
         return image;
     }
+
 }
 
