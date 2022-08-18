@@ -6,6 +6,9 @@ public class EventHandler {
     GamePanel gp;
 
     EventRect eventRect[][];
+
+    int previousEventX, previousEventY;
+    boolean canTouchEvent = true;
     public EventHandler(GamePanel gp){
         this.gp = gp;
 
@@ -33,13 +36,25 @@ public class EventHandler {
 
     }
     public void checkEvent(){
+
+        //Check if player is more than one tile away from last event
+//To change tile's attribute, do it here
+        int xDistance = Math.abs(gp.player.worldX - previousEventX);
+        int yDistance = Math.abs(gp.player.worldY - previousEventY);
+        int distance = Math.max(xDistance, yDistance);
+        if(distance > gp.tileSize){
+            canTouchEvent = true;
+        }
 //EVENT EXAMPLE
-        if(hit( 12, 19, "down")){
-            damagePit(gp.dialogueState);
+        if(canTouchEvent){
+            if(hit( 12, 19, "any")){
+                damagePit(12, 19, gp.dialogueState);
+            }
+            if (hit(17, 19, "up")) {
+                healingPool(gp.dialogueState);
+            }
         }
-        if (hit(17, 19, "up")) {
-            healingPool(gp.dialogueState);
-        }
+
     }
     public boolean hit(int col, int row, String reqDirection){
         //Knowing the direction is important, because if any direction works,
@@ -51,9 +66,12 @@ public class EventHandler {
         eventRect[col][row].x = col*gp.tileSize + eventRect[col][row].x;
         eventRect[col][row].y = row*gp.tileSize + eventRect[col][row].y;
 
-        if(gp.player.solidArea.intersects(eventRect[col][row])){
+        if(gp.player.solidArea.intersects(eventRect[col][row]) && eventRect[col][row].eventDone == false){
             if(gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")){
                 hit = true;
+
+                previousEventX = gp.player.worldX;
+                previousEventY = gp.player.worldY;
             }
         }
         // reset values
@@ -64,10 +82,13 @@ public class EventHandler {
 
         return hit;
     }
-    public void damagePit(int gameState){
+    public void damagePit(int col, int row, int gameState){
         gp.gameState = gameState;
         gp.ui.currentDialogue = "You fell in a hole";
         gp.player.life -=1;
+        //eventRect[col][row].eventDone = true;
+        canTouchEvent = false;
+
     }
     public void healingPool(int gameState){
         if(gp.keyH.spacePressed){
