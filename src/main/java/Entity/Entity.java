@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Entity {
     public GamePanel gp;
-    UtilityTool uT = new UtilityTool();
+    public UtilityTool uT = new UtilityTool();
     public int worldX, worldY;
     public int speed;
     public BufferedImage left1, left2, right1, right2, still1, still2;
@@ -31,9 +31,13 @@ public class Entity {
     int dialogueIndex = 0;
     public int dashSpeed = 48*2;
 
+    public int type; // 0 = player, 1 = npc, 2 = monster;
+
     //ENTITY STATUS
     public int maxLife;
     public int life;
+    public boolean invincible = false;
+    public int invincibleCounter = 0;
 
 
 

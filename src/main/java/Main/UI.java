@@ -12,7 +12,7 @@ import Object.OBJ_Heart;
 
 public class UI {
     GamePanel gp;
-    Font arial_40, arial_55, pixelFont;
+    public Font arial_40, arial_55, pixelFont;
     OBJ_Key key;
     BufferedImage keyImg;
     boolean messageOn;

@@ -45,7 +45,15 @@ public class SuperNPC extends Entity{
         collision = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
-        gp.cChecker.checkPlayer(this);
+        gp.cChecker.checkEntity(this, gp.npc);
+        gp.cChecker.checkEntity(this, gp.monster);
+        boolean contactPlayer = gp.cChecker.checkPlayer(this);
+
+        //Monster inficlt damage
+        if(this.type == 2 && contactPlayer && !gp.player.invincible){
+            gp.player.life -= 1;
+            gp.player.invincible = true;
+        }
 
         if(!collision) {
             switch (direction) {

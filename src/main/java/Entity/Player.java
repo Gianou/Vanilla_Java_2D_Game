@@ -155,6 +155,10 @@ public class Player extends Entity {
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
+            // Check NPC collision
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            contactMonster(monsterIndex);
+
             //Check Event
             gp.eventH.checkEvent();
 
@@ -279,6 +283,14 @@ public class Player extends Entity {
 
 
         dashCoolDown++;
+
+        if(invincible){
+            invincibleCounter++;
+            if(invincibleCounter>60){
+                invincibleCounter=0;
+                invincible = false;
+            }
+        }
     }
 
 
@@ -287,6 +299,15 @@ public class Player extends Entity {
             if (gp.keyH.tPressed) {
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
+            }
+
+        }
+    }
+    public void contactMonster(int i) {
+        if (i != 999) {
+            if(!invincible){
+                life -= 1;
+                invincible = true;
             }
 
         }
@@ -388,10 +409,33 @@ public class Player extends Entity {
                 break;
 
         }
+        //Transparent if damage taken
+        if(invincible){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+        }
         g2.drawImage(image, screenX, screenY, null);
+        // Reset g2
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+
+
+        // Invicibility debug
         g2.setColor(Color.blue);
+        String invincibilityState = "Invincible : " + String.valueOf(invincible) + " " + invincibleCounter;
+        g2.setFont(gp.ui.pixelFont);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
+        g2.setColor(Color.BLACK);
+        int textLength;
+        int x;
+        int y;
+        textLength = (int) g2.getFontMetrics().getStringBounds(invincibilityState, g2).getWidth();
+        x = gp.screenWidth - textLength;
+        y = gp.tileSize*2;
+
         if(keyH.debug){
             g2.drawRect(screenX + solidArea.x, screenY +solidArea.y, solidArea.width, solidArea.height);
+
+            g2.drawString(invincibilityState, x, y);
         }
 
     }
