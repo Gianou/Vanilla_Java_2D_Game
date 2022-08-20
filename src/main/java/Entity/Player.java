@@ -89,7 +89,7 @@ public class Player extends Entity {
     public void update() {
 
 
-        if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed) {
+        if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.tPressed) {
             if (gp.gameState == gp.dialogueState) {
                 if (orientation == 'r') {
                     direction = "stillR";
@@ -152,6 +152,7 @@ public class Player extends Entity {
             pickUpObject(objIndex);
 
             // Check NPC collision
+
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
@@ -163,8 +164,9 @@ public class Player extends Entity {
             gp.eventH.checkEvent();
 
 
+
             // If collision false, player can move
-            if (!collision) {
+            if (!collision && !keyH.tPressed) {
                 switch (direction) {
                     case "up":
                         worldY -= speed;
@@ -204,6 +206,8 @@ public class Player extends Entity {
                         break;
                 }
             }
+
+
             spriteCounter++;
             if (spriteCounter > 10) {
                 if (spriteNum == 1) {
