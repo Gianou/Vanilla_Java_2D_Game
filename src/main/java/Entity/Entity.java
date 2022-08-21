@@ -23,6 +23,7 @@ public class Entity {
     public int spriteCounter = 0;
     public int spriteNum = 1;
     public Rectangle solidArea;
+    public Rectangle attackArea;
     public int solidAreaDefaultX = 0, solidAreaDefaultY = 0;
     public boolean collision = false, collisionDash = false;
     public boolean upOk = true, rightOk = true, downOk = true, leftOk = true;
