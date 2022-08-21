@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 
 public class MouseHandler implements MouseListener {
     GamePanel gp;
-    boolean leftClick;
+    public boolean leftClick;
 
 
     public MouseHandler (GamePanel gp){
@@ -29,7 +29,7 @@ public class MouseHandler implements MouseListener {
 
             if (code == MouseEvent.BUTTON1) {
                 leftClick = true;
-                gp.keyH.debug = true;
+                System.out.println(leftClick);
             }
         }
     }

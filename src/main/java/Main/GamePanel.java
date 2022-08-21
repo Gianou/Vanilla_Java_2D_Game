@@ -42,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable{
     public EventHandler eventH = new EventHandler(this);
     Thread gameThread;
     //ENTITY OBJECT
-    public Player player = new Player(this, keyH, 1, 1);
+    public Player player = new Player(this, keyH, mouseH, 1, 1);
     public SuperObject obj [] = new SuperObject[30];
     public SuperNPC npc[] = new SuperNPC[5];
     public SuperNPC monster[] = new SuperNPC[5];

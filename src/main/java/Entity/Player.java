@@ -2,6 +2,7 @@ package Entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
+import Main.MouseHandler;
 import Main.UtilityTool;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -10,6 +11,7 @@ import java.io.IOException;
 public class Player extends Entity {
 
     KeyHandler keyH;
+    MouseHandler mouseH;
     char orientation = 'r';
 
     public final int screenX;
@@ -23,9 +25,10 @@ public class Player extends Entity {
     boolean attacking = false;
 
 
-    public Player(GamePanel gp, KeyHandler keyH, int width, int height) {
+    public Player(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, int width, int height) {
         super(gp, width, height);
         this.keyH = keyH;
+        this.mouseH = mouseH;
 
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
         screenY = gp.screenHeight / 2 - (gp.tileSize);
@@ -91,11 +94,31 @@ public class Player extends Entity {
 
     }
 
+    public void attack(){
+        spriteCounter++;
+
+        if(spriteCounter <= 5){
+            spriteNum = 1;
+        }
+        if(spriteCounter>5 && spriteCounter <=25){
+            spriteNum = 2;
+        }
+        if(spriteCounter>25){
+            spriteNum = 1;
+            spriteCounter = 0;
+            attacking = false;
+        }
+
+    }
 
     public void update() {
 
+        if(attacking == true){
+            attack();
+            System.out.println("Begin attack line 100");
+        }
 
-        if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.tPressed) {
+        else if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.tPressed) {
             if (gp.gameState == gp.dialogueState) {
                 if (orientation == 'r') {
                     direction = "stillR";
@@ -229,6 +252,13 @@ public class Player extends Entity {
 
         }//End of up down left right pressed loop
 
+        //Attack
+
+        if(gp.mouseH.leftClick){
+            attacking = true;
+            System.out.println("attack");
+        }
+
         //DASH
 
         if (keyH.spacePressed && dashCoolDown > dashCoolDownTime) {
@@ -306,12 +336,22 @@ public class Player extends Entity {
 
     public void interactNPC(int i) {
         if (i != 999) {
+// gp.keyH can be replaced by keyH
             if (gp.keyH.tPressed) {
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
             }
 
         }
+/*
+        if(gp.mouseH.leftClick){
+            attacking = true;
+            System.out.println("attack");
+        }
+
+
+ */
+
     }
     public void contactMonster(int i) {
         if (i != 999) {
@@ -367,10 +407,18 @@ public class Player extends Entity {
         switch (direction) {
 
             case "right":
-                if (spriteNum == 1)
-                    image = right1;
-                if (spriteNum == 2)
-                    image = right2;
+                if(!attacking){
+                    if (spriteNum == 1)
+                        image = right1;
+                    if (spriteNum == 2)
+                        image = right2;
+                }
+                else {
+                    if (spriteNum == 1)
+                        image = attackD1;
+                    if (spriteNum == 2)
+                        image = attackD2;
+                }
                 break;
             case "rightUp":
                 if (spriteNum == 1)
@@ -407,9 +455,9 @@ public class Player extends Entity {
 
             case "down":
                 if (spriteNum == 1)
-                    image = attackD1;
+                    image = down1;
                 if (spriteNum == 2)
-                    image = attackD2;
+                    image = down2;
                 break;
             case "up":
                 if (spriteNum == 1)
@@ -449,4 +497,5 @@ public class Player extends Entity {
         }
 
     }
+
 }
