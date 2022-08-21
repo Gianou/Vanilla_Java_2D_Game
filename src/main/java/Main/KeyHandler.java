@@ -2,6 +2,7 @@ package Main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 
 public class KeyHandler implements KeyListener {
 
@@ -38,6 +39,9 @@ public class KeyHandler implements KeyListener {
                 downPressed = true;
             }
             if (code == KeyEvent.VK_SPACE) {
+                spacePressed = true;
+            }
+            if (code == MouseEvent.BUTTON1) {
                 spacePressed = true;
             }
 

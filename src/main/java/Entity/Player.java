@@ -19,6 +19,9 @@ public class Player extends Entity {
     public boolean dash = false;
     public int dashCoolDownTime = 10, dashCoolDown = 0;
 
+    public BufferedImage attackD1, attackD2;
+    boolean attacking = false;
+
 
     public Player(GamePanel gp, KeyHandler keyH, int width, int height) {
         super(gp, width, height);
@@ -78,6 +81,9 @@ public class Player extends Entity {
 
             still1 = getEntityImage("GhoulDR1", uT);
             still2 = getEntityImage("GhoulDR2", uT);
+
+            attackD1 = getEntityAttackImage("AttackD1",1,2, uT);
+            attackD2 = getEntityAttackImage("AttackD2",1,2, uT);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -401,9 +407,9 @@ public class Player extends Entity {
 
             case "down":
                 if (spriteNum == 1)
-                    image = down1;
+                    image = attackD1;
                 if (spriteNum == 2)
-                    image = down2;
+                    image = attackD2;
                 break;
             case "up":
                 if (spriteNum == 1)
