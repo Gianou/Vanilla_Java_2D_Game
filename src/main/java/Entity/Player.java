@@ -21,7 +21,7 @@ public class Player extends Entity {
     public boolean dash = false;
     public int dashCoolDownTime = 10, dashCoolDown = 0;
 
-    public BufferedImage attackD1, attackD2;
+    public BufferedImage attackD1, attackD2, attackU1, attackU2, attackR1, attackR2, attackL1, attackL2, attackUR1, attackUR2;
     boolean attacking = false;
 
 
@@ -89,6 +89,14 @@ public class Player extends Entity {
 
             attackD1 = getEntityAttackImage("AttackD1",1,2, uT);
             attackD2 = getEntityAttackImage("AttackD2",1,2, uT);
+            attackU1 = getEntityAttackImage("AttackU1",1,2, uT);
+            attackU2 = getEntityAttackImage("AttackU2",1,2, uT);
+            attackR1 = getEntityAttackImage("AttackR1",2,1, uT);
+            attackR2 = getEntityAttackImage("AttackR2",2,1, uT);
+            attackL1 = getEntityAttackImage("AttackL1",2,1, uT);
+            attackL2 = getEntityAttackImage("AttackL2",2,1, uT);
+            attackUR1 = getEntityAttackImage("AttackUR1",2,2, uT);
+            attackUR2 = getEntityAttackImage("AttackUR2",2,2, uT);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -440,9 +448,9 @@ public class Player extends Entity {
                 }
                 else {
                     if (spriteNum == 1)
-                        image = attackD1;
+                        image = attackR1;
                     if (spriteNum == 2)
-                        image = attackD2;
+                        image = attackR2;
                 }
                 break;
             case "rightUp":
@@ -453,10 +461,11 @@ public class Player extends Entity {
                         image = upRight2;
                 }
                 else {
+                    tempScreenY -= gp.tileSize;
                     if (spriteNum == 1)
-                        image = upRight1;
+                        image = attackUR1;
                     if (spriteNum == 2)
-                        image = upRight2;
+                        image = attackUR2;
                 }
 
                 break;
@@ -483,10 +492,11 @@ public class Player extends Entity {
                         image = left2;
                 }
                 else {
+                    tempScreenX -= gp.tileSize;
                     if (spriteNum == 1)
-                        image = left1;
+                        image = attackL1;
                     if (spriteNum == 2)
-                        image = left2;
+                        image = attackL2;
                 }
 
                 break;
@@ -546,10 +556,11 @@ public class Player extends Entity {
                         image = up2;
                 }
                 else {
+                    tempScreenY -= gp.tileSize;
                     if (spriteNum == 1)
-                        image = up1;
+                        image = attackU1;
                     if (spriteNum == 2)
-                        image = up2;
+                        image = attackU2;
                 }
 
                 break;

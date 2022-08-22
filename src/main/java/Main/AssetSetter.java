@@ -70,6 +70,6 @@ public class AssetSetter {
     public void setMonster(){
         gp.monster[0] = new MON_Blob(gp, 1, 1);
         gp.monster[0].worldX = gp.tileSize*25;
-        gp.monster[0].worldY = gp.tileSize*10;
+        gp.monster[0].worldY = gp.tileSize*18;
     }
 }
