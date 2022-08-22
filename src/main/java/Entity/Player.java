@@ -23,6 +23,7 @@ public class Player extends Entity {
 
     public BufferedImage attackD1, attackD2, attackU1, attackU2, attackR1, attackR2, attackL1, attackL2, attackUR1, attackUR2;
     boolean attacking = false;
+    int attackSpriteCounter =0;
 
 
     public Player(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, int width, int height) {
@@ -105,12 +106,12 @@ public class Player extends Entity {
     }
 
     public void attack(){
-        spriteCounter++;
+        attackSpriteCounter++;
 
-        if(spriteCounter <= 5){
+        if(attackSpriteCounter <= 5){
             spriteNum = 1;
         }
-        if(spriteCounter>5 && spriteCounter <=25){
+        if(attackSpriteCounter>5 && attackSpriteCounter <=25){
             spriteNum = 2;
             //During the attack frame you can check hit detection
             //Save current data
@@ -122,6 +123,15 @@ public class Player extends Entity {
             switch (direction){
                 case "down":
                     worldY += attackArea.height;
+                    break;
+                case "up":
+                    worldY -= attackArea.height;
+                    break;
+                case "right":
+                    worldX += attackArea.width;
+                    break;
+                case "left":
+                    worldX -= attackArea.width;
                     break;
             }
             //Solid area becomes attack area to use checkEntity from cChecker
@@ -136,9 +146,9 @@ public class Player extends Entity {
             solidArea.width = solidAreaWidth;
             solidArea.height = solidAreaHeight;
         }
-        if(spriteCounter>25){
+        if(attackSpriteCounter>25){
             spriteNum = 1;
-            spriteCounter = 0;
+            attackSpriteCounter = 0;
             attacking = false;
         }
 
@@ -146,11 +156,10 @@ public class Player extends Entity {
 
     public void update() {
 
-        if(attacking == true){
-            attack();
-        }
 
-        else if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.tPressed) {
+
+
+        if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.tPressed) {
             if (gp.gameState == gp.dialogueState) {
                 if (orientation == 'r') {
                     direction = "stillR";
@@ -291,6 +300,10 @@ public class Player extends Entity {
 
         }
 
+        if(attacking == true){
+            attack();
+            System.out.println(attackSpriteCounter);
+        }
         //DASH
 
         if (keyH.spacePressed && dashCoolDown > dashCoolDownTime) {
@@ -593,16 +606,47 @@ public class Player extends Entity {
             g2.drawRect(screenX + solidArea.x, screenY +solidArea.y, solidArea.width, solidArea.height);
 
             g2.drawString(invincibilityState, x, y);
+
+            g2.setColor(Color.RED);
+            //During the attack frame you can check hit detection
+            //Save current data
+            int currentWorldX = screenX;
+            int currentWorldY = screenY;
+            int solidAreaWidth = solidArea.width;
+            int solidAreaHeight = solidArea.height;
+
+            switch (direction){
+                case "down":
+                    currentWorldY += attackArea.height;
+                    break;
+                case "up":
+                    currentWorldY -= attackArea.height;
+                    break;
+                case "right":
+                    currentWorldX += attackArea.width;
+                    break;
+                case "left":
+                    currentWorldX -= attackArea.width;
+                    break;
+            }
+            //g2.drawRect(worldX, worldY, attackArea.width, attackArea.height);
+            g2.drawRect(currentWorldX + solidArea.x, currentWorldY +solidArea.y, attackArea.width, attackArea.height);
+
+            //Restore values
+
+            solidArea.width = solidAreaWidth;
+            solidArea.height = solidAreaHeight;
+
         }
 
     }
 
     public void damageMonster(int monsterIndex){
         if(monsterIndex != 999){
-            System.out.println("monster damaged");
+            //System.out.println("monster damaged");
         }
         else{
-            System.out.println("miss");
+            //System.out.println("miss");
         }
     }
 

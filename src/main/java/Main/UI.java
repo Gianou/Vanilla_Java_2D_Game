@@ -3,6 +3,7 @@ package Main;
 import Object.OBJ_Key;
 
 import java.awt.*;
+import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +57,15 @@ public class UI {
         messageOn = true;
     }
 
+    public void drawTest(Graphics2D g2){
+        Shape s = new Arc2D.Float(210, 210, 80, 80, 45, 90, Arc2D.PIE);
+        g2.draw(s);
+
+    }
     public void draw(Graphics2D g2){
+
+        //TESTS
+        drawTest(g2);
 
         if(gameFinished){
             drawFinished(g2);
