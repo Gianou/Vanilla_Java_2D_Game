@@ -114,5 +114,13 @@ public class SuperNPC extends Entity{
             }
             spriteCounter = 0;
         }
+
+        if(invincible){
+            invincibleCounter++;
+            if(invincibleCounter>60){
+                invincibleCounter=0;
+                invincible = false;
+            }
+        }
     }
 }

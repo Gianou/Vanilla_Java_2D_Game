@@ -610,27 +610,27 @@ public class Player extends Entity {
             g2.setColor(Color.RED);
             //During the attack frame you can check hit detection
             //Save current data
-            int currentWorldX = screenX;
-            int currentWorldY = screenY;
+            int currentScreenX = screenX;
+            int currentScreenY = screenY;
             int solidAreaWidth = solidArea.width;
             int solidAreaHeight = solidArea.height;
 
             switch (direction){
                 case "down":
-                    currentWorldY += attackArea.height;
+                    currentScreenY += attackArea.height;
                     break;
                 case "up":
-                    currentWorldY -= attackArea.height;
+                    currentScreenY -= attackArea.height;
                     break;
                 case "right":
-                    currentWorldX += attackArea.width;
+                    currentScreenX += attackArea.width;
                     break;
                 case "left":
-                    currentWorldX -= attackArea.width;
+                    currentScreenX -= attackArea.width;
                     break;
             }
             //g2.drawRect(worldX, worldY, attackArea.width, attackArea.height);
-            g2.drawRect(currentWorldX + solidArea.x, currentWorldY +solidArea.y, attackArea.width, attackArea.height);
+            g2.drawRect(currentScreenX + solidArea.x, currentScreenY +solidArea.y, attackArea.width, attackArea.height);
 
             //Restore values
 
@@ -643,6 +643,14 @@ public class Player extends Entity {
 
     public void damageMonster(int monsterIndex){
         if(monsterIndex != 999){
+            if(gp.monster[monsterIndex].invincible == false){
+                gp.monster[monsterIndex].life -= 1;
+                gp.monster[monsterIndex].invincible = true;
+                if(gp.monster[monsterIndex].life <= 0){
+                    gp.monster[monsterIndex] = null;
+                }
+            }
+
             //System.out.println("monster damaged");
         }
         else{

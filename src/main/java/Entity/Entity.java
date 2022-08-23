@@ -131,7 +131,16 @@ public class Entity {
                     image = right1;
                     break;
             }
+
+            //Make transparent
+            if(invincible){
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+            }
             g2.drawImage(image, screenX, screenY, null);
+
+            //Reset Alpha
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
             g2.setColor(Color.blue);
             if(gp.keyH.debug){
                 g2.drawRect(screenX + solidArea.x, screenY +solidArea.y, solidArea.width, solidArea.height);

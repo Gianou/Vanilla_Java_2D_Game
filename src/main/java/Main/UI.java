@@ -58,8 +58,14 @@ public class UI {
     }
 
     public void drawTest(Graphics2D g2){
-        Shape s = new Arc2D.Float(210, 210, 80, 80, 45, 90, Arc2D.PIE);
-        g2.draw(s);
+        Shape s1 = new Arc2D.Float(210, 210, 80, 80, 0, 90, Arc2D.PIE);
+        Shape s2 = new Arc2D.Float(210, 210, 80, 80, 90, 90, Arc2D.PIE);
+        Shape s3 = new Arc2D.Float(210, 210, 80, 80, 180, 90, Arc2D.PIE);
+        Shape s4 = new Arc2D.Float(210, 210, 80, 80, 270, 90, Arc2D.PIE);
+        g2.draw(s1);
+        g2.draw(s2);
+        g2.draw(s3);
+        g2.draw(s4);
 
     }
     public void draw(Graphics2D g2){
