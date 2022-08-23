@@ -47,16 +47,16 @@ public class EventHandler {
         }
 //EVENT EXAMPLE
         if(canTouchEvent){
-            if(hit( 12, 19, "any")){
+            if(hit( 12, 19, -1)){
                 damagePit(12, 19, gp.dialogueState);
             }
-            if (hit(17, 19, "up")) {
+            if (hit(17, 19, 0)) {
                 healingPool(gp.dialogueState);
             }
         }
 
     }
-    public boolean hit(int col, int row, String reqDirection){
+    public boolean hit(int col, int row, int reqDirection){
         //Knowing the direction is important, because if any direction works,
         // n you cannot move away from the eventRect
         boolean hit = false;
@@ -67,7 +67,7 @@ public class EventHandler {
         eventRect[col][row].y = row*gp.tileSize + eventRect[col][row].y;
 
         if(gp.player.solidArea.intersects(eventRect[col][row]) && eventRect[col][row].eventDone == false){
-            if(gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")){
+            if(gp.player.direction == reqDirection || reqDirection ==-1){
                 hit = true;
 
                 previousEventX = gp.player.worldX;

@@ -17,9 +17,10 @@ public class Entity {
     public int speed;
     public BufferedImage left1, left2, right1, right2, still1, still2;
     public BufferedImage upRight1, upRight2, upLeft1, upLeft2, downLeft1, downLeft2, downRight1, downRight2, up1, up2, down1, down2;
+
     public int width = 1, height = 1;
 
-    public String direction;
+    public int direction;
     public int spriteCounter = 0;
     public int spriteNum = 1;
     public Rectangle solidArea;
@@ -74,61 +75,37 @@ public class Entity {
             BufferedImage image = null;
             //switch case
             switch (direction) {
-                case "right":
-                    if (spriteNum == 1)
-                        image = right1;
-                    if (spriteNum == 2)
-                        image = right2;
+                case 0:
+                    if (spriteNum == 1) image = up1;
+                    if (spriteNum == 2) image = up2;
                     break;
-                case "rightUp":
-                    if (spriteNum == 1)
-                        image = upRight1;
-                    if (spriteNum == 2)
-                        image = upRight2;
+                case 1:
+                    if (spriteNum == 1) image = upRight1;
+                    if (spriteNum == 2) image = upRight2;
                     break;
-                case "rightDown":
-                    if (spriteNum == 1)
-                        image = downRight1;
-                    if (spriteNum == 2)
-                        image = downRight2;
+                case 2:
+                    if (spriteNum == 1) image = right1;
+                    if (spriteNum == 2) image = right2;
                     break;
-                case "left":
-                    if (spriteNum == 1)
-                        image = left1;
-                    if (spriteNum == 2)
-                        image = left2;
+                case 3:
+                    if (spriteNum == 1) image = downRight1;
+                    if (spriteNum == 2) image = downRight2;
                     break;
-
-                case "leftUp":
-                    if (spriteNum == 1)
-                        image = upLeft1;
-                    if (spriteNum == 2)
-                        image = upLeft2;
+                case 4:
+                    if (spriteNum == 1) image = down1;
+                    if (spriteNum == 2) image = down2;
                     break;
-
-                case "leftDown":
-                    if (spriteNum == 1)
-                        image = downLeft1;
-                    if (spriteNum == 2)
-                        image = downLeft2;
+                case 5:
+                    if (spriteNum == 1) image = downLeft1;
+                    if (spriteNum == 2) image = downLeft2;
                     break;
-
-                case "down":
-                    if (spriteNum == 1)
-                        image = down1;
-                    if (spriteNum == 2)
-                        image = down2;
+                case 6:
+                    if (spriteNum == 1) image = left1;
+                    if (spriteNum == 2) image = left2;
                     break;
-                case "up":
-                    if (spriteNum == 1)
-                        image = up1;
-                    if (spriteNum == 2)
-                        image = up2;
-                    break;
-
-
-                case "idle":
-                    image = right1;
+                case 7:
+                    if (spriteNum == 1) image = upLeft1;
+                    if (spriteNum == 2) image = upLeft2;
                     break;
             }
 

@@ -21,17 +21,17 @@ public class SuperNPC extends Entity{
         gp.ui.currentDialogue = dialogues[dialogueIndex];
         dialogueIndex++;
         switch (gp.player.direction){
-            case "up":
-                direction = "down";
+            case 0:
+                direction = 4;
                 break;
-            case "down":
-                direction = "up";
+            case 4:
+                direction = 0;
                 break;
-            case "right":
-                direction = "left";
+            case 2:
+                direction = 6;
                 break;
-            case "left":
-                direction = "right";
+            case 6:
+                direction = 2;
                 break;
 
         }
@@ -57,43 +57,43 @@ public class SuperNPC extends Entity{
 
         if(!collision) {
             switch (direction) {
-                case "up":
+                case 0:
                     worldY -= speed;
                     break;
-                case "down":
+                case 4:
                     worldY += speed;
                     break;
-                case "right":
+                case 2:
                     worldX += speed;
                     break;
-                case "left":
+                case 6:
                     worldX -= speed;
                     break;
-                case "rightUp":
+                case 1:
                     if(rightOk)
                         worldX += speed;
                     if(upOk)
                         worldY -= speed;
                     break;
-                case "leftUp":
+                case 7:
                     if(leftOk)
                         worldX -= speed;
                     if(upOk)
                         worldY -= speed;
                     break;
-                case "leftDown":
+                case 5:
                     if(leftOk)
                         worldX -= speed;
                     if(downOk)
                         worldY += speed;
                     break;
-                case "rightDown":
+                case 3:
                     if(rightOk)
                         worldX += speed;
                     if(downOk)
                         worldY += speed;
                     break;
-                case "idle":
+                case -999: //idle?
                     break;
 
             }

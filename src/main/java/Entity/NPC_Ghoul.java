@@ -15,7 +15,7 @@ public class NPC_Ghoul extends SuperNPC {
     public NPC_Ghoul(GamePanel gp, int width, int height) {
         super(gp, width, height);
 
-        direction = "right";
+        direction = 2;
         speed = gp.tileSize / 32;
         getGhoulImage();
         setDialogues("eurg", "Aaaaaargh", "bruuuuh");
@@ -63,23 +63,23 @@ public class NPC_Ghoul extends SuperNPC {
         if (actionLockCounter == 60) {
             int i = (int) (Math.random() * 120 + 1);
             if (i <= 10) {
-                direction = "up";
+                direction = 0;
             } else if (i <= 20) {
-                direction = "down";
+                direction = 4;
             } else if (i <= 30) {
-                direction = "right";
+                direction = 2;
             } else if (i <= 40) {
-                direction = "left";
+                direction = 6;
             } else if (i <= 50) {
-                direction = "leftUp";
+                direction = 7;
             } else if (i <= 60) {
-                direction = "leftDown";
+                direction = 5;
             } else if (i <= 70) {
-                direction = "rightDown";
+                direction = 3;
             } else if (i <= 80) {
-                direction = "rightUp";
+                direction = 1;
             } else if (i <= 120) {
-                direction = "idle";
+                direction = -999;
             }
             actionLockCounter = 0;
         }

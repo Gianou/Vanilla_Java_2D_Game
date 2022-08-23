@@ -13,7 +13,7 @@ public class NPC_Owl extends SuperNPC {
         super(gp, width, height);
 
 
-        direction = "right";
+        direction = 2;
         speed = gp.tileSize / 32;
         getOwlImage();
         setDialogues("hoot", "hooty hoot", "Hoooty partner?");
@@ -62,15 +62,15 @@ public class NPC_Owl extends SuperNPC {
         if (actionLockCounter == 60) {
             int i = (int) (Math.random() * 150 + 1);
             if (i <= 25) {
-                direction = "up";
+                direction = 0;
             } else if (i <= 50) {
-                direction = "down";
+                direction = 4;
             } else if (i <= 75) {
-                direction = "right";
+                direction = 2;
             } else if (i <= 100) {
-                direction = "left";
+                direction = 6;
             } else if (i <= 150) {
-                direction = "idle";
+                direction = -999;
             }
             actionLockCounter = 0;
         }

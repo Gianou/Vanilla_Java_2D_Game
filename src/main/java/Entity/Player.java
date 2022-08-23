@@ -5,6 +5,7 @@ import Main.KeyHandler;
 import Main.MouseHandler;
 import Main.UtilityTool;
 import java.awt.*;
+import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -12,10 +13,12 @@ public class Player extends Entity {
 
     KeyHandler keyH;
     MouseHandler mouseH;
-    char orientation = 'r';
+    int orientation = 1;
 
     public final int screenX;
     public final int screenY;
+    public final int attackRadiusX, attackRadiusY;
+    public final int solidAreaCenterX, solidAreaCenterY;
     public int hasKey = 0;
 
     public boolean dash = false;
@@ -24,6 +27,10 @@ public class Player extends Entity {
     public BufferedImage attackD1, attackD2, attackU1, attackU2, attackR1, attackR2, attackL1, attackL2, attackUR1, attackUR2;
     boolean attacking = false;
     int attackSpriteCounter =0;
+    Shape [] attackAreas = new Shape[4];
+    public int radius = 120;
+    public int mouseX, mouseY;
+    double angle;
 
 
     public Player(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, int width, int height) {
@@ -40,6 +47,12 @@ public class Player extends Entity {
 
         attackArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
 
+        // 80 is the radius
+        attackRadiusX = screenX + gp.tileSize/2 -radius/2;
+        attackRadiusY = screenY + solidArea.y + solidArea.height/2 - radius / 2;
+
+        solidAreaCenterX = screenX + solidArea.x + solidArea.width/2;
+        solidAreaCenterY = screenY + solidArea.y + solidArea.height/2;
         setDefaultValues();
         getPlayerImage();
     }
@@ -50,11 +63,17 @@ public class Player extends Entity {
         speed = gp.tileSize / 8;
         dashSpeed = gp.tileSize * 3;
         //speed =25;
-        direction = "right";
+        direction = 2;
 
         // PLAYER STATUS
         maxLife = 6;
         life = maxLife;
+
+        //Attack areas
+        attackAreas[0] = new Arc2D.Float(210, 210, 80, 80, 0, 90, Arc2D.PIE);
+        attackAreas[1] = new Arc2D.Float(210, 210, 80, 80, 90, 90, Arc2D.PIE);
+        attackAreas[2] = new Arc2D.Float(210, 210, 80, 80, 180, 90, Arc2D.PIE);
+        attackAreas[3] = new Arc2D.Float(210, 210, 80, 80, 270, 90, Arc2D.PIE);
     }
 
     public void getPlayerImage() {
@@ -121,17 +140,13 @@ public class Player extends Entity {
             int solidAreaHeight = solidArea.height;
 
             switch (direction){
-                case "down":
-                    worldY += attackArea.height;
+                case 0: worldY -= attackArea.height;
                     break;
-                case "up":
-                    worldY -= attackArea.height;
+                case 2: worldX += attackArea.width;
                     break;
-                case "right":
-                    worldX += attackArea.width;
+                case 4: worldY += attackArea.height;
                     break;
-                case "left":
-                    worldX -= attackArea.width;
+                case 6: worldX -= attackArea.width;
                     break;
             }
             //Solid area becomes attack area to use checkEntity from cChecker
@@ -155,17 +170,36 @@ public class Player extends Entity {
     }
 
     public void update() {
-
+        // Orientation
+        mouseX =  MouseInfo.getPointerInfo().getLocation().x - 7;
+        mouseY = MouseInfo.getPointerInfo().getLocation().y - 30;
+        angle = getAngle(new Point(mouseX, mouseY));
+        //System.out.println((int)angle);
+        if(angle<=90){
+            orientation = 1;
+        }
+        else if (angle<=180){
+            orientation = 2;
+        }
+        else if(angle<=270){
+            orientation = 3;
+        }
+        else if(angle<=360){
+            orientation = 0;
+        }
+        System.out.println(orientation);
 
 
 
         if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.tPressed) {
             if (gp.gameState == gp.dialogueState) {
-                if (orientation == 'r') {
+                /*if (orientation == 'r') {
                     direction = "stillR";
                 } else {
                     direction = "stillL";
                 }
+
+                 */
                 spriteCounter++;
                 if (spriteCounter > 10) {
                     if (spriteNum == 1) {
@@ -180,31 +214,30 @@ public class Player extends Entity {
                 if(keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed) {
 
                     if (keyH.rightPressed && keyH.upPressed) {
-                        direction = "rightUp";
-                        orientation = 'r';
-                    } else if (keyH.leftPressed && keyH.upPressed) {
-                        direction = "leftUp";
-                        orientation = 'l';
-                    } else if (keyH.rightPressed && keyH.downPressed) {
-                        direction = "rightDown";
-                        orientation = 'r';
-                    } else if (keyH.leftPressed && keyH.downPressed) {
-                        direction = "leftDown";
-                        orientation = 'l';
-                    } else if (keyH.rightPressed) {
-                        direction = "right";
-                        orientation = 'r';
-                    } else if (keyH.leftPressed) {
-                        direction = "left";
-                        orientation = 'l';
-
-                    } else if (keyH.upPressed) {
-                        direction = "up";
-
-                    } else if (keyH.downPressed) {
-                        direction = "down";
-
+                        direction = 1;
                     }
+                    else if (keyH.rightPressed && keyH.downPressed) {
+                        direction = 3;
+                    }
+                    else if (keyH.leftPressed && keyH.downPressed) {
+                        direction = 5;
+                    }
+                    else if (keyH.leftPressed && keyH.upPressed) {
+                        direction = 7;
+                    }
+                    else if (keyH.upPressed) {
+                        direction = 0;
+                    }
+                    else if (keyH.rightPressed) {
+                        direction = 2;
+                    }
+                    else if (keyH.downPressed) {
+                        direction = 4;
+                    }
+                    else if (keyH.leftPressed) {
+                        direction = 6;
+                    }
+
                 }
             }
 
@@ -238,41 +271,41 @@ public class Player extends Entity {
             // If collision false, player can move
             if (!collision && !keyH.tPressed) {
                 switch (direction) {
-                    case "up":
+                    case 0:
                         worldY -= speed;
                         break;
-                    case "down":
-                        worldY += speed;
+                    case 1:
+                        if (rightOk)
+                            worldX += speed;
+                        if (upOk)
+                            worldY -= speed;
                         break;
-                    case "right":
+                    case 2:
                         worldX += speed;
                         break;
-                    case "left":
+                    case 3:
+                        if (rightOk)
+                            worldX += speed;
+                        if (downOk)
+                            worldY += speed;
+                        break;
+                    case 4:
+                        worldY += speed;
+                        break;
+                    case 5:
+                        if (leftOk)
+                            worldX -= speed;
+                        if (downOk)
+                            worldY += speed;
+                        break;
+                    case 6:
                         worldX -= speed;
                         break;
-                    case "rightUp":
-                        if (rightOk)
-                            worldX += speed;
-                        if (upOk)
-                            worldY -= speed;
-                        break;
-                    case "leftUp":
+                    case 7:
                         if (leftOk)
                             worldX -= speed;
                         if (upOk)
                             worldY -= speed;
-                        break;
-                    case "leftDown":
-                        if (leftOk)
-                            worldX -= speed;
-                        if (downOk)
-                            worldY += speed;
-                        break;
-                    case "rightDown":
-                        if (rightOk)
-                            worldX += speed;
-                        if (downOk)
-                            worldY += speed;
                         break;
                 }
             }
@@ -292,6 +325,7 @@ public class Player extends Entity {
 
 
         }//End of up down left right pressed loop
+
 
         //Attack
 
@@ -325,41 +359,41 @@ public class Player extends Entity {
         //DASH
         if (!collisionDash && dash) {
             switch (direction) {
-                case "up":
+                case 0:
                     worldY -= dashSpeed;
                     break;
-                case "down":
-                    worldY += dashSpeed;
+                case 1:
+                    if (rightOk)
+                        worldX += dashSpeed;
+                    if (upOk)
+                        worldY -= dashSpeed;
                     break;
-                case "right":
+                case 2:
                     worldX += dashSpeed;
                     break;
-                case "left":
+                case 3:
+                    if (leftOk)
+                        worldX -= dashSpeed;
+                    if (downOk)
+                        worldY += dashSpeed;
+                    break;
+                case 4:
+                    worldY += dashSpeed;
+                    break;
+                case 5:
+                    if (rightOk)
+                        worldX += dashSpeed;
+                    if (downOk)
+                        worldY += dashSpeed;
+                    break;
+                case 6:
                     worldX -= dashSpeed;
                     break;
-                case "rightUp":
-                    if (rightOk)
-                        worldX += dashSpeed;
-                    if (upOk)
-                        worldY -= dashSpeed;
-                    break;
-                case "leftUp":
+                case 7:
                     if (leftOk)
                         worldX -= dashSpeed;
                     if (upOk)
                         worldY -= dashSpeed;
-                    break;
-                case "leftDown":
-                    if (leftOk)
-                        worldX -= dashSpeed;
-                    if (downOk)
-                        worldY += dashSpeed;
-                    break;
-                case "rightDown":
-                    if (rightOk)
-                        worldX += dashSpeed;
-                    if (downOk)
-                        worldY += dashSpeed;
                     break;
             }
         }
@@ -449,24 +483,9 @@ public class Player extends Entity {
         int tempScreenX = screenX;
         int tempScreenY = screenY;
         BufferedImage image = null;
-        //switch case
-        switch (direction) {
 
-            case "right":
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = right1;
-                    if (spriteNum == 2)
-                        image = right2;
-                }
-                else {
-                    if (spriteNum == 1)
-                        image = attackR1;
-                    if (spriteNum == 2)
-                        image = attackR2;
-                }
-                break;
-            case "rightUp":
+        switch (orientation){
+            case 0:
                 if(!attacking){
                     if (spriteNum == 1)
                         image = upRight1;
@@ -480,9 +499,74 @@ public class Player extends Entity {
                     if (spriteNum == 2)
                         image = attackUR2;
                 }
-
                 break;
-            case "rightDown":
+            case 1:
+                if (spriteNum == 1)
+                    image = downRight1;
+                if (spriteNum == 2)
+                    image = downRight2;
+                break;
+            case 2:
+                if (spriteNum == 1)
+                    image = downLeft1;
+                if (spriteNum == 2)
+                    image = downLeft2;
+                break;
+            case 3:
+                if (spriteNum == 1)
+                    image = upLeft1;
+                if (spriteNum == 2)
+                    image = upLeft2;
+                break;
+        }
+        /*
+        //switch case
+        switch (direction) {
+            case 0:
+                if(!attacking){
+                    if (spriteNum == 1)
+                        image = up1;
+                    if (spriteNum == 2)
+                        image = up2;
+                }
+                else {
+                    tempScreenY -= gp.tileSize;
+                    if (spriteNum == 1)
+                        image = attackU1;
+                    if (spriteNum == 2)
+                        image = attackU2;
+                }
+                break;
+            case 1:
+                if(!attacking){
+                    if (spriteNum == 1)
+                        image = upRight1;
+                    if (spriteNum == 2)
+                        image = upRight2;
+                }
+                else {
+                    tempScreenY -= gp.tileSize;
+                    if (spriteNum == 1)
+                        image = attackUR1;
+                    if (spriteNum == 2)
+                        image = attackUR2;
+                }
+                break;
+            case 2:
+                if(!attacking){
+                    if (spriteNum == 1)
+                        image = right1;
+                    if (spriteNum == 2)
+                        image = right2;
+                }
+                else {
+                    if (spriteNum == 1)
+                        image = attackR1;
+                    if (spriteNum == 2)
+                        image = attackR2;
+                }
+                break;
+            case 3:
                 if(!attacking){
                     if (spriteNum == 1)
                         image = downRight1;
@@ -497,7 +581,37 @@ public class Player extends Entity {
                 }
 
                 break;
-            case "left":
+            case 4:
+                if(!attacking){
+                    if (spriteNum == 1)
+                        image = down1;
+                    if (spriteNum == 2)
+                        image = down2;
+                }
+                else {
+                    if (spriteNum == 1)
+                        image = attackD1;
+                    if (spriteNum == 2)
+                        image = attackD2;
+                }
+
+                break;
+            case 5:
+                if(!attacking){
+                    if (spriteNum == 1)
+                        image = downLeft1;
+                    if (spriteNum == 2)
+                        image = downLeft2;
+                }
+                else {
+                    if (spriteNum == 1)
+                        image = downLeft1;
+                    if (spriteNum == 2)
+                        image = downLeft2;
+                }
+
+                break;
+            case 6:
                 if(!attacking){
                     if (spriteNum == 1)
                         image = left1;
@@ -514,7 +628,7 @@ public class Player extends Entity {
 
                 break;
 
-            case "leftUp":
+            case 7:
                 if(!attacking){
                     if (spriteNum == 1)
                         image = upLeft1;
@@ -529,56 +643,9 @@ public class Player extends Entity {
                 }
 
                 break;
-
-            case "leftDown":
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = downLeft1;
-                    if (spriteNum == 2)
-                        image = downLeft2;
-                }
-                else {
-                    if (spriteNum == 1)
-                        image = downLeft1;
-                    if (spriteNum == 2)
-                        image = downLeft2;
-                }
-
-                break;
-
-            case "down":
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = down1;
-                    if (spriteNum == 2)
-                        image = down2;
-                }
-                else {
-                    if (spriteNum == 1)
-                        image = attackD1;
-                    if (spriteNum == 2)
-                        image = attackD2;
-                }
-
-                break;
-            case "up":
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = up1;
-                    if (spriteNum == 2)
-                        image = up2;
-                }
-                else {
-                    tempScreenY -= gp.tileSize;
-                    if (spriteNum == 1)
-                        image = attackU1;
-                    if (spriteNum == 2)
-                        image = attackU2;
-                }
-
-                break;
-
         }
+
+         */
         //Transparent if damage taken
         if(invincible){
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
@@ -616,16 +683,16 @@ public class Player extends Entity {
             int solidAreaHeight = solidArea.height;
 
             switch (direction){
-                case "down":
-                    currentScreenY += attackArea.height;
-                    break;
-                case "up":
+                case 0:
                     currentScreenY -= attackArea.height;
                     break;
-                case "right":
+                case 2:
                     currentScreenX += attackArea.width;
                     break;
-                case "left":
+                case 4:
+                    currentScreenY += attackArea.height;
+                    break;
+                case 6:
                     currentScreenX -= attackArea.width;
                     break;
             }
@@ -656,6 +723,15 @@ public class Player extends Entity {
         else{
             //System.out.println("miss");
         }
+    }
+    public float getAngle(Point target) {
+        float angle = (float) Math.toDegrees(Math.atan2(target.y - solidAreaCenterY, target.x - solidAreaCenterX));
+
+        if(angle < 0){
+            angle += 360;
+        }
+
+        return angle;
     }
 
 }

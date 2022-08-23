@@ -58,15 +58,33 @@ public class UI {
     }
 
     public void drawTest(Graphics2D g2){
-        Shape s1 = new Arc2D.Float(210, 210, 80, 80, 0, 90, Arc2D.PIE);
-        Shape s2 = new Arc2D.Float(210, 210, 80, 80, 90, 90, Arc2D.PIE);
-        Shape s3 = new Arc2D.Float(210, 210, 80, 80, 180, 90, Arc2D.PIE);
-        Shape s4 = new Arc2D.Float(210, 210, 80, 80, 270, 90, Arc2D.PIE);
+
+        //Arc
+        int x = gp.player.attackRadiusX;
+        int y = gp.player.attackRadiusY;
+
+        Shape s1 = new Arc2D.Float(x, y, gp.player.radius, gp.player.radius, 0, 90, Arc2D.PIE);
+        g2.setColor(Color.BLUE);
+        //g2.fillArc(x, y, 80, 80, 0, 90);
         g2.draw(s1);
+
+        Shape s2 = new Arc2D.Float(x, y, gp.player.radius, gp.player.radius, 90, 90, Arc2D.PIE);
+        g2.setColor(Color.RED);
+        //g2.fillArc(x, y, 80, 80, 90, 90);
         g2.draw(s2);
+
+        Shape s3 = new Arc2D.Float(x, y, gp.player.radius, gp.player.radius, 180, 90, Arc2D.PIE);
+        g2.setColor(Color.GREEN);
+        //g2.fillArc(x, y, 80, 80, 180, 90);
         g2.draw(s3);
+
+        Shape s4 = new Arc2D.Float(x, y, gp.player.radius, gp.player.radius, 270, 90, Arc2D.PIE);
+        g2.setColor(Color.PINK);
+        //g2.fillArc(x, y, 80, 80, 270, 90);
         g2.draw(s4);
 
+        //Mouse location
+        g2.drawRect(gp.player.mouseX, gp.player.mouseY, gp.tileSize, gp.tileSize);
     }
     public void draw(Graphics2D g2){
 
