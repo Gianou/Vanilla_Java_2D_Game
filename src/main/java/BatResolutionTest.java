@@ -14,7 +14,7 @@ public class BatResolutionTest {
         System.out.println("Salut");
 
 
-        }
+
 
         /*
         JFrame frame = new JFrame();
@@ -34,22 +34,21 @@ public class BatResolutionTest {
         image.setVisible(true);
 
         frame.add(image);
+*/
 
 
-
-        for (int i = 0; i<50; i++){
-            for (int j = 0; j<50; j++){
-                if(i <= 7 || i >= 49-7 ||  j <= 7 || j >= 49 -7){
-                    System.out.print(2 + " ");
-                }
-                else if(j == 8 || i == 8|| i == 49-8 || j == 49-8)
-                    System.out.print(3 + " ");
+        for (int i = 0; i < 50; i++) {
+            for (int j = 0; j < 50; j++) {
+                if (i <= 7 || i >= 49 - 7 || j <= 7 || j >= 49 - 7) {
+                    System.out.print(0 + " ");
+                } else if (j == 8 || i == 8 || i == 49 - 8 || j == 49 - 8)
+                    System.out.print(0 + " ");
                 else
                     System.out.print(0 + " ");
             }
             System.out.println();
         }
 
-         */
 
+    }
 }

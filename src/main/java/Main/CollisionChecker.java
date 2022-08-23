@@ -1,6 +1,10 @@
 package Main;
 
 import Entity.Entity;
+import Entity.Player;
+
+import java.awt.*;
+import java.awt.geom.Arc2D;
 
 public class CollisionChecker {
 
@@ -202,6 +206,49 @@ public class CollisionChecker {
                 gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;
                 gp.obj[i].solidArea.y = gp.obj[i].solidAreaDefaultY;
             }
+        }
+        return index;
+    }
+    public int checkAttack(Player player, Entity[] target) {
+        int index = 999;
+        for (int i = 0; i < target.length; i++) {
+            if (target[i] != null) {
+                // get player world coordinates offset for attackArea
+                // get entity solid area position
+                player.solidArea.x = player.worldX + player.solidArea.x;
+                player.solidArea.y = player.worldY + player.solidArea.y;
+                // get object solid area position
+                target[i].solidArea.x = target[i].worldX + target[i].solidArea.x;
+                target[i].solidArea.y = target[i].worldY + target[i].solidArea.y;
+
+                int x = player.solidArea.x - gp.player.solidArea.width - gp.player.solidArea.width / 2;
+                int y = player.solidArea.y - gp.player.solidArea.height - gp.player.solidArea.height / 2;
+                switch (player.orientation) {
+                    case 0:
+                        gp.player.attackAreas = new Arc2D.Float(x, y, gp.player.radius, gp.player.radius, 0, 90, Arc2D.PIE);
+                        break;
+                    case 1:
+                        gp.player.attackAreas = new Arc2D.Float(x, y, gp.player.radius, gp.player.radius, 270, 90, Arc2D.PIE);
+                        break;
+                    case 2:
+                        gp.player.attackAreas = new Arc2D.Float(x, y, gp.player.radius, gp.player.radius, 180, 90, Arc2D.PIE);
+                        break;
+                    case 3:
+                        gp.player.attackAreas = new Arc2D.Float(x, y, gp.player.radius, gp.player.radius, 90, 90, Arc2D.PIE);
+                        break;
+                }
+                if (player.attackAreas.intersects(target[i].solidArea)) {
+                    if (target[i] != player) {
+                        player.collision = true;
+                        index = i;
+                    }
+                }
+                player.solidArea.x = player.solidAreaDefaultX;
+                player.solidArea.y = player.solidAreaDefaultY;
+                target[i].solidArea.x = target[i].solidAreaDefaultX;
+                target[i].solidArea.y = target[i].solidAreaDefaultY;
+            }
+
         }
         return index;
     }

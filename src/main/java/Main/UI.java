@@ -60,8 +60,8 @@ public class UI {
     public void drawTest(Graphics2D g2){
 
         //Arc
-        int x = gp.player.attackRadiusX;
-        int y = gp.player.attackRadiusY;
+        int x = gp.player.ScreenAttackRadiusX;
+        int y = gp.player.ScreenAttackRadiusY;
 
         Shape s1 = new Arc2D.Float(x, y, gp.player.radius, gp.player.radius, 0, 90, Arc2D.PIE);
         g2.setColor(Color.BLUE);
@@ -83,8 +83,27 @@ public class UI {
         //g2.fillArc(x, y, 80, 80, 270, 90);
         g2.draw(s4);
 
+
+
         //Mouse location
         g2.drawRect(gp.player.mouseX, gp.player.mouseY, gp.tileSize, gp.tileSize);
+
+       //g2.drawRect(gp.player.worldX, gp.player.worldY, gp.tileSize, gp.tileSize);
+        gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
+        gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
+        g2.drawRect(gp.player.solidArea.x, gp.player.solidArea.y, gp.player.solidArea.width, gp.player.solidArea.height);
+        //System.out.println(gp.player.solidArea.x);
+        gp.player.solidArea.x = gp.player.solidAreaDefaultX;
+        gp.player.solidArea.y = gp.player.solidAreaDefaultY;
+
+        gp.monster[0].solidArea.x = gp.monster[0].worldX + gp.monster[0].solidArea.x;
+        gp.monster[0].solidArea.y = gp.monster[0].worldY + gp.monster[0].solidArea.y;
+        g2.drawRect(gp.monster[0].solidArea.x, gp.monster[0].solidArea.y, gp.tileSize, gp.tileSize);
+        g2.draw(gp.player.attackAreas);
+        //System.out.println(gp.monster[0].solidArea.x);
+        gp.monster[0].solidArea.x = gp.monster[0].solidAreaDefaultX;
+        gp.monster[0].solidArea.y = gp.monster[0].solidAreaDefaultY;
+
     }
     public void draw(Graphics2D g2){
 

@@ -13,11 +13,11 @@ public class Player extends Entity {
 
     KeyHandler keyH;
     MouseHandler mouseH;
-    int orientation = 1;
+    public int orientation = 1;
 
     public final int screenX;
     public final int screenY;
-    public final int attackRadiusX, attackRadiusY;
+    public final int ScreenAttackRadiusX, ScreenAttackRadiusY;
     public final int solidAreaCenterX, solidAreaCenterY;
     public int hasKey = 0;
 
@@ -27,7 +27,8 @@ public class Player extends Entity {
     public BufferedImage attackD1, attackD2, attackU1, attackU2, attackR1, attackR2, attackL1, attackL2, attackUR1, attackUR2;
     boolean attacking = false;
     int attackSpriteCounter =0;
-    Shape [] attackAreas = new Shape[4];
+    public Shape attackAreas;
+    public int worldAttackX, worldAttackY; //
     public int radius = 120;
     public int mouseX, mouseY;
     double angle;
@@ -48,8 +49,8 @@ public class Player extends Entity {
         attackArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
 
         // 80 is the radius
-        attackRadiusX = screenX + gp.tileSize/2 -radius/2;
-        attackRadiusY = screenY + solidArea.y + solidArea.height/2 - radius / 2;
+        ScreenAttackRadiusX = screenX + gp.tileSize/2 -radius/2;
+        ScreenAttackRadiusY = screenY + solidArea.y + solidArea.height/2 - radius / 2;
 
         solidAreaCenterX = screenX + solidArea.x + solidArea.width/2;
         solidAreaCenterY = screenY + solidArea.y + solidArea.height/2;
@@ -70,10 +71,8 @@ public class Player extends Entity {
         life = maxLife;
 
         //Attack areas
-        attackAreas[0] = new Arc2D.Float(210, 210, 80, 80, 0, 90, Arc2D.PIE);
-        attackAreas[1] = new Arc2D.Float(210, 210, 80, 80, 90, 90, Arc2D.PIE);
-        attackAreas[2] = new Arc2D.Float(210, 210, 80, 80, 180, 90, Arc2D.PIE);
-        attackAreas[3] = new Arc2D.Float(210, 210, 80, 80, 270, 90, Arc2D.PIE);
+        attackAreas = new Arc2D.Float(worldAttackX, worldAttackY, 80, 80, 0, 90, Arc2D.PIE);
+
     }
 
     public void getPlayerImage() {
@@ -132,6 +131,10 @@ public class Player extends Entity {
         }
         if(attackSpriteCounter>5 && attackSpriteCounter <=25){
             spriteNum = 2;
+            int monsterIndex = gp.cChecker.checkAttack(this, gp.monster);
+            damageMonster(monsterIndex);
+
+            /*
             //During the attack frame you can check hit detection
             //Save current data
             int currentWorldX = worldX;
@@ -160,6 +163,8 @@ public class Player extends Entity {
             worldY = currentWorldY;
             solidArea.width = solidAreaWidth;
             solidArea.height = solidAreaHeight;
+
+             */
         }
         if(attackSpriteCounter>25){
             spriteNum = 1;
@@ -187,7 +192,7 @@ public class Player extends Entity {
         else if(angle<=360){
             orientation = 0;
         }
-        System.out.println(orientation);
+
 
 
 

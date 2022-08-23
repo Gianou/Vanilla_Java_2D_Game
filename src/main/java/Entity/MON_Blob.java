@@ -3,6 +3,7 @@ package Entity;
 import Entity.*;
 import Main.GamePanel;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class MON_Blob extends SuperNPC {
@@ -14,9 +15,12 @@ public class MON_Blob extends SuperNPC {
         getBlobImage();
         direction = 2;
         speed = 0;
-        maxLife = 4;
+        maxLife = 40;
         life = maxLife;
         type = 2;
+        solidArea = new Rectangle(0,0, gp.tileSize, gp.tileSize);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         //Solid Area is defined in super constructor but solidArea can be changed here
     }
@@ -65,7 +69,7 @@ public class MON_Blob extends SuperNPC {
             } else if (i <= 100) {
                 direction = 6;
             } else if (i <= 150) {
-                direction = -999;
+                direction = 0;
             }
             actionLockCounter = 0;
         }
