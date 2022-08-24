@@ -15,5 +15,5 @@ All sprites and designs are my own.
 
 
 ## Sources  
-https://www.youtube.com/playlist?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
-https://github.com/jinput/jinput
+RyiSnow's tutorials https://www.youtube.com/playlist?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq  
+jinput used to get gamepad input https://github.com/jinput/jinput
