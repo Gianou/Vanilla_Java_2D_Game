@@ -10,7 +10,7 @@ import java.awt.*;
 public class GamePadHandler {
     Controller controller = null;
     GamePanel gp;
-    Point right = new Point();
+    public Point right = new Point();
     Point left = new Point();
     boolean [] button = new boolean[8];
 
@@ -172,6 +172,7 @@ public class GamePadHandler {
         if(comp.getName().equals("X Rotation")){
             right.x = (int)(value*100);
         }
+
         System.out.println("X : " + right.x);
         System.out.println("Y : " + right.y);
         if(right.x>0 && right.y<0){

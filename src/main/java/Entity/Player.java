@@ -209,6 +209,11 @@ public class Player extends Entity {
         }
 
          */
+        //With controller orientation is done in GamePadHanler
+        //if no orientation is chosen with the left stick, we use direction
+       if(gp.gPadH.right.x == 0 && gp.gPadH.right.y == 0){
+           //orientation = 0;
+       }
 
         if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.tPressed) {
             if (gp.gameState == gp.dialogueState) {
