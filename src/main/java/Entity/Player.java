@@ -24,7 +24,8 @@ public class Player extends Entity {
     public boolean dash = false;
     public int dashCoolDownTime = 10, dashCoolDown = 0;
 
-    public BufferedImage attackD1, attackD2, attackU1, attackU2, attackR1, attackR2, attackL1, attackL2, attackUR1, attackUR2;
+    public BufferedImage attackD1, attackD2, attackU1, attackU2, attackR1, attackR2, attackL1, attackL2,
+            attackUR1, attackUR2, attackUL1, attackUL2;
     boolean attacking = false;
     int attackSpriteCounter =0;
     public Shape attackAreas;
@@ -116,6 +117,8 @@ public class Player extends Entity {
             attackL2 = getEntityAttackImage("AttackL2",2,1, uT);
             attackUR1 = getEntityAttackImage("AttackUR1",2,2, uT);
             attackUR2 = getEntityAttackImage("AttackUR2",2,2, uT);
+            attackUL1 = getEntityAttackImage("AttackUL1",2,2, uT);
+            attackUL2 = getEntityAttackImage("AttackUL2",2,2, uT);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -518,11 +521,22 @@ public class Player extends Entity {
                     image = downLeft2;
                 break;
             case 3:
-                if (spriteNum == 1)
-                    image = upLeft1;
-                if (spriteNum == 2)
-                    image = upLeft2;
+                if(!attacking){
+                    if (spriteNum == 1)
+                        image = upLeft1;
+                    if (spriteNum == 2)
+                        image = upLeft2;
+                }
+                else {
+                    tempScreenY -= gp.tileSize;
+                    tempScreenX -= gp.tileSize;
+                    if (spriteNum == 1)
+                        image = attackUL1;
+                    if (spriteNum == 2)
+                        image = attackUL2;
+                }
                 break;
+
         }
         /*
         //switch case
