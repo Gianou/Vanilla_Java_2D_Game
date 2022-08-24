@@ -25,7 +25,7 @@ public class Player extends Entity {
     public int dashCoolDownTime = 10, dashCoolDown = 0;
 
     public BufferedImage attackD1, attackD2, attackU1, attackU2, attackR1, attackR2, attackL1, attackL2,
-            attackUR1, attackUR2, attackUL1, attackUL2;
+            attackUR1, attackUR2, attackUL1, attackUL2, attackDL1, attackDL2, attackDR1, attackDR2;
     boolean attacking = false;
     int attackSpriteCounter =0;
     public Shape attackAreas;
@@ -109,16 +109,27 @@ public class Player extends Entity {
 
             attackD1 = getEntityAttackImage("AttackD1",1,2, uT);
             attackD2 = getEntityAttackImage("AttackD2",1,2, uT);
+
             attackU1 = getEntityAttackImage("AttackU1",1,2, uT);
             attackU2 = getEntityAttackImage("AttackU2",1,2, uT);
+
             attackR1 = getEntityAttackImage("AttackR1",2,1, uT);
             attackR2 = getEntityAttackImage("AttackR2",2,1, uT);
+
             attackL1 = getEntityAttackImage("AttackL1",2,1, uT);
             attackL2 = getEntityAttackImage("AttackL2",2,1, uT);
+
             attackUR1 = getEntityAttackImage("AttackUR1",2,2, uT);
             attackUR2 = getEntityAttackImage("AttackUR2",2,2, uT);
+
             attackUL1 = getEntityAttackImage("AttackUL1",2,2, uT);
             attackUL2 = getEntityAttackImage("AttackUL2",2,2, uT);
+
+            attackDL1 = getEntityAttackImage("AttackDL1",2,2, uT);
+            attackDL2 = getEntityAttackImage("AttackDL2",2,2, uT);
+
+            attackDR1 = getEntityAttackImage("AttackDR1",2,2, uT);
+            attackDR2 = getEntityAttackImage("AttackDR2",2,2, uT);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -509,16 +520,35 @@ public class Player extends Entity {
                 }
                 break;
             case 1:
-                if (spriteNum == 1)
-                    image = downRight1;
-                if (spriteNum == 2)
-                    image = downRight2;
+                if(!attacking){
+                    if (spriteNum == 1)
+                        image = downRight1;
+                    if (spriteNum == 2)
+                        image = downRight2;
+                }
+                else {
+
+                    if (spriteNum == 1)
+                        image = attackDR1;
+                    if (spriteNum == 2)
+                        image = attackDR2;
+                }
                 break;
             case 2:
-                if (spriteNum == 1)
-                    image = downLeft1;
-                if (spriteNum == 2)
-                    image = downLeft2;
+                if(!attacking){
+                    if (spriteNum == 1)
+                        image = downLeft1;
+                    if (spriteNum == 2)
+                        image = downLeft2;
+                }
+                else {
+
+                    tempScreenX -= gp.tileSize;
+                    if (spriteNum == 1)
+                        image = attackDL1;
+                    if (spriteNum == 2)
+                        image = attackDL2;
+                }
                 break;
             case 3:
                 if(!attacking){
