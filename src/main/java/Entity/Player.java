@@ -175,6 +175,7 @@ public class Player extends Entity {
     }
 
     public void update() {
+        /*
         // Orientation
         mouseX =  MouseInfo.getPointerInfo().getLocation().x - 7;
         mouseY = MouseInfo.getPointerInfo().getLocation().y - 30;
@@ -193,8 +194,7 @@ public class Player extends Entity {
             orientation = 0;
         }
 
-
-
+         */
 
         if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.tPressed) {
             if (gp.gameState == gp.dialogueState) {

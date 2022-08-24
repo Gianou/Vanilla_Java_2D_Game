@@ -1,4 +1,4 @@
-
+package Main;
 
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
@@ -7,8 +7,6 @@ import net.java.games.input.Event;
 import net.java.games.input.EventQueue;
 
 import java.awt.*;
-
-import static net.java.games.input.Component.Identifier.Key.X;
 
 /**
  * This class shows how to use the event queue system in JInput. It will show

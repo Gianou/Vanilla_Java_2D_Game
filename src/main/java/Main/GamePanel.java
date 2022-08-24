@@ -1,10 +1,12 @@
 package Main;
 
 
-import Entity.*;
+import Entity.Entity;
+import Entity.Player;
+import Entity.SuperNPC;
+import Object.SuperObject;
 import Sound.Sound;
 import Tiles.TileManager;
-import Object.SuperObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
     TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     public MouseHandler mouseH = new MouseHandler(this);
+    public GamePadHandler gPadH;
     Sound music = new Sound();
     Sound se = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -75,6 +78,7 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setMonster();
         playMusic(0);
         gameState = titleState;
+        gPadH = new GamePadHandler(this);
     }
 
     public void startGameThread(){
@@ -117,9 +121,10 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update(){
-
+        gPadH.update();
         // So that we cannot move the player if the game is in pause
         if(gameState == playState){
+
             //PLAYER
             player.update();
             //NPC
