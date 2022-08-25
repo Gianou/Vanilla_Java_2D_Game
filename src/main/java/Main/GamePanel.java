@@ -121,7 +121,10 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update(){
-        gPadH.update();
+        if(gPadH.controllerOn){
+            gPadH.update();
+        }
+
         // So that we cannot move the player if the game is in pause
         if(gameState == playState){
 

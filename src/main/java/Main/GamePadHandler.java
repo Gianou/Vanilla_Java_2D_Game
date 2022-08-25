@@ -13,6 +13,7 @@ public class GamePadHandler {
     public Point right = new Point();
     Point left = new Point();
     boolean [] button = new boolean[8];
+    boolean controllerOn = false;
 
 
     public GamePadHandler(GamePanel gp){
@@ -23,6 +24,9 @@ public class GamePadHandler {
                 System.out.println(controllers[i] + " " + controllers[i].getType());
                 controller = controllers[i];
             }
+        }
+        if(controller!=null){
+            controllerOn = true;
         }
         System.out.println(controller);
     }

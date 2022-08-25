@@ -190,7 +190,7 @@ public class Player extends Entity {
 
     public void update() {
         /*
-        // Orientation
+        // Orientation WITH MOUSE
         mouseX =  MouseInfo.getPointerInfo().getLocation().x - 7;
         mouseY = MouseInfo.getPointerInfo().getLocation().y - 30;
         angle = getAngle(new Point(mouseX, mouseY));
@@ -395,8 +395,8 @@ public class Player extends Entity {
                 case 2:
                     worldX += dashSpeed;
                     break;
-                case 3:
-                    if (leftOk)
+                case 5:
+                    if (leftOk && downOk)
                         worldX -= dashSpeed;
                     if (downOk)
                         worldY += dashSpeed;
@@ -404,7 +404,7 @@ public class Player extends Entity {
                 case 4:
                     worldY += dashSpeed;
                     break;
-                case 5:
+                case 3:
                     if (rightOk)
                         worldX += dashSpeed;
                     if (downOk)
