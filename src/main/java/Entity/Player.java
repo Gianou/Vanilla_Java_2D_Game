@@ -189,31 +189,33 @@ public class Player extends Entity {
     }
 
     public void update() {
-        /*
-        // Orientation WITH MOUSE
-        mouseX =  MouseInfo.getPointerInfo().getLocation().x - 7;
-        mouseY = MouseInfo.getPointerInfo().getLocation().y - 30;
-        angle = getAngle(new Point(mouseX, mouseY));
-        //System.out.println((int)angle);
-        if(angle<=90){
-            orientation = 1;
-        }
-        else if (angle<=180){
-            orientation = 2;
-        }
-        else if(angle<=270){
-            orientation = 3;
-        }
-        else if(angle<=360){
-            orientation = 0;
-        }
 
-         */
-        //With controller orientation is done in GamePadHanler
-        //if no orientation is chosen with the left stick, we use direction
-       if(gp.gPadH.right.x == 0 && gp.gPadH.right.y == 0){
-           //orientation = 0;
-       }
+        if(gp.gPadH.controllerOn){
+            //With controller orientation is done in GamePadHanler
+            //if no orientation is chosen with the left stick, we use direction
+            if(gp.gPadH.right.x == 0 && gp.gPadH.right.y == 0){
+                //orientation = 0;
+            }
+        }
+        else{
+            // Orientation WITH MOUSE
+            mouseX =  MouseInfo.getPointerInfo().getLocation().x - 7;
+            mouseY = MouseInfo.getPointerInfo().getLocation().y - 30;
+            angle = getAngle(new Point(mouseX, mouseY));
+            //System.out.println((int)angle);
+            if(angle<=90){
+                orientation = 1;
+            }
+            else if (angle<=180){
+                orientation = 2;
+            }
+            else if(angle<=270){
+                orientation = 3;
+            }
+            else if(angle<=360){
+                orientation = 0;
+            }
+        }
 
         if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.tPressed) {
             if (gp.gameState == gp.dialogueState) {

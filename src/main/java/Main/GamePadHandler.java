@@ -13,7 +13,7 @@ public class GamePadHandler {
     public Point right = new Point();
     Point left = new Point();
     boolean [] button = new boolean[8];
-    boolean controllerOn = false;
+    public boolean controllerOn = false;
 
 
     public GamePadHandler(GamePanel gp){
