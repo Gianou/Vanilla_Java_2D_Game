@@ -21,13 +21,15 @@ public class Player extends Entity {
     public final int solidAreaCenterX, solidAreaCenterY;
     public int hasKey = 0;
 
-    public boolean dash = false;
+    public boolean dashing = false, attacking = false, moving = false;
+
     public int dashCoolDownTime = 10, dashCoolDown = 0;
 
+    int attackSpriteCounter =0, dashSpriteCounter = 0;
     public BufferedImage attackD1, attackD2, attackU1, attackU2, attackR1, attackR2, attackL1, attackL2,
-            attackUR1, attackUR2, attackUL1, attackUL2, attackDL1, attackDL2, attackDR1, attackDR2;
-    boolean attacking = false;
-    int attackSpriteCounter =0;
+            attackUR1, attackUR2, attackUL1, attackUL2, attackDL1, attackDL2, attackDR1, attackDR2,
+            dashSprite;
+
     public Shape attackAreas;
     public int worldAttackX, worldAttackY; //
     public int radius = 120;
@@ -131,8 +133,29 @@ public class Player extends Entity {
             attackDR1 = getEntityAttackImage("AttackDR1",2,2, uT);
             attackDR2 = getEntityAttackImage("AttackDR2",2,2, uT);
 
+            dashSprite = getEntityAttackImage("dash", 1, 1, uT);
+
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+    }
+    public void dash(){
+        dashSpriteCounter++;
+
+        if(dashSpriteCounter <= 5){
+            spriteNum = 1;
+        }
+        if(dashSpriteCounter>5 && dashSpriteCounter <=25){
+            worldX += speed;
+            worldY += speed;
+            spriteNum = 2;
+        }
+        if(dashSpriteCounter>25){
+            spriteNum = 1;
+            dashSpriteCounter = 0;
+            dashing = false;
+            System.out.println(dashSpriteCounter);
         }
 
     }
@@ -148,37 +171,6 @@ public class Player extends Entity {
             int monsterIndex = gp.cChecker.checkAttack(this, gp.monster);
             damageMonster(monsterIndex);
 
-            /*
-            //During the attack frame you can check hit detection
-            //Save current data
-            int currentWorldX = worldX;
-            int currentWorldY = worldY;
-            int solidAreaWidth = solidArea.width;
-            int solidAreaHeight = solidArea.height;
-
-            switch (direction){
-                case 0: worldY -= attackArea.height;
-                    break;
-                case 2: worldX += attackArea.width;
-                    break;
-                case 4: worldY += attackArea.height;
-                    break;
-                case 6: worldX -= attackArea.width;
-                    break;
-            }
-            //Solid area becomes attack area to use checkEntity from cChecker
-            solidArea.height = attackArea.height;
-            solidArea.width = attackArea.width;
-            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex);
-
-            //Restore values
-            worldX = currentWorldX;
-            worldY = currentWorldY;
-            solidArea.width = solidAreaWidth;
-            solidArea.height = solidAreaHeight;
-
-             */
         }
         if(attackSpriteCounter>25){
             spriteNum = 1;
@@ -189,7 +181,8 @@ public class Player extends Entity {
     }
 
     public void update() {
-
+//Controller or mouse
+//**********************************************************************************************************************
         if(gp.gPadH.controllerOn){
             //With controller orientation is done in GamePadHanler
             //if no orientation is chosen with the left stick, we use direction
@@ -203,85 +196,41 @@ public class Player extends Entity {
             mouseY = MouseInfo.getPointerInfo().getLocation().y - 30;
             angle = getAngle(new Point(mouseX, mouseY));
             //System.out.println((int)angle);
-            if(angle<=90){
-                orientation = 1;
-            }
-            else if (angle<=180){
-                orientation = 2;
-            }
-            else if(angle<=270){
-                orientation = 3;
-            }
-            else if(angle<=360){
-                orientation = 0;
-            }
+            if(angle<=90){orientation = 1;}
+            else if (angle<=180){orientation = 2;}
+            else if(angle<=270){orientation = 3;}
+            else if(angle<=360){orientation = 0;}
         }
+//**********************************************************************************************************************
 
-        if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.tPressed) {
-            if (gp.gameState == gp.dialogueState) {
-                /*if (orientation == 'r') {
-                    direction = "stillR";
-                } else {
-                    direction = "stillL";
-                }
+        //Moving
+        if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed ) {moving = true;}
+        //Attacking
+        if (gp.mouseH.leftClick){attacking = true;}
+        //Dashing
+        if (keyH.spacePressed ) {dashing = true;}
 
-                 */
-                spriteCounter++;
-                if (spriteCounter > 10) {
-                    if (spriteNum == 1) {
-                        spriteNum = 2;
-                    } else if (spriteNum == 2) {
-                        spriteNum = 1;
-                    }
-                    spriteCounter = 0;
-                }
-            }
-            else {
-                if(keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed) {
-
-                    if (keyH.rightPressed && keyH.upPressed) {
-                        direction = 1;
-                    }
-                    else if (keyH.rightPressed && keyH.downPressed) {
-                        direction = 3;
-                    }
-                    else if (keyH.leftPressed && keyH.downPressed) {
-                        direction = 5;
-                    }
-                    else if (keyH.leftPressed && keyH.upPressed) {
-                        direction = 7;
-                    }
-                    else if (keyH.upPressed) {
-                        direction = 0;
-                    }
-                    else if (keyH.rightPressed) {
-                        direction = 2;
-                    }
-                    else if (keyH.downPressed) {
-                        direction = 4;
-                    }
-                    else if (keyH.leftPressed) {
-                        direction = 6;
-                    }
-
-                }
-            }
-
+        if (moving && !dashing) {
+            if (keyH.rightPressed && keyH.upPressed) {direction = 1;}
+            else if (keyH.rightPressed && keyH.downPressed) {direction = 3;}
+            else if (keyH.leftPressed && keyH.downPressed) {direction = 5;}
+            else if (keyH.leftPressed && keyH.upPressed) {direction = 7;}
+            else if (keyH.upPressed) {direction = 0;}
+            else if (keyH.rightPressed) {direction = 2;}
+            else if (keyH.downPressed) {direction = 4;}
+            else if (keyH.leftPressed) {direction = 6;}
 
             //CHECK COLLISION
-
             collision = false;
 
             // Check Tile Collision
             gp.cChecker.checkTile(this);
-
 
             // Check object collision
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex);
 
             // Check NPC collision
-
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
@@ -291,8 +240,6 @@ public class Player extends Entity {
 
             //Check Event
             gp.eventH.checkEvent();
-
-
 
             // If collision false, player can move
             if (!collision && !keyH.tPressed) {
@@ -336,7 +283,6 @@ public class Player extends Entity {
                 }
             }
 
-
             spriteCounter++;
             if (spriteCounter > 10) {
                 if (spriteNum == 1) {
@@ -348,86 +294,35 @@ public class Player extends Entity {
             }
 
             resetDirectionsBoolean();
+            moving = false;
 
 
-        }//End of up down left right pressed loop
-
+        }//End of moving condition
 
         //Attack
-
-        if(gp.mouseH.leftClick){
-            attacking = true;
-
-        }
-
-        if(attacking == true){
+        if(attacking && !dashing){
             attack();
-            System.out.println(attackSpriteCounter);
         }
+
         //DASH
+        if(dashing){
+            collisionDash = false;
 
-        if (keyH.spacePressed && dashCoolDown > dashCoolDownTime) {
-            dash = true;
-            dashCoolDown = 0;
-        }
-
-        collisionDash = false;
-
-        //CHECK FOR DASH
-        if (dash) {
+            //CHECK FOR DASH
             gp.cChecker.checkTileDash(this);
 
             int objIndex = gp.cChecker.checkObjectDash(this, true); //If there is an object,
             // this fct will set collisionDash as true but the object willl still be picked
             pickUpObject(objIndex);
-        }
 
-        //DASH
-        if (!collisionDash && dash) {
-            switch (direction) {
-                case 0:
-                    worldY -= dashSpeed;
-                    break;
-                case 1:
-                    if (rightOk)
-                        worldX += dashSpeed;
-                    if (upOk)
-                        worldY -= dashSpeed;
-                    break;
-                case 2:
-                    worldX += dashSpeed;
-                    break;
-                case 5:
-                    if (leftOk && downOk)
-                        worldX -= dashSpeed;
-                    if (downOk)
-                        worldY += dashSpeed;
-                    break;
-                case 4:
-                    worldY += dashSpeed;
-                    break;
-                case 3:
-                    if (rightOk)
-                        worldX += dashSpeed;
-                    if (downOk)
-                        worldY += dashSpeed;
-                    break;
-                case 6:
-                    worldX -= dashSpeed;
-                    break;
-                case 7:
-                    if (leftOk)
-                        worldX -= dashSpeed;
-                    if (upOk)
-                        worldY -= dashSpeed;
-                    break;
+
+            //DASH
+            if ( dashing) { //add dashcChecker
+                dash();
             }
         }
-        dash = false;
 
-
-        dashCoolDown++;
-
+        //dashCoolDown++;
         if(invincible){
             invincibleCounter++;
             if(invincibleCounter>60){
@@ -527,7 +422,13 @@ public class Player extends Entity {
                 }
                 break;
             case 1:
-                if(!attacking){
+                if(dashing){
+                    if (spriteNum == 1)
+                        image = downRight1;
+                    if (spriteNum == 2)
+                        image = dashSprite;
+                }
+                else if(!attacking){
                     if (spriteNum == 1)
                         image = downRight1;
                     if (spriteNum == 2)
@@ -575,133 +476,7 @@ public class Player extends Entity {
                 break;
 
         }
-        /*
-        //switch case
-        switch (direction) {
-            case 0:
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = up1;
-                    if (spriteNum == 2)
-                        image = up2;
-                }
-                else {
-                    tempScreenY -= gp.tileSize;
-                    if (spriteNum == 1)
-                        image = attackU1;
-                    if (spriteNum == 2)
-                        image = attackU2;
-                }
-                break;
-            case 1:
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = upRight1;
-                    if (spriteNum == 2)
-                        image = upRight2;
-                }
-                else {
-                    tempScreenY -= gp.tileSize;
-                    if (spriteNum == 1)
-                        image = attackUR1;
-                    if (spriteNum == 2)
-                        image = attackUR2;
-                }
-                break;
-            case 2:
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = right1;
-                    if (spriteNum == 2)
-                        image = right2;
-                }
-                else {
-                    if (spriteNum == 1)
-                        image = attackR1;
-                    if (spriteNum == 2)
-                        image = attackR2;
-                }
-                break;
-            case 3:
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = downRight1;
-                    if (spriteNum == 2)
-                        image = downRight2;
-                }
-                else {
-                    if (spriteNum == 1)
-                        image = downRight1;
-                    if (spriteNum == 2)
-                        image = downRight2;
-                }
 
-                break;
-            case 4:
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = down1;
-                    if (spriteNum == 2)
-                        image = down2;
-                }
-                else {
-                    if (spriteNum == 1)
-                        image = attackD1;
-                    if (spriteNum == 2)
-                        image = attackD2;
-                }
-
-                break;
-            case 5:
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = downLeft1;
-                    if (spriteNum == 2)
-                        image = downLeft2;
-                }
-                else {
-                    if (spriteNum == 1)
-                        image = downLeft1;
-                    if (spriteNum == 2)
-                        image = downLeft2;
-                }
-
-                break;
-            case 6:
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = left1;
-                    if (spriteNum == 2)
-                        image = left2;
-                }
-                else {
-                    tempScreenX -= gp.tileSize;
-                    if (spriteNum == 1)
-                        image = attackL1;
-                    if (spriteNum == 2)
-                        image = attackL2;
-                }
-
-                break;
-
-            case 7:
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = upLeft1;
-                    if (spriteNum == 2)
-                        image = upLeft2;
-                }
-                else {
-                    if (spriteNum == 1)
-                        image = upLeft1;
-                    if (spriteNum == 2)
-                        image = upLeft2;
-                }
-
-                break;
-        }
-
-         */
         //Transparent if damage taken
         if(invincible){
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
