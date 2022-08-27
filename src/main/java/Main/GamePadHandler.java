@@ -88,9 +88,15 @@ public class GamePadHandler {
     }
     //Map buttons, remap
     public void buttonsEffect(){
-        gp.keyH.spacePressed = button[0];
-        gp.mouseH.leftClick = button[2];
+        //Dash
+        if(button[0] || button[4]){gp.keyH.spacePressed = true;}
+        else{gp.keyH.spacePressed = false;}
+        //Attack
+        if(button[2] || button[5]){gp.mouseH.leftClick = true;}
+        else{gp.mouseH.leftClick = false;}
+
         gp.keyH.tPressed = button[3];
+        gp.keyH.enterPressed = button[7];
     }
     public void buttons(Component comp, float value){
         switch (comp.getName()){

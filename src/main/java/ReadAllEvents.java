@@ -71,7 +71,10 @@ public class ReadAllEvents {
                             buffer.append("Off");
                         }
                     }
-                    System.out.println(buffer.toString());
+                    if(!event.getComponent().getName().equals("Y Axis")){
+                        System.out.println(buffer.toString());
+                    }
+
                 }
             }
 

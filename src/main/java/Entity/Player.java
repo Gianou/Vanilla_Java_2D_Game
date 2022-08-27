@@ -28,7 +28,7 @@ public class Player extends Entity {
     int attackSpriteCounter =0, dashSpriteCounter = 0;
     public BufferedImage attackD1, attackD2, attackU1, attackU2, attackR1, attackR2, attackL1, attackL2,
             attackUR1, attackUR2, attackUL1, attackUL2, attackDL1, attackDL2, attackDR1, attackDR2,
-            dashSprite;
+            dashDl, dashDR, dashUR, dashUL;
 
     public Shape attackAreas;
     public int worldAttackX, worldAttackY; //
@@ -65,7 +65,7 @@ public class Player extends Entity {
         worldX = gp.tileSize * 12;
         worldY = gp.tileSize * 12;
         speed = gp.tileSize / 8;
-        dashSpeed = gp.tileSize * 3;
+        dashSpeed = speed*2;
         //speed =25;
         direction = 2;
 
@@ -133,7 +133,8 @@ public class Player extends Entity {
             attackDR1 = getEntityAttackImage("AttackDR1",2,2, uT);
             attackDR2 = getEntityAttackImage("AttackDR2",2,2, uT);
 
-            dashSprite = getEntityAttackImage("dash", 1, 1, uT);
+            dashDl = getEntityAttackImage("dashDL", 1, 1, uT);
+            dashDR = getEntityAttackImage("dashDR", 1, 1, uT);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -147,8 +148,39 @@ public class Player extends Entity {
             spriteNum = 1;
         }
         if(dashSpriteCounter>5 && dashSpriteCounter <=25){
-            worldX += speed;
-            worldY += speed;
+            switch (direction){
+                case 0:
+                    worldY-=dashSpeed;
+
+                    break;
+                case 1:
+                    worldX += dashSpeed;
+                    worldY -= dashSpeed;
+                    break;
+                case 2:
+                    worldX += dashSpeed;
+                    break;
+                case 3:
+                    worldX += dashSpeed;
+                    worldY += dashSpeed;
+
+                    break;
+                case 4:
+                    worldY += dashSpeed;
+                    break;
+                case 5:
+                    worldX -= dashSpeed;
+                    worldY += dashSpeed;
+
+                    break;
+                case 6:
+                    worldX -= dashSpeed;
+                    break;
+                case 7:
+                    worldX -= dashSpeed;
+                    worldY -= dashSpeed;
+                    break;
+            }
             spriteNum = 2;
         }
         if(dashSpriteCounter>25){
@@ -181,28 +213,6 @@ public class Player extends Entity {
     }
 
     public void update() {
-//Controller or mouse
-//**********************************************************************************************************************
-        if(gp.gPadH.controllerOn){
-            //With controller orientation is done in GamePadHanler
-            //if no orientation is chosen with the left stick, we use direction
-            if(gp.gPadH.right.x == 0 && gp.gPadH.right.y == 0){
-                //orientation = 0;
-            }
-        }
-        else{
-            // Orientation WITH MOUSE
-            mouseX =  MouseInfo.getPointerInfo().getLocation().x - 7;
-            mouseY = MouseInfo.getPointerInfo().getLocation().y - 30;
-            angle = getAngle(new Point(mouseX, mouseY));
-            //System.out.println((int)angle);
-            if(angle<=90){orientation = 1;}
-            else if (angle<=180){orientation = 2;}
-            else if(angle<=270){orientation = 3;}
-            else if(angle<=360){orientation = 0;}
-        }
-//**********************************************************************************************************************
-
         //Moving
         if (keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed ) {moving = true;}
         //Attacking
@@ -220,6 +230,32 @@ public class Player extends Entity {
             else if (keyH.downPressed) {direction = 4;}
             else if (keyH.leftPressed) {direction = 6;}
 
+            //Controller or mouse, Orientation
+//**********************************************************************************************************************
+            if(gp.gPadH.controllerOn){
+                //With controller orientation is done in GamePadHanler
+                //if no orientation is chosen with the left stick, we use direction
+                if(gp.gPadH.right.x == 0 && gp.gPadH.right.y == 0){
+                    switch(direction){
+                        case 1 : orientation = 0;break;
+                        case 3 : orientation = 1; break;
+                        case 5 : orientation = 2; break;
+                        case 7 : orientation = 3; break;
+                    }
+                }
+            }
+            else{
+                // Orientation WITH MOUSE
+                mouseX =  MouseInfo.getPointerInfo().getLocation().x - 7;
+                mouseY = MouseInfo.getPointerInfo().getLocation().y - 30;
+                angle = getAngle(new Point(mouseX, mouseY));
+                //System.out.println((int)angle);
+                if(angle<=90){orientation = 1;}
+                else if (angle<=180){orientation = 2;}
+                else if(angle<=270){orientation = 3;}
+                else if(angle<=360){orientation = 0;}
+            }
+//**********************************************************************************************************************
             //CHECK COLLISION
             collision = false;
 
@@ -317,9 +353,9 @@ public class Player extends Entity {
 
 
             //DASH
-            if ( dashing) { //add dashcChecker
+            //if (collsionDash)
                 dash();
-            }
+
         }
 
         //dashCoolDown++;
@@ -426,52 +462,58 @@ public class Player extends Entity {
                     if (spriteNum == 1)
                         image = downRight1;
                     if (spriteNum == 2)
-                        image = dashSprite;
+                        image = dashDR;
                 }
-                else if(!attacking){
-                    if (spriteNum == 1)
-                        image = downRight1;
-                    if (spriteNum == 2)
-                        image = downRight2;
-                }
-                else {
-
+                else if(attacking){
                     if (spriteNum == 1)
                         image = attackDR1;
                     if (spriteNum == 2)
                         image = attackDR2;
                 }
+                else {
+                    if (spriteNum == 1)
+                        image = downRight1;
+                    if (spriteNum == 2)
+                        image = downRight2;
+                }
                 break;
             case 2:
-                if(!attacking){
+                if(dashing){
                     if (spriteNum == 1)
                         image = downLeft1;
                     if (spriteNum == 2)
-                        image = downLeft2;
+                        image = dashDl;
                 }
-                else {
-
+                else if(attacking){
                     tempScreenX -= gp.tileSize;
                     if (spriteNum == 1)
                         image = attackDL1;
                     if (spriteNum == 2)
                         image = attackDL2;
                 }
+                else {
+                    if (spriteNum == 1)
+                        image = downLeft1;
+                    if (spriteNum == 2)
+                        image = downLeft2;
+                }
                 break;
             case 3:
-                if(!attacking){
-                    if (spriteNum == 1)
-                        image = upLeft1;
-                    if (spriteNum == 2)
-                        image = upLeft2;
-                }
-                else {
+
+                if(attacking){
                     tempScreenY -= gp.tileSize;
                     tempScreenX -= gp.tileSize;
                     if (spriteNum == 1)
                         image = attackUL1;
                     if (spriteNum == 2)
                         image = attackUL2;
+
+                }
+                else {
+                    if (spriteNum == 1)
+                        image = upLeft1;
+                    if (spriteNum == 2)
+                        image = upLeft2;
                 }
                 break;
 

@@ -149,6 +149,11 @@ public class GamePanel extends JPanel implements Runnable{
                 //PLAYER
                 player.update();
         }
+        if(gameState == titleState){
+            if(keyH.enterPressed){
+                gameState = playState;
+            }
+        }
 
 
     }

@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 public class KeyHandler implements KeyListener {
 
     GamePanel gp;
-    public boolean rightPressed, leftPressed, downPressed, upPressed, spacePressed;
+    public boolean rightPressed, leftPressed, downPressed, upPressed, spacePressed, enterPressed;
     public boolean debug;
     public boolean  tPressed;
 
@@ -51,6 +51,9 @@ public class KeyHandler implements KeyListener {
 
             if (code == KeyEvent.VK_T){
                 tPressed = true;
+            }
+            if(code== KeyEvent.VK_ENTER){
+                enterPressed = true;
             }
 
 
@@ -99,6 +102,9 @@ public class KeyHandler implements KeyListener {
 
         //TITLE
         else if (gp.gameState == gp.titleState){
+            if(code== KeyEvent.VK_ENTER || gp.gPadH.button[7]){
+                enterPressed = true;
+            }
             if (code == KeyEvent.VK_W) {
                 gp.ui.menuNum--;
                 if(gp.ui.menuNum < 0){
@@ -111,7 +117,8 @@ public class KeyHandler implements KeyListener {
                     gp.ui.menuNum = 0;
                 }
             }
-            if (code == KeyEvent.VK_ENTER){
+
+            if (enterPressed){
                 if(gp.ui.menuNum == 0){
                     gp.gameState = gp.playState;
                 }
@@ -148,6 +155,9 @@ public class KeyHandler implements KeyListener {
         }
         if(code== KeyEvent.VK_T){
             tPressed = false;
+        }
+        if(code== KeyEvent.VK_ENTER){
+            enterPressed = false;
         }
     }
 
