@@ -83,8 +83,7 @@ public class UI {
         //g2.fillArc(x, y, 80, 80, 270, 90);
         g2.draw(s4);
 
-
-
+        /*
         //Mouse location
         g2.drawRect(gp.player.mouseX, gp.player.mouseY, gp.tileSize, gp.tileSize);
 
@@ -103,6 +102,8 @@ public class UI {
         //System.out.println(gp.monster[0].solidArea.x);
         gp.monster[0].solidArea.x = gp.monster[0].solidAreaDefaultX;
         gp.monster[0].solidArea.y = gp.monster[0].solidAreaDefaultY;
+
+         */
 
     }
     public void draw(Graphics2D g2){

@@ -42,6 +42,10 @@ public class Entity {
     public boolean invincible = false;
     public int invincibleCounter = 0;
 
+    boolean dying = false;
+    public boolean alive = true;
+    int dyingCounter;
+
 
 
     public Entity(){}
@@ -113,6 +117,9 @@ public class Entity {
             if(invincible){
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
             }
+            if(dying){
+                dyingAnimation(g2);
+            }
             g2.drawImage(image, screenX, screenY, null);
 
             //Reset Alpha
@@ -127,6 +134,37 @@ public class Entity {
         }
     }
 
+    public void dyingAnimation(Graphics2D g2){
+        dyingCounter++;
+        if(dyingCounter <= 5){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+        }
+        else if (dyingCounter <= 10){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        }
+        else if (dyingCounter <= 15){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+        }
+        else if (dyingCounter <= 20){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        }
+        else if (dyingCounter <= 25){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+        }
+        else if (dyingCounter <= 30){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        }
+        else if (dyingCounter <= 35){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+        }
+        else if (dyingCounter <= 40){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        }
+        else if (dyingCounter > 40){
+            dying = false;
+            alive = false;
+        }
+    }
     public BufferedImage getEntityImage(String name, UtilityTool uT) throws IOException {
         File file = new File("src/main/resources/npc/" + name + ".png");
         FileInputStream fis = new FileInputStream(file);

@@ -4,6 +4,7 @@ import Main.GamePanel;
 
 public class SuperNPC extends Entity{
 
+
     public SuperNPC(GamePanel gp, int width, int height){
         super(gp, width, height);
     }

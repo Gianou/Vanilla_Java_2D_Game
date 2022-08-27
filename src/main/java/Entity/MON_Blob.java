@@ -15,7 +15,7 @@ public class MON_Blob extends SuperNPC {
         getBlobImage();
         direction = 2;
         speed = 0;
-        maxLife = 40;
+        maxLife = 3;
         life = maxLife;
         type = 2;
         solidArea = new Rectangle(0,0, gp.tileSize, gp.tileSize);
