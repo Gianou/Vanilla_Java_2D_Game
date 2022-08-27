@@ -220,6 +220,18 @@ public class Player extends Entity {
         //Dashing
         if (keyH.spacePressed ) {dashing = true;}
 
+        if(!gp.gPadH.controllerOn){
+            // Orientation WITH MOUSE
+            mouseX =  MouseInfo.getPointerInfo().getLocation().x - 7;
+            mouseY = MouseInfo.getPointerInfo().getLocation().y - 30;
+            angle = getAngle(new Point(mouseX, mouseY));
+            System.out.println((int)angle);
+            if(angle<=90){orientation = 1;}
+            else if (angle<=180){orientation = 2;}
+            else if(angle<=270){orientation = 3;}
+            else if(angle<=360){orientation = 0;}
+        }
+
         if (moving && !dashing) {
             if (keyH.rightPressed && keyH.upPressed) {direction = 1;}
             else if (keyH.rightPressed && keyH.downPressed) {direction = 3;}
@@ -244,17 +256,7 @@ public class Player extends Entity {
                     }
                 }
             }
-            else{
-                // Orientation WITH MOUSE
-                mouseX =  MouseInfo.getPointerInfo().getLocation().x - 7;
-                mouseY = MouseInfo.getPointerInfo().getLocation().y - 30;
-                angle = getAngle(new Point(mouseX, mouseY));
-                //System.out.println((int)angle);
-                if(angle<=90){orientation = 1;}
-                else if (angle<=180){orientation = 2;}
-                else if(angle<=270){orientation = 3;}
-                else if(angle<=360){orientation = 0;}
-            }
+
 //**********************************************************************************************************************
             //CHECK COLLISION
             collision = false;
