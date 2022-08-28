@@ -68,7 +68,7 @@ public class AssetSetter {
         setForest(40,10,32);
         setForest(50,9,35);
         setForest(60,9,38);
-        gp.obj[39] = new OBJ_Tree(gp, gp.tileSize*9, gp.tileSize*37);
+        gp.obj[39] = new OBJ_Tree(gp, gp.tileSize*9, gp.tileSize*36 + gp.tileSize/2);
 
     }
 
