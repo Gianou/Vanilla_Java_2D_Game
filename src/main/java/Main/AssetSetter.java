@@ -64,14 +64,21 @@ public class AssetSetter {
         gp.obj[25] = new OBJ_Statue(gp, gp.tileSize*16, gp.tileSize*16);
         //gp.obj[25].worldX = gp.tileSize*16;
        // gp.obj[25].worldY = gp.tileSize*16;
+        setForest(30, 9, 30);
+        setForest(40,10,32);
+        setForest(50,9,35);
+        setForest(60,9,38);
+        gp.obj[39] = new OBJ_Tree(gp, gp.tileSize*9, gp.tileSize*37);
 
-        gp.obj[30] = new OBJ_Tree(gp, gp.tileSize*12, gp.tileSize*30);
-        gp.obj[31] = new OBJ_Tree(gp, gp.tileSize*14, gp.tileSize*30);
-        gp.obj[32] = new OBJ_Tree(gp, gp.tileSize*16, gp.tileSize*30);
-        gp.obj[33] = new OBJ_Tree(gp, gp.tileSize*13, gp.tileSize*31);
-        gp.obj[34] = new OBJ_Tree(gp, gp.tileSize*15, gp.tileSize*31);
     }
 
+    public void setForest(int index, int x, int y){
+        for(int i = 0; i<10; i++){
+            gp.obj[index + i] = new OBJ_Tree(gp, gp.tileSize*(x + i*2), gp.tileSize*y);
+        }
+
+
+    }
     public void setMonster(){
         gp.monster[0] = new MON_Blob(gp, 1, 1);
         gp.monster[0].worldX = gp.tileSize*25;
