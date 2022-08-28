@@ -65,6 +65,11 @@ public class AssetSetter {
         //gp.obj[25].worldX = gp.tileSize*16;
        // gp.obj[25].worldY = gp.tileSize*16;
 
+        gp.obj[30] = new OBJ_Tree(gp, gp.tileSize*12, gp.tileSize*30);
+        gp.obj[31] = new OBJ_Tree(gp, gp.tileSize*14, gp.tileSize*30);
+        gp.obj[32] = new OBJ_Tree(gp, gp.tileSize*16, gp.tileSize*30);
+        gp.obj[33] = new OBJ_Tree(gp, gp.tileSize*13, gp.tileSize*31);
+        gp.obj[34] = new OBJ_Tree(gp, gp.tileSize*15, gp.tileSize*31);
     }
 
     public void setMonster(){

@@ -24,7 +24,7 @@ public class TileManager {
         mapTileNum = new int [gp.maxWorldRow] [gp.maxWorldCol];
 
         getTileImage();
-        readMapTxt("src/main/resources/maps/03map");
+        readMapTxt("src/main/resources/maps/04map");
 
     }
     public void setUpImage(int index, String imageName, boolean collision) throws IOException {
