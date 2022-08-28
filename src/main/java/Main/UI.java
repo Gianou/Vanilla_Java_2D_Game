@@ -109,7 +109,9 @@ public class UI {
     public void draw(Graphics2D g2){
 
         //TESTS
-        drawTest(g2);
+        if(gp.keyH.debug){
+            drawTest(g2);
+        }
 
         if(gameFinished){
             drawFinished(g2);
@@ -137,9 +139,6 @@ public class UI {
         else if (gp.gameState == gp.dialogueState){
             drawDialogue(g2);
         }
-
-
-
     }
     public void drawFinished(Graphics2D g2){
         g2.setFont(pixelFont);
