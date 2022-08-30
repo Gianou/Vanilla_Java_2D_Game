@@ -540,7 +540,6 @@ public class Player extends Entity {
                         image = attackUL1;
                     if (spriteNum == 2)
                         image = attackUL2;
-
                 }
                 else {
                     if (spriteNum == 1)
@@ -549,7 +548,6 @@ public class Player extends Entity {
                         image = upLeft2;
                 }
                 break;
-
         }
 
         //Transparent if damage taken

@@ -80,36 +80,40 @@ public class Entity {
             //switch case
             switch (direction) {
                 case 0:
-                    if (spriteNum == 1) image = up1;
-                    if (spriteNum == 2) image = up2;
+                    if (spriteNum == 1) image = upRight1;
+                    if (spriteNum == 2) image = upRight2;
                     break;
                 case 1:
                     if (spriteNum == 1) image = upRight1;
                     if (spriteNum == 2) image = upRight2;
                     break;
                 case 2:
-                    if (spriteNum == 1) image = right1;
-                    if (spriteNum == 2) image = right2;
+                    if (spriteNum == 1) image = downRight1;
+                    if (spriteNum == 2) image = downRight2;
                     break;
                 case 3:
                     if (spriteNum == 1) image = downRight1;
                     if (spriteNum == 2) image = downRight2;
                     break;
                 case 4:
-                    if (spriteNum == 1) image = down1;
-                    if (spriteNum == 2) image = down2;
+                    if (spriteNum == 1) image = downRight1;
+                    if (spriteNum == 2) image = downRight2;
                     break;
                 case 5:
                     if (spriteNum == 1) image = downLeft1;
                     if (spriteNum == 2) image = downLeft2;
                     break;
                 case 6:
-                    if (spriteNum == 1) image = left1;
-                    if (spriteNum == 2) image = left2;
+                    if (spriteNum == 1) image = downLeft1;
+                    if (spriteNum == 2) image = downLeft2;
                     break;
                 case 7:
                     if (spriteNum == 1) image = upLeft1;
                     if (spriteNum == 2) image = upLeft2;
+                    break;
+                case -999:
+                    if (spriteNum == 1) image = downLeft1;
+                    if (spriteNum == 2) image = downLeft1;
                     break;
             }
 

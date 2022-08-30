@@ -14,7 +14,7 @@ public class MON_Blob extends SuperNPC {
         //name = "Blob"; no name in entity yet
         getBlobImage();
         direction = 2;
-        speed = 0;
+        speed = 3;
         maxLife = 3;
         life = maxLife;
         type = 2;
