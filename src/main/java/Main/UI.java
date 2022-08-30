@@ -182,9 +182,6 @@ public class UI {
             g2.drawString(coordinates, x, y);
         }
 
-
-
-
         if (messageOn) {
             messageLength = (int) g2.getFontMetrics().getStringBounds(message, g2).getWidth();
             g2.drawString(message, (gp.player.screenX + gp.tileSize / 2) - messageLength / 2, gp.player.screenY);

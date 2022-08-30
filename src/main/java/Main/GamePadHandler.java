@@ -176,10 +176,10 @@ public class GamePadHandler {
     }
     public void rightStick(Component comp, float value){
 
-        if(comp.getName().equals("Y Rotation")){
+        if(comp.getName().equals("Y Rotation") || comp.getName().equals("Z Rotation")){
             right.y = (int)(value*100);
         }
-        if(comp.getName().equals("X Rotation")){
+        if(comp.getName().equals("X Rotation") || comp.getName().equals("Z Axis")){
             right.x = (int)(value*100);
         }
 
