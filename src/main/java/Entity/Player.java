@@ -151,7 +151,8 @@ public class Player extends Entity {
         }
         if(dashSpriteCounter>5 && dashSpriteCounter <=25){
             gp.cChecker.checkTile(this);
-            gp.cChecker.checkObject(this, true);
+            int objIndex = gp.cChecker.checkObject(this, true);
+            pickUpObject(objIndex);
             if(!collision){
                 switch (direction){
                     case 0:

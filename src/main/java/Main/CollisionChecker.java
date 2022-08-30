@@ -263,7 +263,7 @@ public class CollisionChecker {
                     case 7:
                         entity.solidArea.x -= entity.speed;
                         if(entity.solidArea.intersects(gp.obj[i].solidArea)){
-                            entity.rightOk = false;
+                            entity.leftOk = false;
                             if(player){
                                 index = i;
                             }
