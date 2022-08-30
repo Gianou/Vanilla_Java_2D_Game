@@ -28,7 +28,7 @@ public class Player extends Entity {
     int attackSpriteCounter =0, dashSpriteCounter = 0;
     public BufferedImage attackD1, attackD2, attackU1, attackU2, attackR1, attackR2, attackL1, attackL2,
             attackUR1, attackUR2, attackUL1, attackUL2, attackDL1, attackDL2, attackDR1, attackDR2,
-            dashDl, dashDR, dashUR, dashUL;
+            dashDL, dashDR, dashUR, dashUL;
 
     public Shape attackAreas;
     public int worldAttackX, worldAttackY; //
@@ -133,8 +133,10 @@ public class Player extends Entity {
             attackDR1 = getEntityAttackImage("AttackDR1",2,2, uT);
             attackDR2 = getEntityAttackImage("AttackDR2",2,2, uT);
 
-            dashDl = getEntityAttackImage("dashDL", 1, 1, uT);
+            dashDL = getEntityAttackImage("dashDL", 1, 1, uT);
             dashDR = getEntityAttackImage("dashDR", 1, 1, uT);
+            dashUL = getEntityAttackImage("dashUL", 1, 1, uT);
+            dashUR = getEntityAttackImage("dashUR", 1, 1, uT);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -148,39 +150,51 @@ public class Player extends Entity {
             spriteNum = 1;
         }
         if(dashSpriteCounter>5 && dashSpriteCounter <=25){
-            switch (direction){
-                case 0:
-                    worldY-=dashSpeed;
+            gp.cChecker.checkTile(this);
+            gp.cChecker.checkObject(this, true);
+            if(!collision){
+                switch (direction){
+                    case 0:
+                        worldY-=dashSpeed;
+                        break;
+                    case 1:
+                        if(rightOk)
+                            worldX += dashSpeed;
+                        if(upOk)
+                            worldY -= dashSpeed;
+                        break;
+                    case 2:
+                        worldX += dashSpeed;
+                        break;
+                    case 3:
+                        if(rightOk)
+                            worldX += dashSpeed;
+                        if(downOk)
+                            worldY += dashSpeed;
 
-                    break;
-                case 1:
-                    worldX += dashSpeed;
-                    worldY -= dashSpeed;
-                    break;
-                case 2:
-                    worldX += dashSpeed;
-                    break;
-                case 3:
-                    worldX += dashSpeed;
-                    worldY += dashSpeed;
+                        break;
+                    case 4:
+                        worldY += dashSpeed;
+                        break;
+                    case 5:
+                        if(leftOk)
+                            worldX -= dashSpeed;
+                        if(downOk)
+                            worldY += dashSpeed;
 
-                    break;
-                case 4:
-                    worldY += dashSpeed;
-                    break;
-                case 5:
-                    worldX -= dashSpeed;
-                    worldY += dashSpeed;
-
-                    break;
-                case 6:
-                    worldX -= dashSpeed;
-                    break;
-                case 7:
-                    worldX -= dashSpeed;
-                    worldY -= dashSpeed;
-                    break;
+                        break;
+                    case 6:
+                        worldX -= dashSpeed;
+                        break;
+                    case 7:
+                        if(leftOk)
+                            worldX -= dashSpeed;
+                        if(upOk)
+                            worldY -= dashSpeed;
+                        break;
+                }
             }
+
             spriteNum = 2;
         }
         if(dashSpriteCounter>25){
@@ -344,6 +358,8 @@ public class Player extends Entity {
 
         //DASH
         if(dashing){
+            dash();
+            /*
             collisionDash = false;
 
             //CHECK FOR DASH
@@ -358,6 +374,8 @@ public class Player extends Entity {
             //if (collsionDash)
                 dash();
 
+
+             */
         }
 
         //dashCoolDown++;
@@ -445,18 +463,24 @@ public class Player extends Entity {
 
         switch (orientation){
             case 0:
-                if(!attacking){
+                if(dashing){
+                    if (spriteNum == 1)
+                        image = upRight1;
+                    if (spriteNum == 2)
+                        image = dashUR;
+                }
+                else if(attacking){
+                tempScreenY -= gp.tileSize;
+                if (spriteNum == 1)
+                    image = attackUR1;
+                if (spriteNum == 2)
+                    image = attackUR2;
+                }
+                else {
                     if (spriteNum == 1)
                         image = upRight1;
                     if (spriteNum == 2)
                         image = upRight2;
-                }
-                else {
-                    tempScreenY -= gp.tileSize;
-                    if (spriteNum == 1)
-                        image = attackUR1;
-                    if (spriteNum == 2)
-                        image = attackUR2;
                 }
                 break;
             case 1:
@@ -484,7 +508,7 @@ public class Player extends Entity {
                     if (spriteNum == 1)
                         image = downLeft1;
                     if (spriteNum == 2)
-                        image = dashDl;
+                        image = dashDL;
                 }
                 else if(attacking){
                     tempScreenX -= gp.tileSize;
@@ -502,7 +526,13 @@ public class Player extends Entity {
                 break;
             case 3:
 
-                if(attacking){
+                if (dashing){
+                    if (spriteNum == 1)
+                        image = upLeft1;
+                    if (spriteNum == 2)
+                        image = dashUL;
+                }
+                else if(attacking){
                     tempScreenY -= gp.tileSize;
                     tempScreenX -= gp.tileSize;
                     if (spriteNum == 1)
