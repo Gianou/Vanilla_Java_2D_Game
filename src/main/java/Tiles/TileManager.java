@@ -20,11 +20,11 @@ public class TileManager {
     public TileManager(GamePanel gp) throws IOException {
         this.gp = gp;
 
-        tile = new Tile[10];
+        tile = new Tile[100];
         mapTileNum = new int [gp.maxWorldRow] [gp.maxWorldCol];
 
         getTileImage();
-        readMapTxt("src/main/resources/maps/04map");
+        readMapTxt("src/main/resources/maps/05map");
 
     }
     public void setUpImage(int index, String imageName, boolean collision) throws IOException {
@@ -47,13 +47,18 @@ public class TileManager {
      */
     public void getTileImage() throws IOException {
 
-        setUpImage(0, "Grass5", false);
+        setUpImage(10, "Grass", false);
         setUpImage(1, "Wall", true);
-        setUpImage(2, "Water", true);
+        setUpImage(15, "Water", true);
         setUpImage(3, "Sand", false);
         setUpImage(4, "Sea1", true);
         setUpImage(5, "Tree4", true);
         setUpImage(6, "Hole", false);
+
+        for(int i = 1; i<=14; i++){
+            String name = "Lake" + i;
+            setUpImage(i + 20, name, true);
+        }
 
     }
 
