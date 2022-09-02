@@ -13,6 +13,7 @@ public class AssetSetter {
     }
 
     public void setNPC(){
+
         gp.npc[0] = new NPC_Owl(gp, 1, 1);
         gp.npc[0].worldX = gp.tileSize*25;
         gp.npc[0].worldY = gp.tileSize*11;
@@ -20,8 +21,11 @@ public class AssetSetter {
         gp.npc[1] = new NPC_Ghoul(gp, 2, 2);
         gp.npc[1].worldX = gp.tileSize*23;
         gp.npc[1].worldY = gp.tileSize*23;
+
+
     }
     public void setObject(){
+
 
         //This doesn't allow correct drawing priority
         gp.obj[0] = new OBJ_Key(gp);
@@ -64,6 +68,8 @@ public class AssetSetter {
         gp.obj[25] = new OBJ_Statue(gp, gp.tileSize*16, gp.tileSize*16);
         //gp.obj[25].worldX = gp.tileSize*16;
        // gp.obj[25].worldY = gp.tileSize*16;
+
+
         setForest(30, 9, 30);
         setForest(40,10,32);
         setForest(50,9,35);
@@ -81,7 +87,7 @@ public class AssetSetter {
     }
     public void setMonster(){
         gp.monster[0] = new MON_Blob(gp, 1, 1);
-        gp.monster[0].worldX = gp.tileSize*25;
-        gp.monster[0].worldY = gp.tileSize*18;
+        gp.monster[0].worldX = gp.tileSize*18;
+        gp.monster[0].worldY = gp.tileSize*12;
     }
 }
