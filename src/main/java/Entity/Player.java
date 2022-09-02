@@ -240,7 +240,7 @@ public class Player extends Entity {
             mouseX =  MouseInfo.getPointerInfo().getLocation().x - 7;
             mouseY = MouseInfo.getPointerInfo().getLocation().y - 30;
             angle = getAngle(new Point(mouseX, mouseY));
-            System.out.println((int)angle);
+            //System.out.println((int)angle);
             if(angle<=90){orientation = 1;}
             else if (angle<=180){orientation = 2;}
             else if(angle<=270){orientation = 3;}

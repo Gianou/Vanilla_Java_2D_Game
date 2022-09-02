@@ -24,7 +24,7 @@ public class TileManager {
         mapTileNum = new int [gp.maxWorldRow] [gp.maxWorldCol];
 
         getTileImage();
-        readMapTxt("src/main/resources/maps/05map");
+        readMapTxt("src/main/resources/maps/AI_Tracking_Test");
 
     }
     public void setUpImage(int index, String imageName, boolean collision) throws IOException {
@@ -57,7 +57,7 @@ public class TileManager {
 
         for(int i = 1; i<=14; i++){
             String name = "Lake" + i;
-            setUpImage(i + 20, name, true);
+            setUpImage(i + 20, name, false);
         }
 
     }
