@@ -8,7 +8,7 @@ public class PathFinder {
    Point a = new Point();
    Point b = new Point();
    char path[];
-    char bestPath[];
+   char[] shortestPath;
 
     int max;
     static int deltaL[] = {-1, 0, 1, 0 };
@@ -18,7 +18,7 @@ public class PathFinder {
 
     public PathFinder(){
         map = new int[][]{  {0, 0, 0, 0, 0},
-                            {1, 0, 0, 0, 0},
+                            {1, 1, 0, 0, 0},
                             {0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0}};
@@ -27,7 +27,7 @@ public class PathFinder {
         b.x = 0; //row
         b.y = 0; //line
         path = new char[map.length*map.length];
-        bestPath = new char[500];
+
     }
 //Y = line
     // X = row
@@ -40,7 +40,10 @@ public class PathFinder {
 
             if(pathLength()<shortest){
                 shortest = pathLength();
-                showPath();
+                shortestPath = new char[shortest];
+                for(int i = 0; i < shortest; i++){
+                    shortestPath[i] = path[i];
+                }
             }
 
         }

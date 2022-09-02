@@ -5,6 +5,7 @@ import Entity.Entity;
 import Entity.Player;
 import Entity.SuperNPC;
 import Object.SuperObject;
+import PathFinder.SubMatrix;
 import Sound.Sound;
 import Tiles.TileManager;
 
@@ -33,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int worldHeight = tileSize * maxWorldRow;
 
     //SYSTEM
-    TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     public MouseHandler mouseH = new MouseHandler(this);
     public GamePadHandler gPadH;
@@ -59,6 +60,9 @@ public class GamePanel extends JPanel implements Runnable{
     public final int pauseState = 2;
     public final int dialogueState = 3;
 
+    //TEST
+    SubMatrix subM;
+
 
 
     public GamePanel() throws IOException {
@@ -79,6 +83,7 @@ public class GamePanel extends JPanel implements Runnable{
         playMusic(0);
         gameState = titleState;
         gPadH = new GamePadHandler(this);
+        subM = new SubMatrix(this);
     }
 
     public void startGameThread(){

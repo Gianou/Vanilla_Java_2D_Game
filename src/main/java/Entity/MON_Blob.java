@@ -63,7 +63,7 @@ public class MON_Blob extends SuperNPC {
         float fortyFiveByTwo = 45 / 2;
 
 
-        System.out.println(angle);
+        //System.out.println(angle);
         if(angle >= 360 - fortyFiveByTwo || angle < fortyFiveByTwo){direction = 2;}
         else if (angle >= 45 - fortyFiveByTwo && angle < 45 + fortyFiveByTwo){direction = 3;}
         else if (angle >= 90 - fortyFiveByTwo && angle < 90 + fortyFiveByTwo){direction = 4;}
@@ -72,7 +72,7 @@ public class MON_Blob extends SuperNPC {
         else if (angle >= 225 - fortyFiveByTwo && angle < 225 + fortyFiveByTwo){direction = 7;}
         else if (angle >= 270 - fortyFiveByTwo && angle < 270 + fortyFiveByTwo){direction = 0;}
         else if (angle >= 315 - fortyFiveByTwo && angle < 315 + fortyFiveByTwo){direction = 1;}
-        System.out.println(direction);
+        //System.out.println(direction);
 
     }
 
