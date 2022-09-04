@@ -83,7 +83,7 @@ public class GamePanel extends JPanel implements Runnable{
         playMusic(0);
         gameState = titleState;
         gPadH = new GamePadHandler(this);
-        subM = new SubMatrix(this);
+        //subM = new SubMatrix(this);
     }
 
     public void startGameThread(){

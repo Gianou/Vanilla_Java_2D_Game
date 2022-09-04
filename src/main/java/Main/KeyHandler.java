@@ -58,9 +58,6 @@ public class KeyHandler implements KeyListener {
 
 
             if (code == KeyEvent.VK_I) {
-
-                gp.subM.getSubMat();
-                gp.subM.display();
                 if (debug == false) {
                     debug = true;
                 } else if (debug) {

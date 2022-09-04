@@ -2,11 +2,14 @@ package Entity;
 
 import Entity.*;
 import Main.GamePanel;
+import PathFinder.SubMatrix;
 
 import java.awt.*;
 import java.io.IOException;
 
 public class MON_Blob extends SuperNPC {
+    SubMatrix subM;
+    int cpt = 0;
 
     public MON_Blob (GamePanel gp, int width, int height){
 
@@ -18,6 +21,8 @@ public class MON_Blob extends SuperNPC {
         maxLife = 3;
         life = maxLife;
         type = 2;
+
+        subM = new SubMatrix(gp);
         //solidArea = new Rectangle(0,0, gp.tileSize, gp.tileSize);
         //solidAreaDefaultX = solidArea.x;
         //solidAreaDefaultY = solidArea.y;
@@ -84,6 +89,18 @@ public class MON_Blob extends SuperNPC {
         }
 
         return angle;
+    }
+    @Override
+    public void update(){
+        super.update();
+        cpt++;
+        subM.monCol = (worldX+(width*gp.tileSize/2))/gp.tileSize;
+        subM.monLine = (worldY+(height*gp.tileSize/2))/gp.tileSize;
+        if(gp.keyH.enterPressed && cpt >=60){
+            subM.getSubMat();
+            subM.display();
+            cpt = 0;
+        }
     }
 }
 

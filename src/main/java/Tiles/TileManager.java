@@ -48,7 +48,7 @@ public class TileManager {
     public void getTileImage() throws IOException {
 
         setUpImage(10, "Grass", false);
-        setUpImage(1, "Wall", true);
+        setUpImage(20, "Wall", true);
         setUpImage(15, "Water", true);
         setUpImage(3, "Sand", false);
         setUpImage(4, "Sea1", true);
