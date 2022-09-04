@@ -1,0 +1,82 @@
+//Random
+public void setAction() {
+        actionLockCounter++;
+
+        if (actionLockCounter == 60) {
+            int i = (int) (Math.random() * 150 + 1);
+            if (i <= 25) {
+                direction = 0;
+            } else if (i <= 50) {
+                direction = 4;
+            } else if (i <= 75) {
+                direction = 2;
+            } else if (i <= 100) {
+                direction = 6;
+            } else if (i <= 150) {
+                direction = 0;
+            }
+            actionLockCounter = 0;
+        }
+    }
+
+//Basic run from player, based on mimicing players direction
+public void setAction() {
+        direction = gp.player.direction;
+    }
+
+//Basic goes to player, based on the angle between monster and player, wobbly problem with 0, 90, 180 and 270
+public void setAction() {
+        Point player = new Point(gp.player.worldX, gp.player.worldY);
+        float angle = getAngle(player);
+
+        if(angle<=90){direction = 3;}
+        else if (angle<=180){direction = 5;}
+        else if(angle<=270){direction = 7;}
+        else if(angle<=360){direction = 1;}
+    }
+
+// Goes to player, wobbly problem on 0, 90, 180 and 270
+
+public void setAction() {
+        actionLockCounter++;
+
+        if(actionLockCounter > 1){
+            Point player = new Point(gp.player.worldX, gp.player.worldY);
+            int angle = (int) getAngle(player);
+
+            System.out.println(angle);
+            if(angle<90){direction = 3;}
+            else if (angle == 90){direction = 2;}
+            else if (angle<=180){direction = 5;}
+            else if (angle ==180){direction = 4;}
+            else if(angle<270){direction = 7;}
+            else if (angle == 270){direction = 6;}
+            else if(angle<360){direction = 1;}
+            else if (angle == 360){direction = 0;}
+
+            actionLockCounter =0;
+        }
+
+
+    }
+
+//Goes to player, still gets wobbly when close to player
+
+ public void setAction() {
+        Point player = new Point(gp.player.worldX, gp.player.worldY);
+        float angle =  getAngle(player);
+        float fortyFiveByTwo = 45 / 2;
+
+
+        System.out.println(angle);
+        if(angle >= 360 - fortyFiveByTwo || angle < fortyFiveByTwo){direction = 2;}
+        else if (angle >= 45 - fortyFiveByTwo && angle < 45 + fortyFiveByTwo){direction = 3;}
+        else if (angle >= 90 - fortyFiveByTwo && angle < 90 + fortyFiveByTwo){direction = 4;}
+        else if (angle >= 135 - fortyFiveByTwo && angle < 135 + fortyFiveByTwo){direction = 5;}
+        else if (angle >= 180 - fortyFiveByTwo && angle < 180 + fortyFiveByTwo){direction = 6;}
+        else if (angle >= 225 - fortyFiveByTwo && angle < 225 + fortyFiveByTwo){direction = 7;}
+        else if (angle >= 270 - fortyFiveByTwo && angle < 270 + fortyFiveByTwo){direction = 0;}
+        else if (angle >= 315 - fortyFiveByTwo && angle < 315 + fortyFiveByTwo){direction = 1;}
+        System.out.println(direction);
+
+    }
