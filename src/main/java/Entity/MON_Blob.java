@@ -2,6 +2,7 @@ package Entity;
 
 import Entity.*;
 import Main.GamePanel;
+import PathFinder.PathFinder;
 import PathFinder.SubMatrix;
 
 import java.awt.*;
@@ -99,6 +100,14 @@ public class MON_Blob extends SuperNPC {
         if(gp.keyH.enterPressed && cpt >=60){
             subM.getSubMat();
             subM.display();
+            PathFinder pathF = new PathFinder(subM.subMat, new Point(subM.col/2,subM.col/2), subM.playerInSub);
+            pathF.recursive();
+            if(pathF.shortestPath != null){
+                System.out.println(pathF.shortestPath);
+            }
+            else{
+                System.out.println("no path found");
+            }
             cpt = 0;
         }
     }

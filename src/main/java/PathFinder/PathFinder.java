@@ -4,11 +4,11 @@ import java.awt.*;
 
 public class PathFinder {
    int [][]map; // 0 means there is nothing, 1 means there is something
-    boolean [][]explored = new boolean[5][5];
-   Point a = new Point();
-   Point b = new Point();
+    boolean [][]explored;
+   Point monster = new Point();
+   Point player = new Point();
    char path[];
-   char[] shortestPath;
+   public char[] shortestPath;
 
     int max;
     static int deltaL[] = {-1, 0, 1, 0 };
@@ -16,27 +16,36 @@ public class PathFinder {
     int shortest = 500;
 
 
+    public PathFinder(int [][] map, Point monster, Point player){
+        this.map = map;
+        this.monster.x = monster.x;
+        this.monster.y = monster.y;
+        this.player.x = player.x; //row
+        this.player.y = player.y; //line
+        path = new char[map.length*map.length];
+        explored = new boolean[map.length][map.length];
+    }
     public PathFinder(){
-        map = new int[][]{  {0, 0, 0, 0, 0},
+        map = new int[][]{  {0, 1, 0, 0, 0},
                             {1, 1, 0, 0, 0},
                             {0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0}};
-        a.x = 0;
-        a.y = 2;
-        b.x = 0; //row
-        b.y = 0; //line
+        monster.x = 0;
+        monster.y = 2;
+        player.x = 0; //row
+        player.y = 0; //line
         path = new char[map.length*map.length];
 
     }
 //Y = line
     // X = row
     public void recursive(){
-        recursive(a.y, a.x, 0 );
+        recursive(monster.y, monster.x, 0 );
     }
 
     public void recursive(int line, int row, int index){
-        if(line == b.y && row == b.x){
+        if(line == player.y && row == player.x){
 
             if(pathLength()<shortest){
                 shortest = pathLength();
@@ -136,7 +145,7 @@ public class PathFinder {
         if(line < 0 || line > map.length-1 || row < 0 || row > map.length-1){
             return false;
         }
-        if(map[line][row]==1){
+        if(map[line][row]==20){
             return false;
         }
         if(explored[line][row]){

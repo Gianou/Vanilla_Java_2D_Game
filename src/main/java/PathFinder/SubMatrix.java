@@ -2,16 +2,19 @@ package PathFinder;
 
 import Main.GamePanel;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class SubMatrix {
-    int line = 7;
-    int col = 7;
-    int [][] subMat = new int[line][col];
+    public int line = 5;
+    public int col = 5;
+    public int [][] subMat = new int[line][col];
     public int monLine = 12;
     public int monCol = 12;
+
+    public Point playerInSub;
     GamePanel gp;
     public SubMatrix(GamePanel gp){
 
@@ -35,6 +38,7 @@ public class SubMatrix {
                 subMat[i][j] = gp.tileM.mapTileNum[lineSub+i][colSub+j];
                 if(lineSub+i == playerY && colSub + j == playerX){
                     subMat[i][j] = 66;
+                    playerInSub = new Point(j,i);
                 }
             }
         }
