@@ -24,6 +24,7 @@ public class SubMatrix {
 
     public void getSubMat() {
 
+        playerInSub = null;
         int lineSub = monLine - line/2 ;
         int lineSubMax = lineSub + line;
         int colSub = monCol - col/2;
