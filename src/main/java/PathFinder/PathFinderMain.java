@@ -5,8 +5,10 @@ public class PathFinderMain {
 
 
         PathFinder pathF = new PathFinder();
+        System.out.println("start");
         pathF.recursive();
-        //System.out.println(pathF.shortestPath);
+        System.out.println(pathF.shortestPath);
+        System.out.println(pathF.compteur);
 
 
 

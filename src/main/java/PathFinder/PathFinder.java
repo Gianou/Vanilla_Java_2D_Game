@@ -10,7 +10,7 @@ public class PathFinder {
    char path[];
    public char[] shortestPath;
 
-    int max;
+    int compteur = 0;
     static int deltaL[] = {-1, 0, 1, 0 };
     static int deltaC[] = { 0, 1, 0, -1 };
     int shortest = 500;
@@ -26,27 +26,29 @@ public class PathFinder {
         explored = new boolean[map.length][map.length];
     }
     public PathFinder(){
-        map = new int[][]{  {0, 1, 0, 0, 0},
-                            {1, 1, 0, 0, 0},
+        map = new int[][]{  {0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0}};
-        monster.x = 0;
-        monster.y = 2;
+                            {0, 0, 0, 0, 0},
+                            {0, 0, 0, 0, 0},};
+        monster.x = map.length/2;
+        monster.y = map.length/2;
         player.x = 0; //row
         player.y = 0; //line
         path = new char[map.length*map.length];
-
+        explored = new boolean[map.length][map.length];
     }
 //Y = line
     // X = row
     public void recursive(){
+        explored[monster.y][monster.x] = true;
         recursive(monster.y, monster.x, 0 );
     }
 
     public void recursive(int line, int row, int index){
+        compteur++;
+        //System.out.println(compteur);
         if(line == player.y && row == player.x){
-
             if(pathLength()<shortest){
                 shortest = pathLength();
                 shortestPath = new char[shortest];
@@ -57,7 +59,7 @@ public class PathFinder {
 
         }
 
-        /*
+/*
         for(int i = 0; i < 4; i++) { //pour chaque mouvement, 0 = U, 1 = R, 2 = D, 3 = L
             int ligneTest = line + deltaL[i];
             int colTest = row + deltaC[i];
@@ -83,9 +85,18 @@ public class PathFinder {
                 explored[ligneTest][colTest] = false;
             }
         }
-        */
+ */
 
-        //Go up
+
+        //Go down
+        if(checkNextCase(line+1, row)){
+            path [index] = 'D';
+            explored[line+1][row] = true;
+            recursive(line+1, row, index + 1);
+            path [index] = 'x';
+            explored[line+1][row] = false;
+        }
+//Go up
         if(checkNextCase(line-1, row)){
             path [index] = 'U';
             explored[line-1][row] = true;
@@ -93,32 +104,22 @@ public class PathFinder {
             path [index] = 'x';
             explored[line-1][row] = false;
         }
-            //Go down
-            if(checkNextCase(line+1, row)){
-                path [index] = 'D';
-                explored[line+1][row] = true;
-                recursive(line+1, row, index + 1);
-                path [index] = 'x';
-                explored[line+1][row] = false;
-            }
-
-            //Go right
-            if(checkNextCase(line, row+1)){
-                path [index] = 'R';
-                explored[line][row+1] = true;
-                recursive(line, row+1, index + 1);
-                path [index] = 'x';
-                explored[line][row+1] = false;
-            }
-            //Go left
-            if(checkNextCase(line, row-1)){
-                path [index] = 'L';
-                explored[line][row-1] = true;
-                recursive(line, row-1, index + 1);
-                path [index] = 'x';
-                explored[line][row-1] = false;
-            }
-
+        //Go right
+        if(checkNextCase(line, row+1)){
+            path [index] = 'R';
+            explored[line][row+1] = true;
+            recursive(line, row+1, index + 1);
+            path [index] = 'x';
+            explored[line][row+1] = false;
+        }
+        //Go left
+        if(checkNextCase(line, row-1)){
+            path [index] = 'L';
+            explored[line][row-1] = true;
+            recursive(line, row-1, index + 1);
+            path [index] = 'x';
+            explored[line][row-1] = false;
+        }
     }
 
     public int pathLength(){
@@ -142,7 +143,7 @@ public class PathFinder {
     }
     public boolean checkNextCase(int line, int row){
         boolean caseIsOk = true;
-        if(line < 0 || line > map.length-1 || row < 0 || row > map.length-1){
+        if(line < 0 || line > map.length-1 || row < 0 || row > map[0].length-1){
             return false;
         }
         if(map[line][row]==20){
