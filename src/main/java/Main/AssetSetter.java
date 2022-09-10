@@ -28,6 +28,10 @@ public class AssetSetter {
         gp.obj[0].worldX = gp.tileSize*43;
         gp.obj[0].worldY = gp.tileSize*19;
 
+        gp.obj[4] = new OBJ_Chest(gp);
+        gp.obj[4].worldX = gp.tileSize*23;
+        gp.obj[4].worldY = gp.tileSize*11;
+
 /*
         //This doesn't allow correct drawing priority
         gp.obj[0] = new OBJ_Key(gp);

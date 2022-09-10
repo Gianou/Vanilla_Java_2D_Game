@@ -10,13 +10,18 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Class used to read tile images and to draw maps
+ * Class used to load tiles image's and to draw maps
  */
 public class TileManager {
     GamePanel gp;
     public Tile []  tile;
     public int [][] mapTileNum;
 
+    /**
+     * Constructor
+     * @param gp GamePanel created in main
+     * @throws IOException
+     */
     public TileManager(GamePanel gp) throws IOException {
         this.gp = gp;
 
@@ -29,6 +34,14 @@ public class TileManager {
         readMapTxt("src/main/resources/maps/map1.txt");
 
     }
+
+    /**
+     *
+     * @param index
+     * @param imageName
+     * @param collision
+     * @throws IOException
+     */
     public void setUpImage(int index, String imageName, boolean collision) throws IOException {
         UtilityTool uT = new UtilityTool();
 
