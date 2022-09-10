@@ -64,7 +64,6 @@ public class KeyHandler implements KeyListener {
                     debug = false;
                 }
             }
-
         }
 
             //PAUSE

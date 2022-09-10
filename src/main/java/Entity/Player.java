@@ -217,6 +217,10 @@ public class Player extends Entity {
             spriteNum = 2;
             int monsterIndex = gp.cChecker.checkAttack(this, gp.monster);
             damageMonster(monsterIndex);
+            if(monsterIndex != 999){
+                gp.monster[monsterIndex].offensif = true;
+            }
+
 
         }
         if(attackSpriteCounter>25){

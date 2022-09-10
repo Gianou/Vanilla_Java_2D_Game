@@ -12,10 +12,11 @@ import java.io.IOException;
 public class MON_Blob extends SuperNPC {
     SubMatrix subM;
     int cpt = 0;
+    Point spawn;
 
-    public MON_Blob (GamePanel gp, int width, int height){
+    public MON_Blob (GamePanel gp, int width, int height, int worldX, int worldY){
 
-        super(gp, width, height);
+        super(gp, width, height, worldX, worldY);
         //name = "Blob"; no name in entity yet
         getBlobImage();
         direction = 2;
@@ -23,6 +24,8 @@ public class MON_Blob extends SuperNPC {
         maxLife = 12;
         life = maxLife;
         type = 2;
+        spawn = new Point(spawnX, spawnY);
+
 
         subM = new SubMatrix(gp);
         //solidArea = new Rectangle(0,0, gp.tileSize, gp.tileSize);
@@ -65,21 +68,51 @@ public class MON_Blob extends SuperNPC {
 
 
     public void setAction() {
+        Point monster = new Point(worldX, worldY);
         Point player = new Point(gp.player.worldX, gp.player.worldY);
-        float angle =  getAngle(player);
-        float fortyFiveByTwo = 45 / 2;
+        if(offensif){
 
+            float angle =  getAngle(player);
+            float fortyFiveByTwo = 45 / 2;
+            //System.out.println(angle);
+            if(angle >= 360 - fortyFiveByTwo || angle < fortyFiveByTwo){direction = 2;}
+            else if (angle >= 45 - fortyFiveByTwo && angle < 45 + fortyFiveByTwo){direction = 3;}
+            else if (angle >= 90 - fortyFiveByTwo && angle < 90 + fortyFiveByTwo){direction = 4;}
+            else if (angle >= 135 - fortyFiveByTwo && angle < 135 + fortyFiveByTwo){direction = 5;}
+            else if (angle >= 180 - fortyFiveByTwo && angle < 180 + fortyFiveByTwo){direction = 6;}
+            else if (angle >= 225 - fortyFiveByTwo && angle < 225 + fortyFiveByTwo){direction = 7;}
+            else if (angle >= 270 - fortyFiveByTwo && angle < 270 + fortyFiveByTwo){direction = 0;}
+            else if (angle >= 315 - fortyFiveByTwo && angle < 315 + fortyFiveByTwo){direction = 1;}
+            //System.out.println(direction);
 
-        //System.out.println(angle);
-        if(angle >= 360 - fortyFiveByTwo || angle < fortyFiveByTwo){direction = 2;}
-        else if (angle >= 45 - fortyFiveByTwo && angle < 45 + fortyFiveByTwo){direction = 3;}
-        else if (angle >= 90 - fortyFiveByTwo && angle < 90 + fortyFiveByTwo){direction = 4;}
-        else if (angle >= 135 - fortyFiveByTwo && angle < 135 + fortyFiveByTwo){direction = 5;}
-        else if (angle >= 180 - fortyFiveByTwo && angle < 180 + fortyFiveByTwo){direction = 6;}
-        else if (angle >= 225 - fortyFiveByTwo && angle < 225 + fortyFiveByTwo){direction = 7;}
-        else if (angle >= 270 - fortyFiveByTwo && angle < 270 + fortyFiveByTwo){direction = 0;}
-        else if (angle >= 315 - fortyFiveByTwo && angle < 315 + fortyFiveByTwo){direction = 1;}
-        //System.out.println(direction);
+            //Check from player
+
+            if(monster.distance(player) > gp.tileSize*10){
+                offensif = false;
+            }
+        }
+
+        else {
+            if(monster.x == spawn.x && monster.y == spawn.y){
+                //Do nothing
+                direction = -999;
+            }
+            else {
+                // Go back to its spawn
+                float angle =  getAngle(spawn);
+                float fortyFiveByTwo = 45 / 2;
+                //System.out.println(angle);
+                if(angle >= 360 - fortyFiveByTwo || angle < fortyFiveByTwo){direction = 2;}
+                else if (angle >= 45 - fortyFiveByTwo && angle < 45 + fortyFiveByTwo){direction = 3;}
+                else if (angle >= 90 - fortyFiveByTwo && angle < 90 + fortyFiveByTwo){direction = 4;}
+                else if (angle >= 135 - fortyFiveByTwo && angle < 135 + fortyFiveByTwo){direction = 5;}
+                else if (angle >= 180 - fortyFiveByTwo && angle < 180 + fortyFiveByTwo){direction = 6;}
+                else if (angle >= 225 - fortyFiveByTwo && angle < 225 + fortyFiveByTwo){direction = 7;}
+                else if (angle >= 270 - fortyFiveByTwo && angle < 270 + fortyFiveByTwo){direction = 0;}
+                else if (angle >= 315 - fortyFiveByTwo && angle < 315 + fortyFiveByTwo){direction = 1;}
+            }
+
+        }
 
     }
 

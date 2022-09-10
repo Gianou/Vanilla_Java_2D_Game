@@ -12,8 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class NPC_Ghoul extends SuperNPC {
-    public NPC_Ghoul(GamePanel gp, int width, int height) {
-        super(gp, width, height);
+    public NPC_Ghoul(GamePanel gp, int width, int height, int worldX, int woldY){
+        super(gp, width, height, worldX, woldY);
 
         direction = 2;
         speed = gp.tileSize / 32;

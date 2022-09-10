@@ -18,9 +18,8 @@ public class AssetSetter {
         gp.npc[0].worldX = gp.tileSize*25;
         gp.npc[0].worldY = gp.tileSize*11;
 
-        gp.npc[1] = new NPC_Ghoul(gp, 2, 2);
-        gp.npc[1].worldX = gp.tileSize*23;
-        gp.npc[1].worldY = gp.tileSize*23;
+        gp.npc[1] = new NPC_Ghoul(gp, 2, 2, 23, 23);
+
 
 
     }
@@ -86,8 +85,7 @@ public class AssetSetter {
 
     }
     public void setMonster(){
-        gp.monster[0] = new MON_Blob(gp, 1, 1);
-        gp.monster[0].worldX = gp.tileSize*18;
-        gp.monster[0].worldY = gp.tileSize*12;
+        gp.monster[0] = new MON_Blob(gp, 1, 1, 18, 12);
+
     }
 }

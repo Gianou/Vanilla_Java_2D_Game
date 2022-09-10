@@ -14,6 +14,7 @@ public class Entity {
     public GamePanel gp;
     public UtilityTool uT = new UtilityTool();
     public int worldX, worldY;
+    public int spawnX, spawnY;
     public int speed;
     public BufferedImage left1, left2, right1, right2, still1, still2;
     public BufferedImage upRight1, upRight2, upLeft1, upLeft2, downLeft1, downLeft2, downRight1, downRight2, up1, up2, down1, down2;
@@ -48,6 +49,7 @@ public class Entity {
     public boolean alive = true;
     int dyingCounter;
     public int recoilCounter = 0;
+    public boolean offensif;
 
 
 
@@ -60,6 +62,20 @@ public class Entity {
 
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+    }
+    public Entity(GamePanel gp, int width, int height, int worldX, int worldY){
+        this.gp = gp;
+        this.width = width;
+        this.height = height;
+        this.worldX = worldX * gp.tileSize;
+        this.worldY = worldY * gp.tileSize;
+        solidArea = new Rectangle(width*gp.tileSize *3/16, height*gp.tileSize*6/16, width*gp.tileSize *10/16, height*gp.tileSize*10/16);
+
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        spawnX = this.worldX;
+        spawnY = this.worldY;
 
     }
 
@@ -196,8 +212,14 @@ public class Entity {
         if(recoilCounter <= 1){
             tmp = speed;
             //inverse direction
-            direction += 4;
-            direction = direction%8;
+            if(direction == -999){
+                direction = gp.player.direction;
+            }
+            else{
+                direction += 4;
+                direction = direction%8;
+            }
+
             speed = speed * 3;
         }
         if(recoilCounter>5 && recoilCounter <=25){
