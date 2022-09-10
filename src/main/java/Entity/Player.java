@@ -615,6 +615,8 @@ public class Player extends Entity {
     public void damageMonster(int monsterIndex){
         if(monsterIndex != 999){
             if(gp.monster[monsterIndex].invincible == false){
+                //move backwards if possible
+                gp.monster[monsterIndex].recoil = true;
                 gp.monster[monsterIndex].life -= 1;
                 gp.monster[monsterIndex].invincible = true;
                 if(gp.monster[monsterIndex].life <= 0){
@@ -628,6 +630,7 @@ public class Player extends Entity {
             //System.out.println("miss");
         }
     }
+
     public float getAngle(Point target) {
         float angle = (float) Math.toDegrees(Math.atan2(target.y - solidAreaCenterY, target.x - solidAreaCenterX));
 

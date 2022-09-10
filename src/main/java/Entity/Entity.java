@@ -32,6 +32,7 @@ public class Entity {
     public int actionLockCounter = 0;
     String [] dialogues = new String[10];
     int dialogueIndex = 0;
+    int tmp = 0;
     public int dashSpeed = 48*2;
 
     public int type; // 0 = player, 1 = npc, 2 = monster;
@@ -40,11 +41,13 @@ public class Entity {
     public int maxLife;
     public int life;
     public boolean invincible = false;
+    public boolean recoil;
     public int invincibleCounter = 0;
 
     boolean dying = false;
     public boolean alive = true;
     int dyingCounter;
+    public int recoilCounter = 0;
 
 
 
@@ -185,6 +188,150 @@ public class Entity {
         image = uT.scaleImage(image, gp.tileSize*width*this.width, gp.tileSize*height*this.height);
 
         return image;
+    }
+    public void hitRecoil(Entity entity){
+        //int recoilSpeed = gp.tileSize;
+        recoilCounter++;
+
+        if(recoilCounter <= 1){
+            tmp = speed;
+            //inverse direction
+            direction += 4;
+            direction = direction%8;
+            speed = speed * 3;
+        }
+        if(recoilCounter>5 && recoilCounter <=25){
+            gp.cChecker.checkTile(this);
+            gp.cChecker.checkObject(this, true);
+            if(!collision){
+                switch (direction){
+                    case 0:
+                        worldY-=speed;
+                        break;
+                    case 1:
+                        if(rightOk)
+                            worldX += speed;
+                        if(upOk)
+                            worldY -= speed;
+                        break;
+                    case 2:
+                        worldX += speed;
+                        break;
+                    case 3:
+                        if(rightOk)
+                            worldX += speed;
+                        if(downOk)
+                            worldY += speed;
+
+                        break;
+                    case 4:
+                        worldY += speed;
+                        break;
+                    case 5:
+                        if(leftOk)
+                            worldX -= speed;
+                        if(downOk)
+                            worldY += speed;
+
+                        break;
+                    case 6:
+                        worldX -= speed;
+                        break;
+                    case 7:
+                        if(leftOk)
+                            worldX -= speed;
+                        if(upOk)
+                            worldY -= speed;
+                        break;
+                }
+            }
+            /*
+            if(!collision){
+                switch (direction){
+                    case 4:
+                        worldY-=speed;
+                        break;
+                    case 5:
+                        if(rightOk)
+                            worldX += speed;
+                        if(upOk)
+                            worldY -= speed;
+                        break;
+                    case 6:
+                        worldX += speed;
+                        break;
+                    case 7:
+                        if(rightOk)
+                            worldX += speed;
+                        if(downOk)
+                            worldY += speed;
+
+                        break;
+                    case 0:
+                        worldY += speed;
+                        break;
+                    case 1:
+                        if(leftOk)
+                            worldX -= speed;
+                        if(downOk)
+                            worldY += speed;
+
+                        break;
+                    case 2:
+                        worldX -= speed;
+                        break;
+                    case 3:
+                        if(leftOk)
+                            worldX -= speed;
+                        if(upOk)
+                            worldY -= speed;
+                        break;
+                }
+            }
+
+             */
+
+            spriteNum = 2;
+        }
+        if(recoilCounter>25){
+            spriteNum = 1;
+            recoilCounter = 0;
+            recoil = false;
+            speed = tmp;
+        }
+        /*
+        switch (entity.direction){
+            case 0:
+                entity.worldY += recoilSpeed;
+                break;
+            case 1:
+                entity.worldX -= recoilSpeed;
+                entity.worldY += recoilSpeed;
+                break;
+            case 2:
+                entity.worldX -= recoilSpeed;
+                break;
+            case 3:
+                entity.worldX -= recoilSpeed;
+                entity.worldY -= recoilSpeed;
+                break;
+            case 4:
+                entity.worldY -= recoilSpeed;
+                break;
+            case 5:
+                entity.worldX += recoilSpeed;
+                entity.worldY -= recoilSpeed;
+                break;
+            case 6:
+                entity.worldX += recoilSpeed;
+                break;
+            case 7:
+                entity.worldX += recoilSpeed;
+                entity.worldY += recoilSpeed;
+                break;
+        }
+
+         */
     }
 
 }

@@ -159,6 +159,11 @@ public class GamePanel extends JPanel implements Runnable{
         if(gameState == dialogueState){
                 //PLAYER
                 player.update();
+                /*
+                if(keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed){
+
+                    gameState = playState;
+                } */
         }
         if(gameState == titleState){
             if(keyH.enterPressed){

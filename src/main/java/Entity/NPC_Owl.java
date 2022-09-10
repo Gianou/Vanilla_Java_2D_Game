@@ -16,7 +16,7 @@ public class NPC_Owl extends SuperNPC {
         direction = 2;
         speed = gp.tileSize / 32;
         getOwlImage();
-        setDialogues("hoot", "hooty hoot", "Hoooty partner?");
+        setDialogues("hoot hoot mothefucker", "hooty hoot", "Hoooty partner?");
     }
 
     public void getOwlImage() {
