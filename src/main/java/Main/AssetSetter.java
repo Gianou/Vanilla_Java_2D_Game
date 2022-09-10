@@ -24,8 +24,11 @@ public class AssetSetter {
 
     }
     public void setObject(){
+        gp.obj[0] = new OBJ_Key(gp);
+        gp.obj[0].worldX = gp.tileSize*43;
+        gp.obj[0].worldY = gp.tileSize*19;
 
-
+/*
         //This doesn't allow correct drawing priority
         gp.obj[0] = new OBJ_Key(gp);
         gp.obj[0].worldX = gp.tileSize*12;
@@ -75,6 +78,8 @@ public class AssetSetter {
         setForest(60,9,38);
         gp.obj[39] = new OBJ_Tree(gp, gp.tileSize*9, gp.tileSize*36 + gp.tileSize/2);
 
+
+ */
     }
 
     public void setForest(int index, int x, int y){
@@ -85,7 +90,7 @@ public class AssetSetter {
 
     }
     public void setMonster(){
-        gp.monster[0] = new MON_Blob(gp, 1, 1, 18, 12);
+        gp.monster[0] = new MON_Blob(gp, 1, 1, 38, 19);
 
     }
 }

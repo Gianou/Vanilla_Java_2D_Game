@@ -24,14 +24,16 @@ public class TileManager {
         mapTileNum = new int [gp.maxWorldRow] [gp.maxWorldCol];
 
         getTileImage();
-        readMapTxt("src/main/resources/maps/AI_Tracking_Test");
+
+        tile[25].collision = true;
+        readMapTxt("src/main/resources/maps/map1.txt");
 
     }
     public void setUpImage(int index, String imageName, boolean collision) throws IOException {
         UtilityTool uT = new UtilityTool();
 
         tile[index] = new Tile();
-        File file = new File("src/main/resources/tiles/" + imageName + ".png");
+        File file = new File("src/main/resources/tiles2/" + imageName + ".png");
         FileInputStream fis = new FileInputStream(file);
         tile[index].image = ImageIO.read(fis);
         tile[index].image = uT.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
@@ -47,6 +49,16 @@ public class TileManager {
      */
     public void getTileImage() throws IOException {
 
+        for(int i = 0; i <= 50; i++){
+            String name = "";
+            if(i<10){
+                name += "0";
+            }
+
+            name += i;
+            setUpImage(i, name, false);
+        }
+        /*
         setUpImage(10, "Grass5", false);
         setUpImage(20, "Wall", true);
         setUpImage(15, "Water", true);
@@ -59,6 +71,8 @@ public class TileManager {
             String name = "Lake" + i;
             setUpImage(i + 20, name, false);
         }
+
+         */
 
     }
 
