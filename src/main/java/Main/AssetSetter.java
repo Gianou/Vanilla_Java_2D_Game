@@ -5,6 +5,8 @@ import Entity.NPC_Owl;
 import Object.*;
 import Entity.MON_Blob;
 
+import java.awt.*;
+
 public class AssetSetter {
 
     GamePanel gp;
@@ -24,6 +26,8 @@ public class AssetSetter {
 
     }
     public void setObject(){
+        setObjectTiles();
+
         gp.obj[0] = new OBJ_Key(gp);
         gp.obj[0].worldX = gp.tileSize*43;
         gp.obj[0].worldY = gp.tileSize*19;
@@ -96,5 +100,19 @@ public class AssetSetter {
     public void setMonster(){
         gp.monster[0] = new MON_Blob(gp, 1, 1, 38, 19);
 
+    }
+
+    public void setObjectTiles(){
+        int index = 100;
+        for (int i = 0; i < gp.tileM.mapTileNum.length; i++){
+            for(int j = 0; j< gp.tileM.mapTileNum[i].length; j++){
+                if ( gp.tileM.mapTileNum[i][j] == 8 || gp.tileM.mapTileNum[i][j] == 9 || gp.tileM.mapTileNum[i][j] == 10){
+                    gp.obj[index] = new OBJ_TileSolidArea(gp);
+                    gp.obj[index].worldX = j * gp.tileSize;
+                    gp.obj[index].worldY = i * gp.tileSize + gp.tileSize/2;
+                    index++;
+                }
+            }
+        }
     }
 }

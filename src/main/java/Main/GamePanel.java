@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     //ENTITY OBJECT
     public Player player = new Player(this, keyH, mouseH, 1, 1);
-    public SuperObject obj [] = new SuperObject[99];
+    public SuperObject obj [] = new SuperObject[200];
     public SuperNPC npc[] = new SuperNPC[5];
     public SuperNPC monster[] = new SuperNPC[5];
     ArrayList<Entity> entityList = new ArrayList<>();

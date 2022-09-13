@@ -71,6 +71,7 @@ public class TileManager {
             name += i;
             setUpImage(i, name, false);
         }
+
         /*
         setUpImage(10, "Grass5", false);
         setUpImage(20, "Wall", true);
