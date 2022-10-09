@@ -1,4 +1,4 @@
-1. Player can move in diagonals
+//1. Player can move in diagonals
     I added four directions in Player.java : "rightUp", "leftUp", "rightDown", "leftDown".
     This direction are set when the two required keys are pressed.
     As I only have right and left sprites at the moment, I added the String orientation to determine if the player is looking left or right.
@@ -11,7 +11,7 @@
 
 2. NPC have a restricted zone to move in
 
-3. Add a dash to the player
+//3. Add a dash to the player
 
 4. Give the player a gun
 
@@ -19,5 +19,5 @@
     Check dialogue size and if it is too big for the rectangle, you start from the last index and search the first space before
     the max length and make an new line
 
-5. Collision limitation
+//5. Collision limitation
     At the moment the collision doesn't allow Entities to move up to a wall if it's closer than the value of speed
